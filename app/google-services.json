@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "926649478856",
+    "firebase_url": "https://statistaafrbs.firebaseio.com",
+    "project_id": "statistaafrbs",
+    "storage_bucket": "statistaafrbs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926649478856:android:7f595529620f07b4",
+        "android_client_info": {
+          "package_name": "com.htbr.statistaa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926649478856-dd8e77ki1vartkt8mifb6tdhjnkvbh93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhHtrxCjTcgRlIlK9o305-8Gf4EPtyx6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926649478856-dd8e77ki1vartkt8mifb6tdhjnkvbh93.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
