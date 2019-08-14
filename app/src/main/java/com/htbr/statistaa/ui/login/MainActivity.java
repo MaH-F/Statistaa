@@ -1,8 +1,11 @@
 package com.htbr.statistaa.ui.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -10,13 +13,17 @@ import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.htbr.statistaa.R;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
+
+    static FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,11 +43,33 @@ public class MainActivity extends Activity {
                 String token = task.getResult().getToken();
 
                 // Log and toast
-                String msg = getString(R.string.msg_token_fmt, token);
-                Log.d(TAG, msg);
-                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+               // String msg = getString(R.string.msg_token_fmt, token);
+                Log.d(TAG, token);
+                Toast.makeText(MainActivity.this, "registered", Toast.LENGTH_SHORT).show();
             }
         });
 
+        findViewById(R.id.gotologin).setOnClickListener(this);
+
+
     }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        ;
+        if (i == R.id.gotologin) {
+
+            if(user == null) {
+
+                startActivity(new Intent(this, LoginActivity.class));
+            }
+            else {
+                startActivity(new Intent(this,RootActivity.class));
+            }
+        }
+    }
+
+
+
 }
