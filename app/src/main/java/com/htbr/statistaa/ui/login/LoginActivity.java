@@ -216,7 +216,10 @@ public class LoginActivity extends BaseActivity implements
             findViewById(R.id.login).setVisibility(View.GONE);
 
 
-            mStatusTextView.setText("Logged in as : " + user.getEmail());
+
+
+            startActivity(new Intent(LoginActivity.this, RootActivity.class));
+/*            mStatusTextView.setText("Logged in as : " + user.getEmail());
 
             Button goOnButton =  findViewById(R.id.goon);
             goOnButton.setVisibility(View.VISIBLE);
@@ -225,7 +228,7 @@ public class LoginActivity extends BaseActivity implements
                 public void onClick(View v) {
                     startActivity(new Intent(LoginActivity.this, RootActivity.class));
                 }
-            });
+            });*/
 
             //findViewById(R.id.verifyEmailButton).setEnabled(!user.isEmailVerified());
         } else {
