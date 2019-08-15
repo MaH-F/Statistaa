@@ -1,11 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.login.RootActivity"
     tools:showIn="@layout/activity_root">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <RelativeLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            style="@android:style/Widget.DeviceDefault.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:ellipsize="middle"
+            android:scrollbarSize="8dp"
+            android:text="@string/overview"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:autoSizeTextType="uniform" />
+        
+        
+    </RelativeLayout>
+    
+    
+    <GridLayout
+        android:columnCount="2"
+        android:rowCount="3"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false"
+        android:layout_weight="8"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="14dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/learnbutton"
+                    android:layout_width="93dp"
+                    android:layout_height="95dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#922FD50E"
+                    android:scaleType="matrix"
+                    android:scrollbarSize="@android:dimen/dialog_min_width_major"
+                    android:src="@drawable/ic_icon_learn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Learning"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/archivebutton"
+                    android:layout_width="93dp"
+                    android:layout_height="95dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#C40ED5A7"
+                    android:scaleType="matrix"
+                    android:scrollbarSize="@android:dimen/dialog_min_width_major"
+                    android:src="@drawable/ic_icon_archive" />
+
+                <TextView
+                    android:text="Archive"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/profilebutton"
+                    android:layout_width="93dp"
+                    android:layout_height="95dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#8ACBD50E"
+                    android:scaleType="matrix"
+                    android:scrollbarSize="@android:dimen/dialog_min_width_major"
+                    android:src="@drawable/ic_icon_profile" />
+
+                <TextView
+                    android:text="My Profile"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/feedbackbutton"
+                    android:layout_width="93dp"
+                    android:layout_height="95dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#8A0E61D5"
+                    android:scaleType="matrix"
+                    android:scrollbarSize="@android:dimen/dialog_min_width_major"
+                    android:src="@drawable/ic_icon_feedback" />
+
+                <TextView
+                    android:text="Feedback"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </GridLayout>
+
+</LinearLayout>
