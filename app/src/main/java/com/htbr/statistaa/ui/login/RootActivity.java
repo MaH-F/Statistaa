@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,6 +47,16 @@ public class RootActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+
+        ImageButton learnButton = findViewById(R.id.learnbutton);
+        learnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RootActivity.this, ExecisesRecyclerActivity.class));
+            }
+        });
+
+
     }
 
     @Override

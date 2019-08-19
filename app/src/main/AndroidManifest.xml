@@ -38,6 +38,7 @@
         </service>
 
         <activity android:name=".ui.login.LoginActivity" />
+        <activity android:name=".ui.login.ExecisesRecyclerActivity"></activity>
     </application>
 
 </manifest>

@@ -28,6 +28,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // go to RootActivity if user is registered
+        if (user != null){
+            startActivity(new Intent(this,RootActivity.class));
+        }
+
+
         setContentView(R.layout.activity_main);
 
 
@@ -50,6 +57,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         });
 
         findViewById(R.id.gotologin).setOnClickListener(this);
+
+
+
 
 
     }
