@@ -49,6 +49,7 @@ public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
 
         ImageView imageView;
         TextView nameView;
+        TextView subtitle;
         //MaterialRatingBar ratingBar;
         TextView numRatingsView;
         TextView priceView;
@@ -61,6 +62,7 @@ public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
            super(itemView);
 
            nameView = itemView.findViewById(R.id.title);
+           subtitle = itemView.findViewById(R.id.subtitle);
 
 /*
             imageView = itemView.findViewById(R.id.restaurant_item_image);
@@ -80,15 +82,8 @@ public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
 
 
             nameView.setText(exercise.getName());
+            subtitle.setText(exercise.getSubtitle());
 
-
-            /*nameView.setText(exercise.getName());
-            ratingBar.setRating((float) restaurant.getAvgRating());
-            cityView.setText(restaurant.getCity());
-            categoryView.setText(restaurant.getCategory());
-            numRatingsView.setText(resources.getString(R.string.fmt_num_ratings,
-                    restaurant.getNumRatings()));
-            priceView.setText(RestaurantUtil.getPriceString(restaurant));*/
 
             // Click listener
             itemView.setOnClickListener(new View.OnClickListener() {

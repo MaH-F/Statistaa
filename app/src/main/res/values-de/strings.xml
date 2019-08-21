@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">statistaa</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_sign_in">Log in</string>
+    <string name="action_sign_in_short">Log in</string>
+    <string name="auth_failed">Authentifizierung fehlgeschlagen.</string>
+    <string name="go_to_login">ZUM LOGIN</string>
+    <string name="invalid_password">Passwort muss aus mehr als 5 Zeichen bestehen.</string>
+    <string name="invalid_username">Ungültiger Nutzername</string>
+    <string name="login_failed">Login fehlgeschlagen</string>
+    <string name="overview">Überblick</string>
+    <string name="prompt_password">Passwort</string>
+    <string name="title_activity_about">Information</string>
+    <string name="title_activity_root">Mein Profil</string>
+    <string name="welcome">Willkommen</string>
+    <string name="large_text">"Informationen"
+
+        "\n\n"
+
+        "Diese Applikation heißt statistaa und wird im Rahmen einer Masterarbeit an der Hochschule Aalen entwickelt."
+        "Sie dient keinem kommerziellen Zweck. Die erhobenen und gespeicherten Nutzerdaten werden nicht an Dritte weitergegeben."
+        "Aus den im Rahmen der Abschlussarbeit veröffentlichten Ergebnissen können keine Rückschlüsse auf personenbezogenen Daten gemacht werden, da alle Auswertungen anonymisiert durchgeführt werden."
+
+        "\n\n"
+
+        "Berechtigungen"
+
+        "\n\n"
+
+        "Diese Applikation nutzt folgende Berechtigungen:"
+
+
+
+
+        "\n\n"
+
+        "Datenverarbeitung"
+
+        "\n\n"
+
+        "Das Backend der Applikation besteht aus Komponenten von Google Firebase."
+        "Zur Anmeldung der Nutzer werden manuell Konten auf der Konsole von Firebase Authentication angelegt."
+        "Für weitere Informationen siehe https://firebase.google.com/docs/auth"
+
+        "\n"
+
+
+        "Die Aufgabenelemente werden auf der Firebase Live Database gespeichert."
+        "Für weitere Informationen siehe https://firebase.google.com/docs/database"
+
+
+        "\n\n"
+
+
+        "Die Anmeldedaten werden mit Google Firebase Authentication gespeichert."
+        "Nutzungsdaten werden mit Google Analytics erhoben und verarbeitet."
+        "Die erhobenen und gespeicherten Daten dienen keinem kommerziellen Zweck und werden an keine Dritten weitergegeben"
+
+        "\n\n"
+
+        "Weitere Informationen oder Fragen:"
+        "thehitbear@gmail.com"
+
+        "\n\n"
+
+    </string>
+    <string name="learning">Lernen</string>
+    <string name="archive">Archiv</string>
+    <string name="myprofile">Mein Profil</string>
+    <string name="feedback">Feedback</string>
+    <string name="logout">Ausloggen</string>
+    <string name="about">Informationen</string>
+</resources>

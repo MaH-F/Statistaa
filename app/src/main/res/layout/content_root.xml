@@ -74,7 +74,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Learning"
+                    android:text="@string/learning"
                     android:textAlignment="center"
                     android:textColor="@android:color/black" />
 
@@ -114,7 +114,7 @@
                     android:src="@drawable/ic_icon_archive" />
 
                 <TextView
-                    android:text="Archive"
+                    android:text="@string/archive"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:layout_width="wrap_content"
@@ -156,7 +156,7 @@
                     android:src="@drawable/ic_icon_profile" />
 
                 <TextView
-                    android:text="My Profile"
+                    android:text="@string/myprofile"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:layout_width="wrap_content"
@@ -198,7 +198,7 @@
                     android:src="@drawable/ic_icon_feedback" />
 
                 <TextView
-                    android:text="Feedback"
+                    android:text="@string/feedback"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:layout_width="wrap_content"
