@@ -13,7 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -31,6 +36,8 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
     private static final String TAG = "ExercisesRecycler";
 
     private FirebaseFirestore mFirestore;
+    private DatabaseReference reference;
+
     private Query mQuery;
     private int LIMIT = 50;
     private ExerciseAdapter exerciseAdapter;
@@ -69,10 +76,19 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
     private void initFirestore() {
         mFirestore = FirebaseFirestore.getInstance();
 
+
+
+
+
+
+
         // Get the 50 highest rated restaurants
-        mQuery = mFirestore.collection("Exercises")
+        //TODO generate GroupID
+        mQuery = mFirestore.collection("ExercisesB")
                 .orderBy("number", Query.Direction.DESCENDING)
                 .limit(LIMIT);
+
+
 
         mAdapter = new ExerciseAdapter(mQuery, this);
 

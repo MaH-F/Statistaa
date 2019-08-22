@@ -100,6 +100,7 @@ public abstract class MyAdapter<VH extends RecyclerView.ViewHolder>
 
         if (e!=null){
             Log.d(TAG,"Error:"+e.getMessage());
+
         }
         else {
 
