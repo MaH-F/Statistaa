@@ -34,6 +34,8 @@
     <string name="feedback">Feedback</string>
     <string name="logout">Log out</string>
     <string name="about">About</string>
+    <string name="usergroup" translatable="false">usergroup</string>
+    <string name="usergroup_sp_file_key" translatable="false">usergroup</string>
 
 
 </resources>

@@ -1,6 +1,7 @@
 package com.htbr.statistaa.ui.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.auth.User;
 import com.htbr.statistaa.R;
 
 public class RootActivity extends AppCompatActivity {
@@ -32,6 +34,11 @@ public class RootActivity extends AppCompatActivity {
         setContentView(R.layout.activity_root);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+       UserHandler.setUsergroup(this, user);
+
+
 
 
 
