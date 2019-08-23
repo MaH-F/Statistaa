@@ -80,7 +80,10 @@ public class RootActivity extends AppCompatActivity {
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 if (FirebaseAuth.getInstance().getCurrentUser() == null){
-                    startActivity(new Intent(this, LoginActivity.class));
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    //this (hopefully destroys all other activities)
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                     finish();
                 }
                 else {

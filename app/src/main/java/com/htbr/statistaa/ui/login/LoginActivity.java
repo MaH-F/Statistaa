@@ -219,6 +219,7 @@ public class LoginActivity extends BaseActivity implements
 
 
             startActivity(new Intent(LoginActivity.this, RootActivity.class));
+
 /*            mStatusTextView.setText("Logged in as : " + user.getEmail());
 
             Button goOnButton =  findViewById(R.id.goon);

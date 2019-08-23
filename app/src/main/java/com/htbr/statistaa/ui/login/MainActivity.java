@@ -32,6 +32,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // go to RootActivity if user is registered
         if (user != null){
             startActivity(new Intent(this,RootActivity.class));
+            //finish this activity
+            finish();
         }
 
 
