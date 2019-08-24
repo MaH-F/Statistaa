@@ -34,6 +34,8 @@ public class UserHandler {
         final FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
 
+
+
         final String uid = firebaseUser.getUid();
 
         final long[] group = {0};
@@ -55,6 +57,8 @@ public class UserHandler {
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putLong(uid, group[0]);
                         editor.commit();
+                        //editor.apply();
+                        Log.d(TAG," SharedPreferences commit was successfull");
                     } else {
                         Log.d(TAG, "No such document");
                     }
@@ -62,11 +66,12 @@ public class UserHandler {
                     Log.d(TAG, "get failed with ", task.getException());
                 }
             }
+
         });
 
-        long putvalue = group[0];
 
-        //write to shared prefs
+
+
 
 
 

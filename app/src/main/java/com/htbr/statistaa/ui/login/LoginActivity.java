@@ -29,7 +29,7 @@ public class LoginActivity extends BaseActivity implements
 
     private static final String TAG = "EmailPassword";
 
-    private TextView mStatusTextView;
+    //private TextView mStatusTextView;
     //private TextView mDetailTextView;
 
 
@@ -46,7 +46,7 @@ public class LoginActivity extends BaseActivity implements
         setContentView(R.layout.activity_login);
 
         // Views
-        mStatusTextView = findViewById(R.id.status);
+       // mStatusTextView = findViewById(R.id.status);
         //mDetailTextView = findViewById(R.id.detail);
         mEmailField = findViewById(R.id.username);
         mPasswordField = findViewById(R.id.password);
@@ -136,7 +136,8 @@ public class LoginActivity extends BaseActivity implements
 
                         // [START_EXCLUDE]
                         if (!task.isSuccessful()) {
-                            mStatusTextView.setText(R.string.auth_failed);
+                            //mStatusTextView.setText(R.string.auth_failed);
+                            Toast.makeText(LoginActivity.this, "Authentication failed...", Toast.LENGTH_SHORT).show();
                         }
                         hideProgressDialog();
                         // [END_EXCLUDE]
@@ -219,6 +220,7 @@ public class LoginActivity extends BaseActivity implements
 
 
             startActivity(new Intent(LoginActivity.this, RootActivity.class));
+            finish();
 
 /*            mStatusTextView.setText("Logged in as : " + user.getEmail());
 
@@ -233,7 +235,7 @@ public class LoginActivity extends BaseActivity implements
 
             //findViewById(R.id.verifyEmailButton).setEnabled(!user.isEmailVerified());
         } else {
-            mStatusTextView.setText(R.string.signed_out);
+            //mStatusTextView.setText(R.string.signed_out);
             //mDetailTextView.setText(null);
 
             findViewById(R.id.username).setVisibility(View.VISIBLE);
@@ -241,7 +243,7 @@ public class LoginActivity extends BaseActivity implements
             findViewById(R.id.login).setVisibility(View.VISIBLE);
 
 
-            findViewById(R.id.goon).setVisibility(View.GONE);
+            //findViewById(R.id.goon).setVisibility(View.GONE);
         }
     }
 

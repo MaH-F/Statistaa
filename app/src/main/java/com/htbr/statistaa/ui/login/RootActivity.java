@@ -23,7 +23,9 @@ import com.htbr.statistaa.R;
 
 public class RootActivity extends AppCompatActivity {
 
-    static FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+    // user is not "static" because after logging out, it still will be the "old" user
+    FirebaseUser user;
 
 
 
@@ -36,7 +38,9 @@ public class RootActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-       UserHandler.setUsergroup(this, user);
+
+
+
 
 
 
@@ -61,6 +65,14 @@ public class RootActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        UserHandler.setUsergroup(this, user);
     }
 
 

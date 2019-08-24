@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -57,8 +58,7 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
         //TODO do we need this??
         //emptyView = findViewById(R.id.view_empty);
 
-        initFirestore();
-        initRecyclerView();
+
 
     }
 
@@ -66,6 +66,8 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
     @Override
     public void onStart() {
         super.onStart();
+        initFirestore();
+        initRecyclerView();
 
 
 
@@ -100,6 +102,10 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
             Toast.makeText(this, "Error, you are not part of a user group, please call help", Toast.LENGTH_LONG).show();
         }
 
+
+        if(collection == ""){
+            Log.e(TAG,"collection is empty string");
+        }
 
         // Get the 50 highest rated restaurants
         //TODO generate GroupID
@@ -159,4 +165,16 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
     public void onExerciseSelected(DocumentSnapshot exercise) {
 
     }
+
+
+/*    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }*/
+
 }
