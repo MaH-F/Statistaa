@@ -64,6 +64,14 @@ public class RootActivity extends AppCompatActivity {
             }
         });
 
+        ImageButton myProfileButton = findViewById(R.id.profilebutton);
+        myProfileButton .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RootActivity.this, MyProfileActivity.class));
+            }
+        });
+
 
     }
 

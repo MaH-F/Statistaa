@@ -1,11 +1,13 @@
 package com.htbr.statistaa.ui.login;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
+import java.io.Serializable;
+
 /**
  * Restaurant POJO.
  */
 @IgnoreExtraProperties
-public class Exercise {
+public class Exercise implements Serializable {
     private String name;
     private String subtitle;
     private String content;

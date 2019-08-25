@@ -2,6 +2,7 @@ package com.htbr.statistaa.ui.login;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.htbr.statistaa.R;
+
+import java.io.Serializable;
 
 public class ExercisesRecyclerActivity extends AppCompatActivity implements View.OnClickListener, ExerciseAdapter.OnExerciseSelectedListener  {
 
@@ -162,7 +165,14 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
     }
 
     @Override
-    public void onExerciseSelected(DocumentSnapshot exercise) {
+    public void onExerciseSelected(DocumentSnapshot exerciseSnapshot) {
+        Exercise exercise = exerciseSnapshot.toObject(Exercise.class);
+        Log.d(TAG, "Exercise "+ exercise.getName() + " selected");
+
+        Intent intent = new Intent(this, ExerciseScrollingActivity.class);
+        intent.putExtra("Exercise" , (Serializable) exercise);
+        startActivity(intent);
+
 
     }
 

@@ -12,9 +12,8 @@
     <string name="overview">Überblick</string>
     <string name="prompt_password">Passwort</string>
     <string name="title_activity_about">Information</string>
-    <string name="title_activity_root">Mein Profil</string>
     <string name="welcome">Willkommen</string>
-    <string name="large_text">"Informationen"
+    <string name="terms_and_conditions_text">"Informationen"
 
         "\n\n"
 
@@ -61,6 +60,10 @@
 
         "Weitere Informationen oder Fragen:"
         "thehitbear@gmail.com"
+
+        "\n\n"
+
+        "Matthias Hauber, 2019"
 
         "\n\n"
 
