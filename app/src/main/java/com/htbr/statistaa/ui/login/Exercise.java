@@ -1,4 +1,6 @@
 package com.htbr.statistaa.ui.login;
+import androidx.annotation.Keep;
+
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
 import java.io.Serializable;
@@ -6,6 +8,7 @@ import java.io.Serializable;
 /**
  * Restaurant POJO.
  */
+@Keep //try this for proguard
 @IgnoreExtraProperties
 public class Exercise implements Serializable {
     private String name;
