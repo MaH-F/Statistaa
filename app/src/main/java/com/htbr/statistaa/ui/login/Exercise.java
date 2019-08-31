@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Restaurant POJO.
  */
-@Keep //try this for proguard
+@Keep //try this for proguard, so firebase database is still readable
 @IgnoreExtraProperties
 public class Exercise implements Serializable {
     private String name;
