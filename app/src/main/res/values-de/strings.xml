@@ -74,4 +74,5 @@
     <string name="feedback">Feedback</string>
     <string name="logout">Ausloggen</string>
     <string name="about">Informationen</string>
+    <string name="addToArchve">Zu meinem Archiv hinzufügen</string>
 </resources>

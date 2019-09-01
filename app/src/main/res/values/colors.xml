@@ -3,6 +3,10 @@
     <color name="colorPrimary">#337ADC</color>
     <color name="colorPrimaryDark">#0634B1</color>
     <color name="colorAccent">#777575</color>
+    <color name="colorArchive">#C40ED5A7</color>
+    <color name="colorLearn">#922FD50E</color>
+    <color name="colorProflie">#8ACBD50E</color>
+    <color name="colorFeedback">#8A0E61D5</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>
