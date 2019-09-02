@@ -2,8 +2,10 @@ package com.htbr.statistaa.ui.login;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -15,15 +17,21 @@ import android.view.View;
 import android.widget.ImageButton;
 
 
-
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.auth.User;
+
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.htbr.statistaa.R;
+
+import java.io.File;
 
 public class RootActivity extends AppCompatActivity {
 
-
+    private static final String TAG = "RootActivity";
     // user is not "static" because after logging out, it still will be the "old" user
     FirebaseUser user;
 
@@ -36,6 +44,8 @@ public class RootActivity extends AppCompatActivity {
         setContentView(R.layout.activity_root);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 
 
 
@@ -81,6 +91,74 @@ public class RootActivity extends AppCompatActivity {
         super.onStart();
         user = FirebaseAuth.getInstance().getCurrentUser();
         UserHandler.setUsergroup(this, user);
+
+
+
+        //if we have no json,
+        String fileContent = FileWriter.readFile(this, user.getUid()+getString(R.string.mySelectedExerciseJSON));
+
+
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://statistaafrbs.appspot.com/");
+        StorageReference storageRef = storage.getReference();
+
+
+        if (fileContent.equals("{}")){
+            //load file down if exists
+
+            StorageReference riversRef = storageRef.child(user.getEmail()+"/selectedExercises.txt");
+            final long ONE_MEGABYTE = 1024 * 1024;
+            riversRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    // Data for "images/island.jpg" is returns, use this as needed
+                    FileWriter.writeBytesToFile(getApplicationContext(), user.getUid()+getString(R.string.mySelectedExerciseJSON), bytes);
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                   String exceptionMessage =  exception.getMessage();
+
+                   if (exceptionMessage.contains("Object does not exist at location.")){
+                       //go on, this is the first time
+                       Log.d(TAG, "Object does not exist, first Log In?");
+                   }
+                   else{
+                       exception.printStackTrace();
+                   }
+
+
+                }
+            });
+        }
+
+        else {
+            //load data up
+
+
+            StorageReference riversRef = storageRef.child(user.getEmail()+"/selectedExercises.txt");
+            UploadTask uploadTask = riversRef.putBytes(fileContent.getBytes());
+
+            // Register observers to listen for when the download is done or if it fails
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                    // ...
+                }
+            });
+        }
+
+
+
+
+
     }
 
 

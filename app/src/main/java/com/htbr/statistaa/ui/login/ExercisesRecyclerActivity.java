@@ -25,13 +25,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.htbr.statistaa.R;
 
 import java.io.Serializable;
 
 public class ExercisesRecyclerActivity extends AppCompatActivity implements View.OnClickListener, ExerciseAdapter.OnExerciseSelectedListener  {
+
+
 
 
     private RecyclerView mExercisesRecycler;
@@ -40,11 +40,11 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
     private static final String TAG = "ExercisesRecycler";
 
     private FirebaseFirestore mFirestore;
-    private DatabaseReference reference;
+
 
     private Query mQuery;
     private int LIMIT = 50;
-    private ExerciseAdapter exerciseAdapter;
+
 
 
     @Override
@@ -162,7 +162,10 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
     @Override
     public void onExerciseSelected(DocumentSnapshot exerciseSnapshot) {
         Exercise exercise = exerciseSnapshot.toObject(Exercise.class);
-        Log.d(TAG, "Exercise "+ exercise.getName() + " selected");
+        exercise.setId(exerciseSnapshot.getId());
+        Log.d(TAG, "Exercise "+ exercise.getName() + " id: " + exercise.getId() + " selected");
+
+
 
         Intent intent = new Intent(this, ExerciseScrollingActivity.class);
         intent.putExtra("Exercise" , (Serializable) exercise);
