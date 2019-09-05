@@ -1,4 +1,4 @@
-package com.htbr.statistaa.ui.login;
+package com.htbr.statistaa.Adapters;
 
 
 import android.util.Log;

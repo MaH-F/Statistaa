@@ -4,8 +4,8 @@
     package="com.htbr.statistaa">
 
     <application
-        android:versionCode="7"
-        android:versionName="1.6"
+        android:versionCode="8"
+        android:versionName="1.7"
         android:name="androidx.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,19 +15,27 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.login.ExerciseScrollingActivity"
+            android:name=".Activities.QuestionnaireScrollingActivity"
+            android:label="@string/title_activity_questionnaire_scrolling"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activities.QuestionnairesRecyclerActivity"
+            android:label="@string/title_activity_questionnaire_recycling"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activities.ExerciseScrollingActivity"
             android:label="@string/title_activity_exercise_scrolling"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".ui.login.AboutActivity"
+            android:name=".Activities.AboutActivity"
             android:label="@string/title_activity_about"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.login.RootActivity"
+            android:name=".Activities.RootActivity"
             android:label="@string/title_activity_root"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.login.MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,10 +44,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.login.LoginActivity" />
+        <activity android:name=".Activities.LoginActivity" />
 
-        <activity android:name=".ui.login.ExercisesRecyclerActivity" />
-        <activity android:name=".ui.login.MyProfileActivity" />
+        <activity android:name=".Activities.ExercisesRecyclerActivity" />
+        <activity android:name=".Activities.MyProfileActivity" />
 
         <service
             android:name=".services.MyFirebaseMessagingService"
