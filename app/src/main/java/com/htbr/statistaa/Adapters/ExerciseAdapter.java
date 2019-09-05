@@ -1,4 +1,4 @@
-package com.htbr.statistaa.ui.login;
+package com.htbr.statistaa.Adapters;
 
 
 
@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 import com.htbr.statistaa.R;
+import com.htbr.statistaa.Classes.Exercise;
 
 
 public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
@@ -57,8 +58,6 @@ public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
         TextView cityView;
 
         public ViewHolder(View itemView) {
-
-
            super(itemView);
 
            nameView = itemView.findViewById(R.id.title);

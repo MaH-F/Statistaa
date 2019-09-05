@@ -5,14 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activities.ExerciseScrollingActivity"
-    tools:showIn="@layout/activity_exercise_scrolling">
+    tools:context=".Activities.QuestionnaireScrollingActivity"
+    tools:showIn="@layout/activity_questionnaire_scrolling">
 
-    <TextView
-        android:id="@+id/exercise_body_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/question_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </androidx.core.widget.NestedScrollView>

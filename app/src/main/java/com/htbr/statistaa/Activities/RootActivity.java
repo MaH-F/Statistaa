@@ -1,8 +1,6 @@
-package com.htbr.statistaa.ui.login;
+package com.htbr.statistaa.Activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,8 +24,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.htbr.statistaa.R;
-
-import java.io.File;
+import com.htbr.statistaa.Classes.FileWriter;
+import com.htbr.statistaa.Classes.UserHandler;
 
 public class RootActivity extends AppCompatActivity {
 
@@ -79,6 +77,14 @@ public class RootActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RootActivity.this, MyProfileActivity.class));
+            }
+        });
+
+        ImageButton feedbackButton = findViewById(R.id.feedbackbutton);
+        feedbackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RootActivity.this, QuestionnairesRecyclerActivity.class));
             }
         });
 

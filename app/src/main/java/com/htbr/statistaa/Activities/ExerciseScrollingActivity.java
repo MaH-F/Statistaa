@@ -1,4 +1,4 @@
-package com.htbr.statistaa.ui.login;
+package com.htbr.statistaa.Activities;
 
 import android.os.Bundle;
 
@@ -7,11 +7,9 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.JsonReader;
 import android.util.Log;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,20 +19,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.htbr.statistaa.R;
+import com.htbr.statistaa.Classes.Exercise;
+import com.htbr.statistaa.Classes.FileWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Iterator;
-
 
 public class ExerciseScrollingActivity extends AppCompatActivity {
 
     FirebaseUser user;
-    private static final String TAG = "ExerciseScrollingAc";
+    private static final String TAG = "ExerciseScrollingAy";
     static JSONObject mySelectedExercisesJSON;
 
     Exercise exercise;

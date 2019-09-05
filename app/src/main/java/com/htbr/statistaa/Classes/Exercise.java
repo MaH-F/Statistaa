@@ -1,13 +1,11 @@
-package com.htbr.statistaa.ui.login;
+package com.htbr.statistaa.Classes;
 import androidx.annotation.Keep;
 
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
 import java.io.Serializable;
 
-/**
- * Restaurant POJO.
- */
+
 @Keep //try this for proguard, so firebase database is still readable
 @IgnoreExtraProperties
 public class Exercise implements Serializable {

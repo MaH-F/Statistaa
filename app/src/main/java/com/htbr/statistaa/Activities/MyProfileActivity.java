@@ -1,4 +1,4 @@
-package com.htbr.statistaa.ui.login;
+package com.htbr.statistaa.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;

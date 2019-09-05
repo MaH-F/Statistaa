@@ -1,11 +1,10 @@
-package com.htbr.statistaa.ui.login;
+package com.htbr.statistaa.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -54,7 +53,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 // Log and toast
                // String msg = getString(R.string.msg_token_fmt, token);
                 Log.d(TAG, token);
-                Toast.makeText(MainActivity.this, "registered", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "registered", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -98,4 +98,7 @@
     <string name="logout">Ausloggen</string>
     <string name="about">Informationen</string>
     <string name="addToArchve">Zu meinem Archiv hinzufügen</string>
+    <string name="questionnaire">Fragebogen</string>
+    <string name="questionnaire_pretitle">Fragebogen</string>
+    <string name="authentication_failed">Authentifizierung fehlgeschlagen</string>
 </resources>
