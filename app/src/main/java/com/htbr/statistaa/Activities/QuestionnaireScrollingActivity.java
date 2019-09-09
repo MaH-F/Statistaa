@@ -59,7 +59,7 @@ public class QuestionnaireScrollingActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new QuestionAdapter(questionnaire.getQuestions().toArray(new String[0]));
+        mAdapter = new QuestionAdapter(questionnaire.getQuestions().toArray(new String[0]), questionnaire.getId());
         recyclerView.setAdapter(mAdapter);
 
 

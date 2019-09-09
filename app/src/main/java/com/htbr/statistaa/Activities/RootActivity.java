@@ -109,7 +109,7 @@ public class RootActivity extends AppCompatActivity {
 
 
         if (fileContent.equals("{}")){
-            //load file down if exists
+            //download file if exists
 
             StorageReference riversRef = storageRef.child(user.getEmail()+"/selectedExercises.txt");
             final long ONE_MEGABYTE = 1024 * 1024;

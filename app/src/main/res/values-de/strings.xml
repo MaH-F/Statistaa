@@ -101,4 +101,5 @@
     <string name="questionnaire">Fragebogen</string>
     <string name="questionnaire_pretitle">Fragebogen</string>
     <string name="authentication_failed">Authentifizierung fehlgeschlagen</string>
+    <string name="alreadyInArchive">Bereits in meinem Archiv</string>
 </resources>
