@@ -102,6 +102,7 @@ public class RootActivity extends AppCompatActivity {
 
         //if we have no json,
         String fileContent = FileWriter.readFile(this, user.getUid()+getString(R.string.mySelectedExerciseJSON));
+        //String fileContent = FileWriter.readFile(this, "questionnaire_1");
 
 
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://statistaafrbs.appspot.com/");
@@ -160,6 +161,8 @@ public class RootActivity extends AppCompatActivity {
                 }
             });
         }
+
+
 
 
 

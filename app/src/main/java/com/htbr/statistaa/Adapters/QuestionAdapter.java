@@ -1,5 +1,6 @@
 package com.htbr.statistaa.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,13 @@ import org.json.JSONObject;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyViewHolder> {
 
+    //TODO
+    //set seekbar like in json or set seekbar invisible
+
 
     private String[] mDataset;
-    private String questinnaireID;
+    private String questionnaire;
+    private Context context;
 
 
     // Provide a reference to the views for each data item
@@ -37,9 +42,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public QuestionAdapter(String[] myDataset, String questionnaireID) {
+    public QuestionAdapter(String[] myDataset, String questionnaireID, Context context) {
         mDataset = myDataset;
-        this.questinnaireID = questionnaireID;
+        this.questionnaire = questionnaireID;
+        // we need the context to write to a file
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -56,7 +63,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.textView.setText(mDataset[position]);
@@ -76,8 +83,29 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
             public void onStopTrackingTouch(SeekBar seekBar) {
                 // Write code to perform some action when touch is stopped.
 
+                JSONObject jsonObject;
+
+                try {
+                    //File file = new File(getString(R.string.mySelectedExerciseJSON));
+                    //if(file.exists()){
+                    jsonObject = new JSONObject(FileWriter.readFile(context,  questionnaire));
 
 
+                } catch (JSONException e) {
+                    //if file does not exist
+                    e.printStackTrace();
+                    jsonObject = new JSONObject();
+
+                }
+
+                try {
+                    jsonObject.put(mDataset[position], seekBar.getProgress());
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+                FileWriter.writeNewToFile(context, questionnaire, jsonObject.toString());
 
 
             }
