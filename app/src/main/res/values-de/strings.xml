@@ -102,4 +102,6 @@
     <string name="questionnaire_pretitle">Fragebogen</string>
     <string name="authentication_failed">Authentifizierung fehlgeschlagen</string>
     <string name="alreadyInArchive">Bereits in meinem Archiv</string>
+    <string name="edit_mode_toast">Bearbeitungsmodus</string>
+    <string name="non_edit_mode">Gespeichert.</string>
 </resources>

@@ -18,13 +18,16 @@ import org.json.JSONObject;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyViewHolder> {
 
-    //TODO
-    //set seekbar like in json or set seekbar invisible
+
+
+
 
 
     private String[] mDataset;
     private String questionnaire;
     private Context context;
+
+    int mode;
 
 
     // Provide a reference to the views for each data item
@@ -38,15 +41,23 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
             super(v);
             textView = itemView.findViewById(R.id.item_question_content);
             seekBar = itemView.findViewById(R.id.seekBar);
+
         }
+
+
+
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public QuestionAdapter(String[] myDataset, String questionnaireID, Context context) {
+    public QuestionAdapter(String[] myDataset, String questionnaireID, Context context, int mode) {
         mDataset = myDataset;
         this.questionnaire = questionnaireID;
         // we need the context to write to a file
         this.context = context;
+        this.mode = mode;
+
+
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -67,6 +78,31 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.textView.setText(mDataset[position]);
+
+        //0 means edit-sign appears -> no edit mode  , 1 is edit mode (fab shows a save sign)
+        if (mode == 1){
+            holder.seekBar.setVisibility(View.VISIBLE);
+            //holder.seekBar.setEnabled(true);
+
+            JSONObject jsonObject;
+            try {
+                jsonObject =  new JSONObject(FileWriter.readFile(context,  questionnaire));
+                if(jsonObject.has(mDataset[position])){
+                    holder.seekBar.setProgress((int)jsonObject.get(mDataset[position]));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+
+        } else if (mode == 0){
+            holder.seekBar.setVisibility(View.INVISIBLE);
+            //holder.seekBar.setEnabled(false);
+
+        }
+
         holder.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
