@@ -100,16 +100,17 @@ public class RootActivity extends AppCompatActivity {
 
 
 
-        //if we have no json,
+
         String fileContent = FileWriter.readFile(this, user.getUid()+getString(R.string.mySelectedExerciseJSON));
+        //String fileContent = FileWriter.readFile(this, "questionnaire_1");
 
-
+        //if we have no json,
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://statistaafrbs.appspot.com/");
         StorageReference storageRef = storage.getReference();
 
 
         if (fileContent.equals("{}")){
-            //load file down if exists
+            //download file if exists
 
             StorageReference riversRef = storageRef.child(user.getEmail()+"/selectedExercises.txt");
             final long ONE_MEGABYTE = 1024 * 1024;
@@ -160,6 +161,8 @@ public class RootActivity extends AppCompatActivity {
                 }
             });
         }
+
+
 
 
 

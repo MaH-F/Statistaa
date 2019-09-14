@@ -133,7 +133,7 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Already in your archive", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.alreadyInArchive), Toast.LENGTH_LONG).show();
                 }
             }
         });

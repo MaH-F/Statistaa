@@ -134,6 +134,10 @@
     <string name="title_activity_questionnaire_recycling">QuestionnaireRecyclerActivity</string>
     <string name="title_activity_questionnaire_scrolling">QuestionnaireScrollingActivity</string>
     <string name="authentication_failed">Authentication failed.</string>
+    <string name="questioncontent">questioncontent</string>
+    <string name="alreadyInArchive">Already in your archive</string>
+    <string name="edit_mode_toast">Please answer and store</string>
+    <string name="non_edit_mode">Stored.</string>
 
 
 </resources>

@@ -4,8 +4,8 @@
     package="com.htbr.statistaa">
 
     <application
-        android:versionCode="8"
-        android:versionName="1.7"
+        android:versionCode="9"
+        android:versionName="1.8"
         android:name="androidx.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
