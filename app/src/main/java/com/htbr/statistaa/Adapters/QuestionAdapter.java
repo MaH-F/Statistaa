@@ -1,15 +1,18 @@
 package com.htbr.statistaa.Adapters;
 
 import android.content.Context;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.htbr.statistaa.Classes.FileWriter;
 import com.htbr.statistaa.R;
 
@@ -20,14 +23,17 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
 
 
 
-
+    private String localJSONFilename;
+    private JSONObject jsonObject;
 
 
     private String[] mDataset;
-    private String questionnaire;
+    private String questionnaireID;
     private Context context;
 
+
     int mode;
+
 
 
     // Provide a reference to the views for each data item
@@ -37,10 +43,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
         // each data item is just a string in this case
         public TextView textView;
         public SeekBar seekBar;
+        public RelativeLayout seekBarRelativeLayout;
         public MyViewHolder(View v) {
             super(v);
             textView = itemView.findViewById(R.id.item_question_content);
             seekBar = itemView.findViewById(R.id.seekBar);
+            seekBarRelativeLayout= itemView.findViewById(R.id.seekbar_relative_layout);
 
         }
 
@@ -51,12 +59,20 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
     // Provide a suitable constructor (depends on the kind of dataset)
     public QuestionAdapter(String[] myDataset, String questionnaireID, Context context, int mode) {
         mDataset = myDataset;
-        this.questionnaire = questionnaireID;
+        this.questionnaireID = questionnaireID;
         // we need the context to write to a file
         this.context = context;
         this.mode = mode;
 
-
+        if(mode == 1){
+            this.localJSONFilename = FirebaseAuth.getInstance().getCurrentUser().getUid() + "_" + questionnaireID;
+            try {
+                jsonObject = new JSONObject(FileWriter.readFile(context,  localJSONFilename));
+            } catch (JSONException e) {
+                e.printStackTrace();
+                jsonObject = new JSONObject();
+            }
+        }
 
     }
 
@@ -81,14 +97,24 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
 
         //0 means edit-sign appears -> no edit mode  , 1 is edit mode (fab shows a save sign)
         if (mode == 1){
-            holder.seekBar.setVisibility(View.VISIBLE);
+            holder.seekBarRelativeLayout.setVisibility(View.VISIBLE);
+           // holder.seekBar.setVisibility(View.VISIBLE);
             //holder.seekBar.setEnabled(true);
 
-            JSONObject jsonObject;
+
+            //TODO is it possible to read JSON file only once?
+            //JSONObject jsonObject;
             try {
-                jsonObject =  new JSONObject(FileWriter.readFile(context,  questionnaire));
+                //jsonObject =  new JSONObject(FileWriter.readFile(context,  localJSONFilename));
                 if(jsonObject.has(mDataset[position])){
                     holder.seekBar.setProgress((int)jsonObject.get(mDataset[position]));
+                }
+                else {
+                    // JSON has no entry for the current question, so set it to mean progress
+                    jsonObject.put(mDataset[position], holder.seekBar.getProgress());
+                    // and write it to file
+                    //TODO is this necessary for every time? find a better place for this and write only once
+                    FileWriter.writeNewToFile(context, localJSONFilename, jsonObject.toString());
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -98,7 +124,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
 
 
         } else if (mode == 0){
-            holder.seekBar.setVisibility(View.INVISIBLE);
+            holder.seekBarRelativeLayout.setVisibility(View.GONE);
+            //holder.seekBar.setVisibility(View.INVISIBLE);
             //holder.seekBar.setEnabled(false);
 
         }
@@ -119,20 +146,20 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
             public void onStopTrackingTouch(SeekBar seekBar) {
                 // Write code to perform some action when touch is stopped.
 
-                JSONObject jsonObject;
+                //JSONObject jsonObject;
 
-                try {
-                    //File file = new File(getString(R.string.mySelectedExerciseJSON));
-                    //if(file.exists()){
-                    jsonObject = new JSONObject(FileWriter.readFile(context,  questionnaire));
-
-
-                } catch (JSONException e) {
-                    //if file does not exist
-                    e.printStackTrace();
-                    jsonObject = new JSONObject();
-
-                }
+//                try {
+//                    //File file = new File(getString(R.string.mySelectedExerciseJSON));
+//                    //if(file.exists()){
+//                    jsonObject = new JSONObject(FileWriter.readFile(context,  localJSONFilename));
+//
+//
+//                } catch (JSONException e) {
+//                    //if file does not exist
+//                    e.printStackTrace();
+//                    jsonObject = new JSONObject();
+//
+//                }
 
                 try {
                     jsonObject.put(mDataset[position], seekBar.getProgress());
@@ -141,7 +168,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
                 }
 
 
-                FileWriter.writeNewToFile(context, questionnaire, jsonObject.toString());
+                FileWriter.writeNewToFile(context, localJSONFilename, jsonObject.toString());
 
 
             }

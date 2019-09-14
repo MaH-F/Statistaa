@@ -21,6 +21,12 @@
         android:typeface="normal" />
 
 
+<RelativeLayout
+
+    android:id="@+id/seekbar_relative_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
     <SeekBar
 
         android:id="@+id/seekBar"
@@ -30,15 +36,13 @@
         android:max="4"
         android:min="0"
         android:progress="2"
-        android:theme="@style/AlertDialog.AppCompat" />
+       />
 
-
+</RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
-
-
 
 
 </LinearLayout>

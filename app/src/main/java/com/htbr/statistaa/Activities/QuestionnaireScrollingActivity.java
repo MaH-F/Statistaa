@@ -28,13 +28,15 @@ import com.htbr.statistaa.Classes.FileWriter;
 import com.htbr.statistaa.Classes.Questionnaire;
 import com.htbr.statistaa.R;
 
+import java.io.File;
+
 public class QuestionnaireScrollingActivity extends AppCompatActivity {
 
     private static final String TAG = "QuestionnaireScrollingA";
 
     Questionnaire questionnaire;
 
-
+    FirebaseUser user;
 
 
     private RecyclerView recyclerView;
@@ -60,10 +62,18 @@ public class QuestionnaireScrollingActivity extends AppCompatActivity {
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        // get JSON File
+
+        questionnaire = (Questionnaire) getIntent().getSerializableExtra("Questionnaire");
+        String jsonFileName = questionnaire.getId();
 
 
+        //download file from storage or write new empty JSON to file or do nothing if JSON exists already
+        initJSONFile();
 
-
+        //now we should have a (JSON) file userUID_questtinnaireID for the current questionnaire
 
 
         mode = 0; //0 means edit-sign  > no edit mode  , 1 is edit mode (fab shows a save sign)
@@ -99,12 +109,12 @@ public class QuestionnaireScrollingActivity extends AppCompatActivity {
 
 
                     // upload json
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                   // FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     FirebaseStorage storage = FirebaseStorage.getInstance("gs://statistaafrbs.appspot.com/");
                     StorageReference storageRef = storage.getReference();
 
 
-                    String fileContent = FileWriter.readFile(getApplicationContext(), questionnaire.getId());
+                    String fileContent = FileWriter.readFile(getApplicationContext(), user.getUid() + "_" + questionnaire.getId());
 
                     //TODO:
                     //every user can write in every directory
@@ -139,11 +149,89 @@ public class QuestionnaireScrollingActivity extends AppCompatActivity {
 
     }
 
+    private void initJSONFile() {
+
+        final String localFilename = user.getUid() + "_" + questionnaire.getId();
+        String storageFilename = user.getEmail() + "/" + questionnaire.getId();
+
+       // String localFileContent = "";
+        //String localFileContent = FileWriter.readFile(this, localFilename);
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://statistaafrbs.appspot.com/");
+        StorageReference storageRef = storage.getReference();
+
+
+        //if (localFileContent.equals("{}")){
+            //download file if exists
+
+        StorageReference riversRef = storageRef.child(storageFilename);
+        final long ONE_MEGABYTE = 1024 * 1024;
+        riversRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                // Data for "images/island.jpg" is returns, use this as needed
+                FileWriter.writeBytesToNEWFile(getApplicationContext(), localFilename, bytes);
+                Log.d(TAG, "wrote QuestionnaireJSON to local file");
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                String exceptionMessage =  exception.getMessage();
+                exception.printStackTrace();
+
+                if (exceptionMessage.contains("Object does not exist at location.")){
+                    //go on, this is the first time
+                    Log.d(TAG, "Object does not exist, first Log In?");
+
+                    //write empty JSON to localFile
+                    //try to read local file
+
+                    String localFileContent = FileWriter.readFile(getApplicationContext(), localFilename);
+                    if (localFileContent.equals("{}")){
+                        //this means that file didnt exist before, look into FrileWriter.readFile();
+
+                        //so write a new empty JSON
+                        FileWriter.writeNewToFile(getApplicationContext(), localFilename, "{}");
+                    }
+                    else {
+                        // in this case a local file exists, but no file on the cloud storage
+                        Log.d(TAG, "no JSON found on cloud storage but local file is here");
+                    }
+
+
+
+
+
+                }
+                else{
+                    exception.printStackTrace();
+                }
+
+
+            }
+        });
+
+//        }
+//        else {
+//            //local file exists
+//            //TODO is file a JSON??
+//            Log.d(TAG, "Local file is no emty JSON");
+//        }
+
+
+
+
+
+
+
+    }
+
     private void showRecycler() {
 
         Log.d(TAG, "reload recycler");
 
-        questionnaire = (Questionnaire) getIntent().getSerializableExtra("Questionnaire");
+
         CollapsingToolbarLayout collapsingToolbarLayout  = findViewById(R.id.collapsing_toolbar_layout);
         collapsingToolbarLayout.setTitle(questionnaire.getName());
 

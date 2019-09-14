@@ -34,6 +34,21 @@ public class FileWriter {
 
     }
 
+    public static void writeBytesToNEWFile(Context context, String fileName, byte[] data){
+        String filename = fileName;
+        FileOutputStream outputStream;
+
+
+        try {
+            outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(data);
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void writeToFile(Context context, String fileName, String data){
         String filename = fileName;
         String fileContents = data;
@@ -64,6 +79,9 @@ public class FileWriter {
         }
 
     }
+
+
+
 
     public static String readFile(Context context, String fileName) {
         StringBuilder sb = new StringBuilder();
