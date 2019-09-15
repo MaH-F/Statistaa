@@ -104,4 +104,5 @@
     <string name="alreadyInArchive">Bereits in meinem Archiv</string>
     <string name="edit_mode_toast">Bearbeitungsmodus</string>
     <string name="non_edit_mode">Gespeichert.</string>
+    <string name="Fach">BOX #</string>
 </resources>
