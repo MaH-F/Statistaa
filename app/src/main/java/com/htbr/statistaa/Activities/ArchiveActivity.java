@@ -19,6 +19,9 @@ public class ArchiveActivity extends FragmentActivity {
 
     ViewPager mPager;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

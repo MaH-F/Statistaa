@@ -12,7 +12,14 @@ import android.widget.TextView;
 
 import androidx.fragment.app.ListFragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.htbr.statistaa.Classes.FileWriter;
 import com.htbr.statistaa.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ArrayListFragment extends ListFragment {
     int mNum;
@@ -60,7 +67,32 @@ public class ArrayListFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, new String[] {"ExerciseITEM1", "ExerciseITEM2", "ExerciseITEM3"} ));
+
+
+        String [] exercises = new String[0];
+
+        if (mNum == 0){
+            try {
+                JSONObject jsonObject = new JSONObject(FileWriter.readFile(getContext(),  FirebaseAuth.getInstance().getCurrentUser().getUid() + getString(R.string.mySelectedExerciseJSON)));
+                //TODO: better way to convert JSONARRRAY to stringarray
+
+
+                JSONArray jsonArray = (JSONArray) jsonObject.get("archive");
+                exercises = jsonArray.toString().split(",");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            exercises = new String[]{"Exercise" + mNum, "Exercise" + mNum, "Exercise" + mNum};
+
+        }
+
+
+        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, exercises ));
+
+
+
     }
 
     @Override

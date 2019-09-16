@@ -131,6 +131,9 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                     }
                     FileWriter.writeNewToFile(getApplicationContext(), user.getUid() + getString(R.string.mySelectedExerciseJSON), mySelectedExercisesJSON.toString());
 
+
+
+
                 }
                 else {
                     Toast.makeText(getApplicationContext(), getString(R.string.alreadyInArchive), Toast.LENGTH_LONG).show();
