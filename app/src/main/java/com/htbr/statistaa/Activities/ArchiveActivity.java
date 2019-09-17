@@ -27,7 +27,7 @@ public class ArchiveActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive);
 
-        mAdapter = new PagerAdapter(getSupportFragmentManager());
+        mAdapter = new PagerAdapter(getSupportFragmentManager(), NUM_ITEMS);
 
 
 
@@ -38,21 +38,7 @@ public class ArchiveActivity extends FragmentActivity {
         tabLayout.setupWithViewPager(mPager);
 
 
-//        // Watch for button clicks.
-//        Button button = (Button)findViewById(R.id.goto_first);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mPager.setCurrentItem(0);
-//            }
-//        });
-//        button = (Button)findViewById(R.id.goto_last);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mPager.setCurrentItem(NUM_ITEMS-1);
-//            }
-//        });
+
     }
 
 

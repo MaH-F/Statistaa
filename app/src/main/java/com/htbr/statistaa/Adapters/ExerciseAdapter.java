@@ -63,14 +63,7 @@ public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
            nameView = itemView.findViewById(R.id.title);
            subtitle = itemView.findViewById(R.id.subtitle);
 
-/*
-            imageView = itemView.findViewById(R.id.restaurant_item_image);
-            nameView = itemView.findViewById(R.id.restaurant_item_name);
-            //ratingBar = itemView.findViewById(R.id.restaurant_item_rating);
-            numRatingsView = itemView.findViewById(R.id.restaurant_item_num_ratings);
-            priceView = itemView.findViewById(R.id.restaurant_item_price);
-            categoryView = itemView.findViewById(R.id.restaurant_item_category);
-            cityView = itemView.findViewById(R.id.restaurant_item_city);*/
+
         }
 
         public void bind(final DocumentSnapshot snapshot,

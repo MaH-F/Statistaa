@@ -14,6 +14,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 
 public class FileWriter {
@@ -113,22 +115,53 @@ public class FileWriter {
         return sb.toString();
     }
 
-//    public void writeToExternalFile(Context context,String fileName, String data){
-//        if(isExternalStorageWritable()) {
-//
-//            String filename = fileName;
-//            String fileContents = data;
-//            FileOutputStream outputStream;
-//
-//            try {
-//                outputStream = context.openFileOutput(getPublicDocumentStorageDir("").getPath(), Context.MODE_APPEND);
-//                outputStream.write(fileContents.getBytes());
-//                outputStream.close();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    public static void writeObjectToFile(Context context, Exercise exercise) {
+        String filename = exercise.getId();
+
+        FileOutputStream outputStream;
+        ObjectOutputStream objectOutputStream;
+
+        try {
+            outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
+            objectOutputStream = new ObjectOutputStream(outputStream);
+            objectOutputStream.writeObject(exercise);
+            objectOutputStream.close();
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public static Object readObjectFromFile(Context context, String fileName){
+        FileInputStream fileInputStream;
+        ObjectInputStream objectInputStream;
+        Object returnObject = null;
+
+
+        try {
+            fileInputStream = context.openFileInput(fileName);
+            objectInputStream = new ObjectInputStream(fileInputStream);
+
+
+            returnObject = objectInputStream.readObject();
+
+
+
+
+
+        }
+        catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+
+
+        }
+        // context.deleteFile(fileName);
+        return returnObject;
+    }
+
+
 
 
     public File getPublicDocumentStorageDir(String albumName) {

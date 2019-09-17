@@ -26,6 +26,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
 
 public class ExerciseScrollingActivity extends AppCompatActivity {
 
@@ -98,7 +103,7 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                // Exercise is not in archive
                 if (isAlreadyArchived == 0) {
 
                     Toast.makeText(getApplicationContext(), getString(R.string.addToArchve), Toast.LENGTH_LONG).show();
@@ -130,6 +135,10 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
                     }
                     FileWriter.writeNewToFile(getApplicationContext(), user.getUid() + getString(R.string.mySelectedExerciseJSON), mySelectedExercisesJSON.toString());
+
+
+                    //save exercise to file
+                    FileWriter.writeObjectToFile(getApplicationContext(), exercise);
 
 
 

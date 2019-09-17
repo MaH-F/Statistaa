@@ -4,18 +4,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.htbr.statistaa.Activities.ArchiveActivity;
-import com.htbr.statistaa.Fragments.ArrayListFragment;
+
+import com.htbr.statistaa.Fragments.RecyclerViewFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
 
-    static final int NUM_ITEMS = 3;
+    static int NUM_ITEMS;
     static final String[] tabTitles = new String[]{"Box1", "Box2", "Box3"};
 
-    public PagerAdapter(FragmentManager fm) {
+    public PagerAdapter(FragmentManager fm, int num) {
         //  super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
         super(fm);
+        NUM_ITEMS = num;
     }
 
     @Override
@@ -25,7 +26,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return ArrayListFragment.newInstance(position);
+       return RecyclerViewFragment.newInstance(position);
     }
 
     @Override
