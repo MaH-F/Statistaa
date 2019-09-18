@@ -92,6 +92,7 @@ public class FileWriter {
         try {
             fis = context.openFileInput(fileName);
 
+
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader bufferedReader = new BufferedReader(isr);
 
@@ -161,7 +162,14 @@ public class FileWriter {
         return returnObject;
     }
 
+    public static int exists(Context context, String exerciseID) {
+        int exists = 0;
+        if(context.getFileStreamPath(exerciseID).exists()){
+            exists = 1;
+        }
 
+        return exists;
+    }
 
 
     public File getPublicDocumentStorageDir(String albumName) {

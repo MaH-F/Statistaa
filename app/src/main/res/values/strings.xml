@@ -139,6 +139,8 @@
     <string name="edit_mode_toast">Please answer and store</string>
     <string name="non_edit_mode">Stored.</string>
     <string name="box">BOX #</string>
+    <string name="jsonparam_exercise_id">id</string>
+    <string name="no_user_group">Error, you are not part of a user group, please call help</string>
 
 
 </resources>

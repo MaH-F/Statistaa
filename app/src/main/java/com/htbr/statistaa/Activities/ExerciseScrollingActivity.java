@@ -36,7 +36,11 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
     FirebaseUser user;
     private static final String TAG = "ExerciseScrollingAy";
-    static JSONObject mySelectedExercisesJSON;
+
+
+    static JSONArray mySelectedExercisesJSONArray;
+    JSONObject exerciseJSON;
+    JSONObject detailsJSON;
 
     Exercise exercise;
 
@@ -57,7 +61,7 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
         collapsingToolbarLayout.setTitle(exercise.getSubtitle());
 
-        final String archive = getString(R.string.archive_JSON_ARRAY_key);
+
 
 
         TextView textView = findViewById(R.id.exercise_body_text);
@@ -68,14 +72,16 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
         try {
-            //File file = new File(getString(R.string.mySelectedExerciseJSON));
-            //if(file.exists()){
-            mySelectedExercisesJSON = new JSONObject(FileWriter.readFile(this, user.getUid() + getString(R.string.mySelectedExerciseJSON)));
+
+
+            mySelectedExercisesJSONArray = new JSONArray(FileWriter.readFile(this, user.getUid() + getString(R.string.mySelectedExerciseJSON)));
 
 
         } catch (JSONException e) {
             e.printStackTrace();
-            mySelectedExercisesJSON = new JSONObject();
+
+
+            mySelectedExercisesJSONArray = new JSONArray();
 
         }
 
@@ -83,25 +89,28 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab_archieveFab);
 
 
-        if (mySelectedExercisesJSON.has(archive)){
+
+        for(int i = 0; i < mySelectedExercisesJSONArray.length(); i++){
             try {
-                JSONArray archived = (JSONArray) mySelectedExercisesJSON.getJSONArray(archive);
-                for (int i = 0; i < archived.length(); i++) {
-                    if (exercise.getId().equals(archived.getString(i))) {
-                        isAlreadyArchived = 1;
-                    }
+                exerciseJSON = (JSONObject) mySelectedExercisesJSONArray.get(i);
+                detailsJSON = (JSONObject) exerciseJSON.get("exercise");
+                if(detailsJSON.get(getString(R.string.jsonparam_exercise_id)).equals(exercise.getId())){
+
+                    isAlreadyArchived = 1;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
-
 
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //JSONArray jsonArray= new JSONArray();
+                JSONObject detais = new JSONObject();
+                JSONObject exerciseJSON = new JSONObject();
 
                 // Exercise is not in archive
                 if (isAlreadyArchived == 0) {
@@ -110,23 +119,28 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
                     Log.d(TAG, "Select exercise " + exercise.getId());
-                    ;
+
                     try {
 
 
-                        JSONArray jsonArray;
-                        if (mySelectedExercisesJSON.has(archive)) {
 
-                            jsonArray = mySelectedExercisesJSON.getJSONArray(archive);
 
-                        } else {
-                            jsonArray = new JSONArray();
+                        detais.put("id", exercise.getId());
+                        detais.put("group", 0);
 
-                        }
-                        jsonArray.put(exercise.getId());
 
-                        mySelectedExercisesJSON.put(archive, jsonArray);
+
+                        exerciseJSON.put("exercise", detais);
+                        mySelectedExercisesJSONArray.put(exerciseJSON);
+
+
+
+
+
+
                         isAlreadyArchived = 1;
+
+
 
 
                     } catch (JSONException e) {
@@ -134,10 +148,11 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
                     }
-                    FileWriter.writeNewToFile(getApplicationContext(), user.getUid() + getString(R.string.mySelectedExerciseJSON), mySelectedExercisesJSON.toString());
+                    FileWriter.writeNewToFile(getApplicationContext(), user.getUid() + getString(R.string.mySelectedExerciseJSON), mySelectedExercisesJSONArray.toString());
 
 
                     //save exercise to file
+                    exercise.setBox(0);
                     FileWriter.writeObjectToFile(getApplicationContext(), exercise);
 
 
@@ -146,6 +161,13 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(getApplicationContext(), getString(R.string.alreadyInArchive), Toast.LENGTH_LONG).show();
+
+
+                    // but if file does not exists save it
+                    if(FileWriter.exists(getApplicationContext(), exercise.getId()) == 0) {
+                        exercise.setBox(0);
+                        FileWriter.writeObjectToFile(getApplicationContext(), exercise);
+                    }
                 }
             }
         });

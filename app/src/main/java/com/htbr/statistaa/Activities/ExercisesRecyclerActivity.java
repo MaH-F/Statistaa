@@ -80,7 +80,7 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
 
 
         //get user group id
-        long group = UserHandler.getUsergroup(this, FirebaseAuth.getInstance().getCurrentUser());;
+        long group = UserHandler.getUsergroup(this, FirebaseAuth.getInstance().getCurrentUser());
 
 
         String collection = "";
@@ -92,7 +92,7 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
             collection = "ExercisesB";
             Log.w(TAG, "Group is "+ group + "collection is "+ collection);
         } else{
-            Toast.makeText(this, "Error, you are not part of a user group, please call help", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_user_group), Toast.LENGTH_LONG).show();
         }
 
 

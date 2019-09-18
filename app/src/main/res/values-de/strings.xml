@@ -105,4 +105,5 @@
     <string name="edit_mode_toast">Bearbeitungsmodus</string>
     <string name="non_edit_mode">Gespeichert.</string>
     <string name="Fach">BOX #</string>
+    <string name="no_user_group">Fehler: Diesem Nutzer ist keine Gruppe zugewiesen. Bitte Entwickler kontaktieren!</string>
 </resources>

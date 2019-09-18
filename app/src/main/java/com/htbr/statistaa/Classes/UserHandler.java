@@ -22,7 +22,9 @@ public class UserHandler {
     private static final String TAG = "UserHandler";
 
 
-    public static long getUsergroup(Activity c, FirebaseUser firebaseUser){
+    public static long getUsergroup(Activity c, FirebaseUser firebaseUser)  {
+
+
         SharedPreferences sharedPref = c.getSharedPreferences(c.getString(R.string.usergroup_sp_file_key),Context.MODE_PRIVATE);
         int defaultValue = 0;
         long group = sharedPref.getLong(firebaseUser.getUid(), defaultValue);
@@ -61,6 +63,12 @@ public class UserHandler {
                         Log.d(TAG," SharedPreferences commit was successfull");
                     } else {
                         Log.d(TAG, "No such document");
+
+                        // write -1 to file
+                        SharedPreferences sharedPref = context.getSharedPreferences(context.getString(R.string.usergroup_sp_file_key),Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putLong(uid, -1);
+                        editor.commit();
                     }
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());

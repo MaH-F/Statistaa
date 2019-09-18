@@ -15,6 +15,9 @@ public class Exercise implements Serializable {
     private String content;
     private int number;
 
+    //this is only for "offline"
+    private int box;
+
 
 
 
@@ -68,6 +71,14 @@ public class Exercise implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getBox() {
+        return box;
+    }
+
+    public void setBox(int box) {
+        this.box = box;
     }
 }
 

@@ -17,6 +17,10 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
         super(fm);
         NUM_ITEMS = num;
+
+
+
+
     }
 
     @Override

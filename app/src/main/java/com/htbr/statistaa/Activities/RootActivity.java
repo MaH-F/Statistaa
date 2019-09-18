@@ -15,17 +15,27 @@ import android.view.View;
 import android.widget.ImageButton;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.htbr.statistaa.Classes.Exercise;
 import com.htbr.statistaa.R;
 import com.htbr.statistaa.Classes.FileWriter;
 import com.htbr.statistaa.Classes.UserHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class RootActivity extends AppCompatActivity {
 
@@ -33,6 +43,7 @@ public class RootActivity extends AppCompatActivity {
     // user is not "static" because after logging out, it still will be the "old" user
     FirebaseUser user;
 
+    long group;
 
 
     @Override
@@ -128,6 +139,8 @@ public class RootActivity extends AppCompatActivity {
                     // Data for "images/island.jpg" is returns, use this as needed
                     FileWriter.writeBytesToFile(getApplicationContext(), user.getUid()+getString(R.string.mySelectedExerciseJSON), bytes);
 
+                    //downloadSavedExercises();
+
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -175,11 +188,108 @@ public class RootActivity extends AppCompatActivity {
 
 
 
-
     }
 
 
+    public void downloadSavedExercises(){
+        group = UserHandler.getUsergroup(this, user);
 
+
+        while (group == 0){
+            try {
+                Thread.sleep(2000);
+                Log.d(TAG, "Usergroup is still default");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        try {
+            JSONArray mySelectetExerciseJSONArray = new JSONArray(FileWriter.readFile(this, user.getUid()+  getString(R.string.mySelectedExerciseJSON)));
+
+
+
+            JSONObject exerciseJSON;
+            JSONObject detailsJSON;
+            for (int i = 0; i < mySelectetExerciseJSONArray.length(); i++){
+                final Exercise exercise;
+                exerciseJSON = (JSONObject) mySelectetExerciseJSONArray.get(i);
+                detailsJSON = (JSONObject) exerciseJSON.get("exercise");
+                //TODO: if a string is in the json that is not a file, what to do?
+                String exerciseFileName = detailsJSON.getString(getString(R.string.jsonparam_exercise_id));
+
+
+
+
+                //TODO thread or service?
+                //
+                // if file does not exists
+                if  ( FileWriter.exists(this,exerciseFileName) == 0 ){
+                    Log.d(TAG, "File " + exerciseFileName + " does not exist so try to load it form database!");
+
+
+                    final FirebaseFirestore db;
+                    db = FirebaseFirestore.getInstance();
+
+
+
+
+                    String collection = "";
+
+                    if(group == 1){
+                        collection = "ExercisesA";
+                        Log.w(TAG, "Group is "+ group + "collection is "+ collection);
+                    } else if (group == 2){
+                        collection = "ExercisesB";
+                        Log.w(TAG, "Group is "+ group + "collection is "+ collection);
+                    } else {
+                        Log.d(TAG, "user has no group");
+                    }
+                    final DocumentReference docRef = db.collection(collection).document(detailsJSON.getString("id"));
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    Exercise downloadedExercise = document.toObject(Exercise.class);
+
+                                    downloadedExercise.setId(document.getId());
+
+
+
+
+                                    FileWriter.writeObjectToFile(getApplicationContext(), downloadedExercise);
+
+
+
+                                    //editor.apply();
+                                    Log.d(TAG," was successfull for File " + downloadedExercise.getId());
+
+                                } else {
+                                    Log.d(TAG, "No such document");
+                                }
+                            } else {
+                                Log.d(TAG, "get failed with ", task.getException());
+                            }
+                        }
+
+                    });
+
+
+
+
+                }
+
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
