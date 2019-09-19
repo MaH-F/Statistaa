@@ -1,5 +1,6 @@
 package com.htbr.statistaa.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -42,6 +43,11 @@ public class RootActivity extends AppCompatActivity {
     private static final String TAG = "RootActivity";
     // user is not "static" because after logging out, it still will be the "old" user
     FirebaseUser user;
+    FirebaseStorage storage;
+    StorageReference storageRef;
+    StorageReference riversRef;
+
+    UserHandler userHandler;
 
     long group;
 
@@ -54,26 +60,6 @@ public class RootActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         ImageButton learnButton = findViewById(R.id.learnbutton);
         learnButton.setOnClickListener(new View.OnClickListener() {
@@ -115,73 +101,56 @@ public class RootActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        UserHandler.setUsergroup(this, user);
+
+        storage = FirebaseStorage.getInstance("gs://statistaafrbs.appspot.com/");
+        storageRef = storage.getReference();
+        riversRef = storageRef.child(user.getEmail()+"/selectedExercises.txt");
+
+
+        userHandler = new UserHandler(this);
+        userHandler.setGroupIDListener(new UserHandler.GroupIDListener() {
+            @Override
+            public void onGotGroup() {
+                // check if stored exercise-filies exist, if not download them.
+                Log.d(TAG, "group is " + userHandler.getUsergroup(user));
+
+
+                //TODO: download every time?? Maybe work with Listeners (OnDataChanged -> upload) and download every time...?
+                String fileContent = FileWriter.readFile(getApplicationContext(), user.getUid() + getString(R.string.mySelectedExerciseJSON));
+
+
+                // if no file exists...
+                 if (fileContent.equals("{}")) {
+                     Log.d(TAG, "file " + user.getUid() + getString(R.string.mySelectedExerciseJSON) + " is not in storage. Download it. ");
+                     downloadSelectedExercisesJSONFile();
+                 }
+                 else {
+                     //load data up
+                     uploadSelectedExercises(fileContent);
+                 }
+
+            }
+        });
+
+        userHandler.setUsergroup(this, user);
 
 
 
 
-        String fileContent = FileWriter.readFile(this, user.getUid()+getString(R.string.mySelectedExerciseJSON));
+       // String fileContent = FileWriter.readFile(this, user.getUid() + getString(R.string.mySelectedExerciseJSON));
         //String fileContent = FileWriter.readFile(this, "questionnaire_1");
 
-        //if we have no json,
-        FirebaseStorage storage = FirebaseStorage.getInstance("gs://statistaafrbs.appspot.com/");
-        StorageReference storageRef = storage.getReference();
 
 
-        if (fileContent.equals("{}")){
-            //download file if exists
+       // if (fileContent.equals("{}")){
+            //download file if exists from firebase
 
-            StorageReference riversRef = storageRef.child(user.getEmail()+"/selectedExercises.txt");
-            final long ONE_MEGABYTE = 1024 * 1024;
-            riversRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                @Override
-                public void onSuccess(byte[] bytes) {
-                    // Data for "images/island.jpg" is returns, use this as needed
-                    FileWriter.writeBytesToFile(getApplicationContext(), user.getUid()+getString(R.string.mySelectedExerciseJSON), bytes);
+       //     downloadSelectedExercisesJSONFile();
+        //}
 
-                    //downloadSavedExercises();
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle any errors
-                   String exceptionMessage =  exception.getMessage();
-
-                   if (exceptionMessage.contains("Object does not exist at location.")){
-                       //go on, this is the first time
-                       Log.d(TAG, "Object does not exist, first Log In?");
-                   }
-                   else{
-                       exception.printStackTrace();
-                   }
-
-
-                }
-            });
-        }
-
-        else {
-            //load data up
-
-
-            StorageReference riversRef = storageRef.child(user.getEmail()+"/selectedExercises.txt");
-            UploadTask uploadTask = riversRef.putBytes(fileContent.getBytes());
-
-            // Register observers to listen for when the download is done or if it fails
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle unsuccessful uploads
-                }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                    // ...
-                }
-            });
-        }
+//            //load data up
+          //  uploadSelectedExercises(fileContent);
+        //}
 
 
 
@@ -190,19 +159,70 @@ public class RootActivity extends AppCompatActivity {
 
     }
 
+    private void downloadSelectedExercisesJSONFile() {
+
+        //if we have no json,
+
+
+        final long ONE_MEGABYTE = 1024 * 1024;
+        riversRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                // Data for "images/island.jpg" is returns, use this as needed
+                FileWriter.writeBytesToFile(getApplicationContext(), user.getUid()+getString(R.string.mySelectedExerciseJSON), bytes);
+
+               // then download our saved exercise-Files (if they not exist)
+                downloadSavedExercises();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                String exceptionMessage =  exception.getMessage();
+
+                if (exceptionMessage.contains("Object does not exist at location.")){
+                    //go on, this is the first time
+                    Log.d(TAG, "Object does not exist, first Log In?");
+                }
+                else{
+                    exception.printStackTrace();
+                }
+
+
+            }
+        });
+    }
+
+
+
+    private void uploadSelectedExercises(String fileContent){
+        //if we have no json,
+
+
+        UploadTask uploadTask = riversRef.putBytes(fileContent.getBytes());
+
+        // Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+            }
+        });
+    }
+
 
     public void downloadSavedExercises(){
-        group = UserHandler.getUsergroup(this, user);
+        group = userHandler.getUsergroup(user);
 
 
-        while (group == 0){
-            try {
-                Thread.sleep(2000);
-                Log.d(TAG, "Usergroup is still default");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+
 
 
         try {

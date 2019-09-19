@@ -21,17 +21,41 @@ import com.htbr.statistaa.R;
 public class UserHandler {
     private static final String TAG = "UserHandler";
 
+    private Activity activity;
 
-    public static long getUsergroup(Activity c, FirebaseUser firebaseUser)  {
+
+    public interface GroupIDListener{
+        public void onGotGroup();
+    }
+
+    private GroupIDListener groupIDListener;
+
+    public UserHandler(Activity activity){
+        this.activity = activity;
+        this.groupIDListener = null;
+    }
+
+    public void setGroupIDListener (GroupIDListener groupIDListener){
+        this.groupIDListener = groupIDListener;
+    }
 
 
-        SharedPreferences sharedPref = c.getSharedPreferences(c.getString(R.string.usergroup_sp_file_key),Context.MODE_PRIVATE);
+
+
+
+
+    public long getUsergroup(FirebaseUser firebaseUser)  {
+
+
+        SharedPreferences sharedPref = activity.getSharedPreferences(activity.getString(R.string.usergroup_sp_file_key),Context.MODE_PRIVATE);
         int defaultValue = 0;
         long group = sharedPref.getLong(firebaseUser.getUid(), defaultValue);
         return group;
 
     }
-    public static void setUsergroup(Activity c, final FirebaseUser firebaseUser){
+
+
+    public void setUsergroup(Activity c, final FirebaseUser firebaseUser){
 
         final FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
@@ -61,6 +85,14 @@ public class UserHandler {
                         editor.commit();
                         //editor.apply();
                         Log.d(TAG," SharedPreferences commit was successfull");
+
+                        // send it to listener
+                        if (groupIDListener != null){
+
+                            groupIDListener.onGotGroup();
+                        }
+
+
                     } else {
                         Log.d(TAG, "No such document");
 

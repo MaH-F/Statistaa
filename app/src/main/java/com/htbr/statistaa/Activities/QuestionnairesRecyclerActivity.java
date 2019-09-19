@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -30,8 +31,8 @@ public class QuestionnairesRecyclerActivity extends AppCompatActivity implements
     private static final String TAG = "QuestionnaireRecycler";
 
     private FirebaseFirestore mFirestore;
-
-
+    private FirebaseUser user;
+    private UserHandler userHandler;
     private Query mQuery;
     private int LIMIT = 50;
 
@@ -46,8 +47,8 @@ public class QuestionnairesRecyclerActivity extends AppCompatActivity implements
         //TODO do we need this??
         //emptyView = findViewById(R.id.view_empty);
 
-
-
+        userHandler = new UserHandler(this);
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
 
@@ -75,7 +76,7 @@ public class QuestionnairesRecyclerActivity extends AppCompatActivity implements
 
 
         //get user group id
-        long group = UserHandler.getUsergroup(this, FirebaseAuth.getInstance().getCurrentUser());;
+        long group = userHandler.getUsergroup(user);;
 
 
 

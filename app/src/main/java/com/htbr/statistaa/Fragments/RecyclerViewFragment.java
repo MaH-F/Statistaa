@@ -110,46 +110,7 @@ public class RecyclerViewFragment extends Fragment {
 
                 // if file does not exists
                 if  ( FileWriter.exists(getContext(),exerciseFileName) == 0 ){
-                    Log.d(TAG, "File " + exerciseFileName + " does not exist so try to load it form database!");
-
-
-                    final FirebaseFirestore db;
-                    db = FirebaseFirestore.getInstance();
-
-
-                    //TODO: get correct group
-                    final DocumentReference docRef = db.collection("ExercisesA").document(detailsJSON.getString("id"));
-                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document.exists()) {
-                                    Exercise downloadedExercise = document.toObject(Exercise.class);
-
-                                    downloadedExercise.setId(document.getId());
-
-                                    exerciseListGroup1.add(downloadedExercise);
-
-
-                                    FileWriter.writeObjectToFile(getContext(), downloadedExercise);
-
-
-
-                                    //editor.apply();
-                                    Log.d(TAG," was successfull for File " + downloadedExercise.getId());
-
-                                } else {
-                                    Log.d(TAG, "No such document");
-                                }
-                            } else {
-                                Log.d(TAG, "get failed with ", task.getException());
-                            }
-                        }
-
-                    });
-
-
+                    Log.e(TAG, "File " + exerciseFileName + " does not exist!");
 
 
                 }
