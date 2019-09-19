@@ -4,8 +4,6 @@
     package="com.htbr.statistaa">
 
     <application
-        android:versionCode="9"
-        android:versionName="1.8"
         android:name="androidx.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,19 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:versionCode="9"
+        android:versionName="1.8"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".Activities.QuestionnaireScrollingActivity"
             android:label="@string/title_activity_questionnaire_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.QuestionnairesRecyclerActivity"
             android:label="@string/title_activity_questionnaire_recycling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.ExerciseScrollingActivity"
             android:label="@string/title_activity_exercise_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.AboutActivity"
             android:label="@string/title_activity_about"
@@ -43,11 +43,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Activities.LoginActivity" />
-
         <activity android:name=".Activities.ExercisesRecyclerActivity" />
         <activity android:name=".Activities.MyProfileActivity" />
+        <activity android:name=".Activities.ArchiveActivity"></activity>
 
         <service
             android:name=".services.MyFirebaseMessagingService"

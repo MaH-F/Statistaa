@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -36,11 +37,12 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
 
     private FirebaseFirestore mFirestore;
 
+    private FirebaseUser user;
 
     private Query mQuery;
     private int LIMIT = 50;
 
-
+    private UserHandler userHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +53,8 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
         //TODO do we need this??
         //emptyView = findViewById(R.id.view_empty);
 
-
-
+        userHandler = new UserHandler(this);
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
 
@@ -80,7 +82,7 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
 
 
         //get user group id
-        long group = UserHandler.getUsergroup(this, FirebaseAuth.getInstance().getCurrentUser());;
+        long group = userHandler.getUsergroup( user );
 
 
         String collection = "";
@@ -92,7 +94,7 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
             collection = "ExercisesB";
             Log.w(TAG, "Group is "+ group + "collection is "+ collection);
         } else{
-            Toast.makeText(this, "Error, you are not part of a user group, please call help", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_user_group), Toast.LENGTH_LONG).show();
         }
 
 
