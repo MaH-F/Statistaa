@@ -127,19 +127,19 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="addToArchve">Add this Exercse to my Archive</string>
-    <string name="mySelectedExerciseJSON">MySelectedExercises.json</string>
-    <string name="archive_JSON_ARRAY_key">archive</string>
+    <string name="mySelectedExerciseJSON" translatable="false">MySelectedExercises.json</string>
+    <string name="archive_JSON_ARRAY_key" translatable="false">archive</string>
     <string name="questionnaire">Questionnaire</string>
     <string name="questionnaire_pretitle">Questionnaire</string>
-    <string name="title_activity_questionnaire_recycling">QuestionnaireRecyclerActivity</string>
-    <string name="title_activity_questionnaire_scrolling">QuestionnaireScrollingActivity</string>
+    <string name="title_activity_questionnaire_recycling" translatable="false">QuestionnaireRecyclerActivity</string>
+    <string name="title_activity_questionnaire_scrolling" translatable="false">QuestionnaireScrollingActivity</string>
     <string name="authentication_failed">Authentication failed.</string>
-    <string name="questioncontent">questioncontent</string>
+    <string name="questioncontent" translatable="false">questioncontent</string>
     <string name="alreadyInArchive">Already in your archive</string>
     <string name="edit_mode_toast">Please answer and store</string>
     <string name="non_edit_mode">Stored.</string>
     <string name="box">BOX #</string>
-    <string name="jsonparam_exercise_id">id</string>
+    <string name="jsonparam_exercise_id" translatable="false">id</string>
     <string name="no_user_group">Error, you are not part of a user group, please call help</string>
 
 
