@@ -15,17 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
+import com.htbr.statistaa.Interfaces.OnExerciseSelectedListener;
 import com.htbr.statistaa.R;
 import com.htbr.statistaa.Classes.Exercise;
 
 
 public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
 
-    public interface OnExerciseSelectedListener {
-
-        void onExerciseSelected(DocumentSnapshot exercise);
-
-    }
+//    public interface OnExerciseSelectedListener {
+//
+//        void onExerciseSelected(DocumentSnapshot exercise);
+//
+//    }
 
     private OnExerciseSelectedListener mListener;
 

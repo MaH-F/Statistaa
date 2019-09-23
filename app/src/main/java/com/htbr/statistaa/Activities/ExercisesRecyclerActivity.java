@@ -18,6 +18,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.htbr.statistaa.Interfaces.OnExerciseSelectedListener;
 import com.htbr.statistaa.R;
 import com.htbr.statistaa.Classes.Exercise;
 import com.htbr.statistaa.Adapters.ExerciseAdapter;
@@ -25,7 +26,7 @@ import com.htbr.statistaa.Classes.UserHandler;
 
 import java.io.Serializable;
 
-public class ExercisesRecyclerActivity extends AppCompatActivity implements View.OnClickListener, ExerciseAdapter.OnExerciseSelectedListener {
+public class ExercisesRecyclerActivity extends AppCompatActivity implements View.OnClickListener, OnExerciseSelectedListener {
 
 
 
@@ -168,6 +169,13 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
         intent.putExtra("Exercise" , (Serializable) exercise);
         startActivity(intent);
 
+
+    }
+
+
+    //do nothing
+    @Override
+    public void onExerciseSelected(Exercise exercise) {
 
     }
 

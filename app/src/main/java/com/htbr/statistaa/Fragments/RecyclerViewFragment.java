@@ -2,6 +2,7 @@ package com.htbr.statistaa.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,21 +24,24 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.htbr.statistaa.Activities.ExerciseScrollingActivity;
 import com.htbr.statistaa.Adapters.ArchiveRecyclerAdapter;
 import com.htbr.statistaa.Adapters.ExerciseAdapter;
 import com.htbr.statistaa.Classes.Exercise;
 import com.htbr.statistaa.Classes.FileWriter;
 import com.htbr.statistaa.Classes.UserHandler;
+import com.htbr.statistaa.Interfaces.OnExerciseSelectedListener;
 import com.htbr.statistaa.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewFragment extends Fragment {
+public class RecyclerViewFragment extends Fragment implements OnExerciseSelectedListener {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -108,7 +112,7 @@ public class RecyclerViewFragment extends Fragment {
 
 
 
-                // if file does not exists
+                // if file does not exist
                 if  ( FileWriter.exists(getContext(),exerciseFileName) == 0 ){
                     Log.e(TAG, "File " + exerciseFileName + " does not exist!");
 
@@ -197,7 +201,7 @@ public class RecyclerViewFragment extends Fragment {
 
 
         //specify an adpater
-        recyclerViewAdapter = new ArchiveRecyclerAdapter(exerciseList);
+        recyclerViewAdapter = new ArchiveRecyclerAdapter(exerciseList, this);
 
 
 
@@ -211,5 +215,19 @@ public class RecyclerViewFragment extends Fragment {
     }
 
 
+    @Override
+    public void onExerciseSelected(DocumentSnapshot exercise) {
+        //do nothing
+    }
 
+    @Override
+    public void onExerciseSelected(Exercise exercise) {
+        Log.d(TAG, "Exercise " + exercise.getId() + " selected");
+
+
+        Intent intent = new Intent(getContext(), ExerciseScrollingActivity.class);
+        intent.putExtra("Exercise" , (Serializable) exercise);
+        startActivity(intent);
+
+    }
 }

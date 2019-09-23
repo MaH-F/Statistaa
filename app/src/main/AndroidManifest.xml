@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme"
         android:versionCode="9"
         android:versionName="1.8"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        android:fullBackupContent="@xml/backup_descriptor">
         <activity
             android:name=".Activities.QuestionnaireScrollingActivity"
             android:label="@string/title_activity_questionnaire_scrolling"
@@ -46,7 +47,7 @@
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.ExercisesRecyclerActivity" />
         <activity android:name=".Activities.MyProfileActivity" />
-        <activity android:name=".Activities.ArchiveActivity"></activity>
+        <activity android:name=".Activities.ArchiveActivity" />
 
         <service
             android:name=".services.MyFirebaseMessagingService"

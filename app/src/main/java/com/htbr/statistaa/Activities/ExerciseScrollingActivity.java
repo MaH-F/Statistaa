@@ -26,11 +26,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-
 
 public class ExerciseScrollingActivity extends AppCompatActivity {
 
@@ -89,14 +84,18 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab_archieveFab);
 
 
-
+        String exerciseID = exercise.getId();
+        int group = -1;
         for(int i = 0; i < mySelectedExercisesJSONArray.length(); i++){
             try {
                 exerciseJSON = (JSONObject) mySelectedExercisesJSONArray.get(i);
                 detailsJSON = (JSONObject) exerciseJSON.get("exercise");
-                if(detailsJSON.get(getString(R.string.jsonparam_exercise_id)).equals(exercise.getId())){
+                if(detailsJSON.get(getString(R.string.jsonparam_exercise_id)).equals(exerciseID)){
 
                     isAlreadyArchived = 1;
+                    group = (int) detailsJSON.get(getString(R.string.jsonparam_exercise_group));
+
+                    Log.d(TAG, "Group of exercise " + exerciseID + " is " + group);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
