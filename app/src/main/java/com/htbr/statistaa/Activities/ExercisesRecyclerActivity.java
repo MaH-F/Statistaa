@@ -167,6 +167,7 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
 
         Intent intent = new Intent(this, ExerciseScrollingActivity.class);
         intent.putExtra("Exercise" , (Serializable) exercise);
+        intent.putExtra("CallingActivity", "ExerciseRecyclerActivity");
         startActivity(intent);
 
 

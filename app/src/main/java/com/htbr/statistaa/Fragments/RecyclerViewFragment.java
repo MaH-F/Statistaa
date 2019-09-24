@@ -227,6 +227,7 @@ public class RecyclerViewFragment extends Fragment implements OnExerciseSelected
 
         Intent intent = new Intent(getContext(), ExerciseScrollingActivity.class);
         intent.putExtra("Exercise" , (Serializable) exercise);
+        intent.putExtra("CallingActivity", "RecyclerViewFragment");
         startActivity(intent);
 
     }

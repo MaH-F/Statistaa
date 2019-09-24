@@ -53,6 +53,8 @@
     <string name="jsonparam_exercise_id" translatable="false">id</string>
     <string name="no_user_group">Error, you are not part of a user group, please call help</string>
     <string name="jsonparam_exercise_group">group</string>
+    <string name="moveToBox2">Move Exercise to Box 2</string>
+    <string name="moveToBox3">Move Exercise to Box 3</string>
 
 
 </resources>
