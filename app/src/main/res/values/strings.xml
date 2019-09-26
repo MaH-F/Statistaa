@@ -55,6 +55,7 @@
     <string name="jsonparam_exercise_group">group</string>
     <string name="moveToBox2">Move Exercise to Box 2</string>
     <string name="moveToBox3">Move Exercise to Box 3</string>
+    <string name="Feedback">Feedback</string>
 
 
 </resources>

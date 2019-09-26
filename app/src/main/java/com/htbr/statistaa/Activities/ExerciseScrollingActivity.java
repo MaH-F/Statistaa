@@ -4,12 +4,13 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 
-
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,13 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
         CollapsingToolbarLayout collapsingToolbarLayout  = findViewById(R.id.collapsing_toolbar_layout);
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+
+
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -313,4 +321,15 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
     }
+
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+
+            if ( item.getItemId() == android.R.id.home){
+                finish();
+            }
+
+            return super.onOptionsItemSelected(item);
+        }
 }

@@ -3,8 +3,10 @@ package com.htbr.statistaa.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,12 +45,24 @@ public class QuestionnairesRecyclerActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnairerecycler);
 
+
+
+
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+
+
+
         mQuestionnaireRecycler = findViewById(R.id.my_questionnairerecycler_view);
         //TODO do we need this??
         //emptyView = findViewById(R.id.view_empty);
 
         userHandler = new UserHandler(this);
         user = FirebaseAuth.getInstance().getCurrentUser();
+
+
     }
 
 
@@ -150,4 +164,16 @@ public class QuestionnairesRecyclerActivity extends AppCompatActivity implements
 
 
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if ( item.getItemId() == android.R.id.home){
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

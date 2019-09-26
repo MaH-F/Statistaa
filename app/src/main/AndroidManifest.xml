@@ -21,16 +21,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.QuestionnairesRecyclerActivity"
-            android:label="@string/title_activity_questionnaire_recycling"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/Feedback"/>
         <activity
             android:name=".Activities.ExerciseScrollingActivity"
             android:label="@string/title_activity_exercise_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.AboutActivity"
-            android:label="@string/title_activity_about"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_about" />
         <activity
             android:name=".Activities.RootActivity"
             android:label="@string/title_activity_root"
@@ -46,7 +44,8 @@
         </activity>
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.ExercisesRecyclerActivity" />
-        <activity android:name=".Activities.MyProfileActivity" />
+        <activity android:name=".Activities.MyProfileActivity"
+            android:label="@string/myprofile"/>
         <activity android:name=".Activities.ArchiveActivity" />
 
         <service
