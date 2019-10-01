@@ -110,4 +110,5 @@
     <string name="moveToBox3">In Box 3 verschieben.</string>
     <string name="seekBarMinText">Trifft nicht zu.</string>
     <string name="seekBarMaxText">Trifft vollkommen zu.</string>
+    <string name="Feedback">Feedback</string>
 </resources>
