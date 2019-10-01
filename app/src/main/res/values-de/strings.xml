@@ -108,4 +108,6 @@
     <string name="no_user_group">Fehler: Diesem Nutzer ist keine Gruppe zugewiesen. Bitte Entwickler kontaktieren!</string>
     <string name="moveToBox2">In Box 2 verschieben.</string>
     <string name="moveToBox3">In Box 3 verschieben.</string>
+    <string name="seekBarMinText">Trifft nicht zu.</string>
+    <string name="seekBarMaxText">Trifft vollkommen zu.</string>
 </resources>

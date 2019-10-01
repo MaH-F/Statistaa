@@ -56,6 +56,8 @@
     <string name="moveToBox2">Move Exercise to Box 2</string>
     <string name="moveToBox3">Move Exercise to Box 3</string>
     <string name="Feedback">Feedback</string>
+    <string name="seekBarMinText">Absolutely not.</string>
+    <string name="seekBarMaxText">Absolutly yes.</string>
 
 
 </resources>
