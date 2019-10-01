@@ -8,11 +8,17 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.htbr.statistaa.Classes.Exercise;
+import com.htbr.statistaa.Interfaces.OnExerciseSelectedListener;
 import com.htbr.statistaa.R;
 
 import java.util.List;
 
 public class ArchiveRecyclerAdapter extends RecyclerView.Adapter<ArchiveRecyclerAdapter.MyViewHolder> {
+
+
+
+
+    private OnExerciseSelectedListener onExerciseSelectedListener;
 
     private List<Exercise> exerciseList;
 
@@ -21,8 +27,10 @@ public class ArchiveRecyclerAdapter extends RecyclerView.Adapter<ArchiveRecycler
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ArchiveRecyclerAdapter(List<Exercise> exerciseList) {
+    public ArchiveRecyclerAdapter(List<Exercise> exerciseList, OnExerciseSelectedListener listener) {
         this.exerciseList = exerciseList;
+        onExerciseSelectedListener = listener;
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -39,7 +47,7 @@ public class ArchiveRecyclerAdapter extends RecyclerView.Adapter<ArchiveRecycler
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        holder.bind(exerciseList.get(position));
+        holder.bind(exerciseList.get(position), onExerciseSelectedListener);
 
     }
 
@@ -69,7 +77,7 @@ public class ArchiveRecyclerAdapter extends RecyclerView.Adapter<ArchiveRecycler
 
         }
 
-        public void bind(Exercise exercise) {
+        public void bind(final Exercise exercise, final OnExerciseSelectedListener listener) {
 
 
 
@@ -79,15 +87,16 @@ public class ArchiveRecyclerAdapter extends RecyclerView.Adapter<ArchiveRecycler
             subtitle.setText(exercise.getSubtitle());
 
 
+
             // Click listener
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    if (listener != null) {
-//                        listener.onExerciseSelected(snapshot);
-//                    }
-//                }
-//            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        listener.onExerciseSelected(exercise);
+                    }
+                }
+            });
         }
     }
 }

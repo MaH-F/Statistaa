@@ -11,25 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:versionCode="10"
-        android:versionName="1.9"
-        tools:ignore="GoogleAppIndexingWarning">
+
+        android:versionCode="11"
+        android:versionName="1.10"
+        tools:ignore="GoogleAppIndexingWarning"
+        android:fullBackupContent="@xml/backup_descriptor">
+
         <activity
             android:name=".Activities.QuestionnaireScrollingActivity"
             android:label="@string/title_activity_questionnaire_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.QuestionnairesRecyclerActivity"
-            android:label="@string/title_activity_questionnaire_recycling"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/Feedback"/>
         <activity
             android:name=".Activities.ExerciseScrollingActivity"
             android:label="@string/title_activity_exercise_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.AboutActivity"
-            android:label="@string/title_activity_about"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_about" />
         <activity
             android:name=".Activities.RootActivity"
             android:label="@string/title_activity_root"
@@ -45,8 +46,9 @@
         </activity>
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.ExercisesRecyclerActivity" />
-        <activity android:name=".Activities.MyProfileActivity" />
-        <activity android:name=".Activities.ArchiveActivity"></activity>
+        <activity android:name=".Activities.MyProfileActivity"
+            android:label="@string/myprofile"/>
+        <activity android:name=".Activities.ArchiveActivity" />
 
         <service
             android:name=".services.MyFirebaseMessagingService"

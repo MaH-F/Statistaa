@@ -1,14 +1,16 @@
 package com.htbr.statistaa.Activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 
-
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,11 +28,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-
 
 public class ExerciseScrollingActivity extends AppCompatActivity {
 
@@ -45,7 +42,10 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
     Exercise exercise;
 
     int isAlreadyArchived = 0;
+    int group = -1;
+    int index;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +54,13 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
         CollapsingToolbarLayout collapsingToolbarLayout  = findViewById(R.id.collapsing_toolbar_layout);
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+
+
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -89,14 +96,30 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab_archieveFab);
 
 
+        String callingActivity = (String) getIntent().getSerializableExtra("CallingActivity");
+
+
+
+        if ((callingActivity.equals("ExerciseRecyclerActivity") && exercise.getBox() != -1) || exercise.getBox() == 2){
+            floatingActionButton.setVisibility(View.INVISIBLE);
+        }
+
+
+
+        String exerciseID = exercise.getId();
 
         for(int i = 0; i < mySelectedExercisesJSONArray.length(); i++){
             try {
                 exerciseJSON = (JSONObject) mySelectedExercisesJSONArray.get(i);
                 detailsJSON = (JSONObject) exerciseJSON.get("exercise");
-                if(detailsJSON.get(getString(R.string.jsonparam_exercise_id)).equals(exercise.getId())){
+                if(detailsJSON.get(getString(R.string.jsonparam_exercise_id)).equals(exerciseID)){
 
-                    isAlreadyArchived = 1;
+                    //isAlreadyArchived = 1;
+                    group = (int) detailsJSON.get(getString(R.string.jsonparam_exercise_group));
+
+                    Log.d(TAG, "Group of exercise " + exerciseID + " is " + group);
+
+                    index = i;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -112,67 +135,201 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                 JSONObject detais = new JSONObject();
                 JSONObject exerciseJSON = new JSONObject();
 
-                // Exercise is not in archive
+                // to guarantee that a user can push an exercise only one time to another box/group
                 if (isAlreadyArchived == 0) {
+                    // in witch group is our archive
+                    switch (group) {
+                        // exercise is not archived, does not exist in JSON
+                        case -1:
+                            Log.d(TAG, "Exercise is not in a group");
 
-                    Toast.makeText(getApplicationContext(), getString(R.string.addToArchve), Toast.LENGTH_LONG).show();
-
-
-                    Log.d(TAG, "Select exercise " + exercise.getId());
-
-                    try {
-
-
+                            Toast.makeText(getApplicationContext(), getString(R.string.addToArchve), Toast.LENGTH_LONG).show();
 
 
-                        detais.put("id", exercise.getId());
-                        detais.put("group", 0);
+                            try {
+                                mySelectedExercisesJSONArray.remove(index);
+
+                                detais.put("id", exercise.getId());
+                                detais.put("group", 0);
 
 
+                                exerciseJSON.put("exercise", detais);
+                                mySelectedExercisesJSONArray.put(exerciseJSON);
 
-                        exerciseJSON.put("exercise", detais);
-                        mySelectedExercisesJSONArray.put(exerciseJSON);
-
-
-
+                                isAlreadyArchived = 1;
 
 
-
-                        isAlreadyArchived = 1;
-
-
+                            } catch (JSONException e) {
+                                e.printStackTrace();
 
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                            }
+                            FileWriter.writeNewToFile(getApplicationContext(), user.getUid() + getString(R.string.mySelectedExerciseJSON), mySelectedExercisesJSONArray.toString());
 
 
+                            //save exercise to file
+                            exercise.setBox(0);
+                            FileWriter.writeObjectToFile(getApplicationContext(), exercise);
+
+
+                            break;
+                        // exercise is in group 0
+                        case 0:
+                            Log.d(TAG, "Exercise is in group 0 push it to group 1");
+
+                            Toast.makeText(getApplicationContext(), getString(R.string.moveToBox2), Toast.LENGTH_LONG).show();
+
+
+                            try {
+                                mySelectedExercisesJSONArray.remove(index);
+                                detais.put("id", exercise.getId());
+                                detais.put("group", 1);
+
+
+                                exerciseJSON.put("exercise", detais);
+                                mySelectedExercisesJSONArray.put(exerciseJSON);
+
+                                isAlreadyArchived = 1;
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+
+                            }
+                            FileWriter.writeNewToFile(getApplicationContext(), user.getUid() + getString(R.string.mySelectedExerciseJSON), mySelectedExercisesJSONArray.toString());
+
+
+                            //save exercise to file
+                            exercise.setBox(1);
+                            FileWriter.writeObjectToFile(getApplicationContext(), exercise);
+
+
+                            break;
+                        case 1:
+                            Log.d(TAG, "Exercise is in group 0 push it to group 2");
+
+
+                            Toast.makeText(getApplicationContext(), getString(R.string.moveToBox3), Toast.LENGTH_LONG).show();
+
+
+                            try {
+                                mySelectedExercisesJSONArray.remove(index);
+                                detais.put("id", exercise.getId());
+                                detais.put("group", 2);
+
+
+                                exerciseJSON.put("exercise", detais);
+                                mySelectedExercisesJSONArray.put(exerciseJSON);
+
+                                isAlreadyArchived = 1;
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+
+                            }
+                            FileWriter.writeNewToFile(getApplicationContext(), user.getUid() + getString(R.string.mySelectedExerciseJSON), mySelectedExercisesJSONArray.toString());
+
+
+                            //save exercise to file
+                            exercise.setBox(2);
+                            FileWriter.writeObjectToFile(getApplicationContext(), exercise);
+
+
+                            break;
+                        case 2:
+                            //What to do ??
+                            Log.d(TAG, "Exercise is in group 2.");
+
+                            Toast.makeText(getApplicationContext(), getString(R.string.alreadyInArchive), Toast.LENGTH_LONG).show();
+                            // but if file does not exists save it
+                            if (FileWriter.exists(getApplicationContext(), exercise.getId()) == 0) {
+                                Log.d(TAG, "File does not exist but is in group 2");
+                                exercise.setBox(0);
+                                FileWriter.writeObjectToFile(getApplicationContext(), exercise);
+                            }
+                            break;
                     }
-                    FileWriter.writeNewToFile(getApplicationContext(), user.getUid() + getString(R.string.mySelectedExerciseJSON), mySelectedExercisesJSONArray.toString());
-
-
-                    //save exercise to file
-                    exercise.setBox(0);
-                    FileWriter.writeObjectToFile(getApplicationContext(), exercise);
-
-
-
 
                 }
-                else {
-                    Toast.makeText(getApplicationContext(), getString(R.string.alreadyInArchive), Toast.LENGTH_LONG).show();
 
 
-                    // but if file does not exists save it
-                    if(FileWriter.exists(getApplicationContext(), exercise.getId()) == 0) {
-                        exercise.setBox(0);
-                        FileWriter.writeObjectToFile(getApplicationContext(), exercise);
-                    }
-                }
+
+
+//                // Exercise is not in archive
+//                if (isAlreadyArchived == 0) {
+//
+//                    Toast.makeText(getApplicationContext(), getString(R.string.addToArchve), Toast.LENGTH_LONG).show();
+//
+//
+//                    Log.d(TAG, "Select exercise " + exercise.getId());
+//
+//                    try {
+//                        detais.put("id", exercise.getId());
+//                        detais.put("group", 0);
+//
+//
+//
+//                        exerciseJSON.put("exercise", detais);
+//                        mySelectedExercisesJSONArray.put(exerciseJSON);
+//
+//
+//
+//
+//
+//
+//                        isAlreadyArchived = 1;
+//
+//
+//
+//
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//
+//
+//                    }
+//                    FileWriter.writeNewToFile(getApplicationContext(), user.getUid() + getString(R.string.mySelectedExerciseJSON), mySelectedExercisesJSONArray.toString());
+//
+//
+//                    //save exercise to file
+//                    exercise.setBox(0);
+//                    FileWriter.writeObjectToFile(getApplicationContext(), exercise);
+//
+//
+//
+//
+//                }
+//                else {
+//                    Toast.makeText(getApplicationContext(), getString(R.string.alreadyInArchive), Toast.LENGTH_LONG).show();
+//
+//
+//                    // but if file does not exists save it
+//                    if(FileWriter.exists(getApplicationContext(), exercise.getId()) == 0) {
+//                        exercise.setBox(0);
+//                        FileWriter.writeObjectToFile(getApplicationContext(), exercise);
+//                    }
+//                }
             }
+
+
+
+
         });
 
 
 
     }
+
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+
+            if ( item.getItemId() == android.R.id.home){
+                finish();
+            }
+
+            return super.onOptionsItemSelected(item);
+        }
 }
