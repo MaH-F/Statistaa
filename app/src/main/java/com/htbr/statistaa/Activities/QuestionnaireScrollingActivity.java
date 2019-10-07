@@ -30,7 +30,7 @@ import com.htbr.statistaa.Classes.FileWriter;
 import com.htbr.statistaa.Classes.Questionnaire;
 import com.htbr.statistaa.R;
 
-import java.io.File;
+
 
 public class QuestionnaireScrollingActivity extends AppCompatActivity {
 

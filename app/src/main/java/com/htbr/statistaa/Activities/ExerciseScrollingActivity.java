@@ -258,59 +258,7 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
 
-//                // Exercise is not in archive
-//                if (isAlreadyArchived == 0) {
-//
-//                    Toast.makeText(getApplicationContext(), getString(R.string.addToArchve), Toast.LENGTH_LONG).show();
-//
-//
-//                    Log.d(TAG, "Select exercise " + exercise.getId());
-//
-//                    try {
-//                        detais.put("id", exercise.getId());
-//                        detais.put("group", 0);
-//
-//
-//
-//                        exerciseJSON.put("exercise", detais);
-//                        mySelectedExercisesJSONArray.put(exerciseJSON);
-//
-//
-//
-//
-//
-//
-//                        isAlreadyArchived = 1;
-//
-//
-//
-//
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//
-//
-//                    }
-//                    FileWriter.writeNewToFile(getApplicationContext(), user.getUid() + getString(R.string.mySelectedExerciseJSON), mySelectedExercisesJSONArray.toString());
-//
-//
-//                    //save exercise to file
-//                    exercise.setBox(0);
-//                    FileWriter.writeObjectToFile(getApplicationContext(), exercise);
-//
-//
-//
-//
-//                }
-//                else {
-//                    Toast.makeText(getApplicationContext(), getString(R.string.alreadyInArchive), Toast.LENGTH_LONG).show();
-//
-//
-//                    // but if file does not exists save it
-//                    if(FileWriter.exists(getApplicationContext(), exercise.getId()) == 0) {
-//                        exercise.setBox(0);
-//                        FileWriter.writeObjectToFile(getApplicationContext(), exercise);
-//                    }
-//                }
+
             }
 
 

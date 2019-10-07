@@ -2,6 +2,8 @@ package com.htbr.statistaa.Adapters;
 
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,24 +24,26 @@ import com.htbr.statistaa.Classes.Exercise;
 
 public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
 
-//    public interface OnExerciseSelectedListener {
-//
-//        void onExerciseSelected(DocumentSnapshot exercise);
-//
-//    }
 
     private OnExerciseSelectedListener mListener;
 
     public ExerciseAdapter(Query query, OnExerciseSelectedListener listener) {
         super(query);
         mListener = listener;
+
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new ViewHolder(inflater.inflate(R.layout.item_exercise, parent, false));
+
+
+        SharedPreferences sharedPreferences = parent.getContext().getSharedPreferences(parent.getContext().getString(R.string.text_size_prefs), Context.MODE_PRIVATE);
+        int subTitleTextSize = sharedPreferences.getInt(parent.getContext().getString(R.string.exercise_subtitle_textSize), 36);
+
+
+        return new ViewHolder(inflater.inflate(R.layout.item_exercise, parent, false), subTitleTextSize);
     }
 
     @Override
@@ -58,17 +62,23 @@ public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
         TextView categoryView;
         TextView cityView;
 
-        public ViewHolder(View itemView) {
+        Context context;
+
+
+        int subtitleSize;
+
+
+        public ViewHolder(View itemView, int subtitleSize) {
            super(itemView);
 
-           nameView = itemView.findViewById(R.id.title);
-           subtitle = itemView.findViewById(R.id.subtitle);
+           nameView = itemView.findViewById(R.id.exercise_title);
+           subtitle = itemView.findViewById(R.id.exercise_subtitle);
 
+           this.subtitleSize = subtitleSize;
 
         }
 
-        public void bind(final DocumentSnapshot snapshot,
-                         final OnExerciseSelectedListener listener) {
+        public void bind(final DocumentSnapshot snapshot, final OnExerciseSelectedListener listener) {
 
             Exercise exercise = snapshot.toObject(Exercise.class);
             Resources resources = itemView.getResources();
@@ -76,6 +86,10 @@ public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
 
             nameView.setText(exercise.getName());
             subtitle.setText(exercise.getSubtitle());
+
+            subtitle.setTextSize(subtitleSize);
+
+
 
 
             // Click listener
