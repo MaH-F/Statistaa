@@ -1,6 +1,8 @@
 package com.htbr.statistaa.Adapters;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +39,11 @@ public class QuestionnaireAdapter extends MyAdapter<QuestionnaireAdapter.ViewHol
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new ViewHolder(inflater.inflate(R.layout.item_questionnaire, parent, false));
+
+        SharedPreferences sharedPreferences = parent.getContext().getSharedPreferences(parent.getContext().getString(R.string.text_size_prefs), Context.MODE_PRIVATE);
+        int textSize = sharedPreferences.getInt(parent.getContext().getString(R.string.exercise_subtitle_textSize), 36);
+
+        return new ViewHolder(inflater.inflate(R.layout.item_questionnaire, parent, false), textSize);
     }
 
     @Override
@@ -50,17 +56,17 @@ public class QuestionnaireAdapter extends MyAdapter<QuestionnaireAdapter.ViewHol
         ImageView imageView;
         TextView nameView;
         TextView date;
+        int textSize;
 
 
-
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, int textSize) {
 
 
             super(itemView);
 
             nameView = itemView.findViewById(R.id.questionnaire_title);
             date = itemView.findViewById(R.id.questionnaire_date);
-
+            this.textSize = textSize;
 /*
             imageView = itemView.findViewById(R.id.restaurant_item_image);
             nameView = itemView.findViewById(R.id.restaurant_item_name);
@@ -79,6 +85,10 @@ public class QuestionnaireAdapter extends MyAdapter<QuestionnaireAdapter.ViewHol
             Resources resources = itemView.getResources();
 
             nameView.setText(questionnaire.getName());
+            nameView.setTextSize(textSize);
+
+            date.setTextSize(textSize - 10);
+
             //date.setText((String)questionnaire.getNumber());
             //date.setText(questionnaire.getDate().toDate());
 

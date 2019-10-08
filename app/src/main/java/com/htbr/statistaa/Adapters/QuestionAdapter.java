@@ -1,14 +1,14 @@
 package com.htbr.statistaa.Adapters;
 
 import android.content.Context;
-import android.text.Layout;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +18,8 @@ import com.htbr.statistaa.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import javax.annotation.Nullable;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyViewHolder> {
 
@@ -43,13 +45,16 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
         // each data item is just a string in this case
         public TextView textView;
         public SeekBar seekBar;
+
+        int subtitleSize;
+
         public RelativeLayout seekBarRelativeLayout;
-        public MyViewHolder(View v) {
+        public MyViewHolder(View v, int subtitleSize) {
             super(v);
             textView = itemView.findViewById(R.id.item_question_content);
             seekBar = itemView.findViewById(R.id.seekBar);
             seekBarRelativeLayout= itemView.findViewById(R.id.seekbar_relative_layout);
-
+            this.subtitleSize = subtitleSize;
         }
 
 
@@ -77,12 +82,21 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
     }
 
     // Create new views (invoked by the layout manager)
+    @Nullable
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new MyViewHolder(inflater.inflate(R.layout.item_question, parent, false));
+
+
+
+        SharedPreferences sharedPreferences = parent.getContext().getSharedPreferences(parent.getContext().getString(R.string.text_size_prefs), Context.MODE_PRIVATE);
+        int subTitleTextSize = sharedPreferences.getInt(parent.getContext().getString(R.string.exercise_subtitle_textSize), 36);
+
+
+
+        return new MyViewHolder(inflater.inflate(R.layout.item_question, parent, false), subTitleTextSize);
 
 
 
@@ -94,6 +108,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.textView.setText(mDataset[position]);
+
+
+        holder.textView.setTextSize(holder.subtitleSize);
+
 
         //0 means edit-sign appears -> no edit mode  , 1 is edit mode (fab shows a save sign)
         if (mode == 1){

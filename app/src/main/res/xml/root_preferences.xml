@@ -19,21 +19,22 @@
 
     <PreferenceCategory app:title="@string/Text_appearance_header">
 
-        <EditTextPreference
-            app:key="textSizePreference"
-            app:title="@string/TextSizeSettingItem"
+<!--        <EditTextPreference-->
+<!--            app:key="textSizePreference"-->
+<!--            app:title="@string/TextSizeSettingItem"-->
+<!--            app:useSimpleSummaryProvider="true"-->
+<!--            android:digits="0123456789"-->
+<!--            android:inputType="number"/>-->
+
+        <!-- app:defaultValue="reply"-->
+                <ListPreference
+            app:entries="@array/textSize_entries"
+            app:entryValues="@array/textSize_values"
+            app:key="textSizeOnePreference"
+            app:title="@string/textSizeOne"
             app:useSimpleSummaryProvider="true"
-            android:digits="0123456789"
-            android:inputType="number"/>
-
-
-        <!--        <ListPreference-->
-<!--            app:defaultValue="reply"-->
-<!--            app:entries="@array/reply_entries"-->
-<!--            app:entryValues="@array/reply_values"-->
-<!--            app:key="reply"-->
-<!--            app:title="@string/reply_title"-->
-<!--            app:useSimpleSummaryProvider="true" />-->
+            android:inputType="number"
+                    />
 
     </PreferenceCategory>
 

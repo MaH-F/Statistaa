@@ -62,7 +62,6 @@ public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
         TextView categoryView;
         TextView cityView;
 
-        Context context;
 
 
         int subtitleSize;
@@ -76,6 +75,7 @@ public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
 
            this.subtitleSize = subtitleSize;
 
+
         }
 
         public void bind(final DocumentSnapshot snapshot, final OnExerciseSelectedListener listener) {
@@ -88,7 +88,7 @@ public class ExerciseAdapter extends MyAdapter<ExerciseAdapter.ViewHolder> {
             subtitle.setText(exercise.getSubtitle());
 
             subtitle.setTextSize(subtitleSize);
-
+            nameView.setTextSize(subtitleSize - 10);
 
 
 
