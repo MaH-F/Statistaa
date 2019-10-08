@@ -6,7 +6,7 @@
 
 
         <TextView
-        android:id="@+id/title"
+        android:id="@+id/exercise_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Title"
@@ -15,7 +15,7 @@
 
 
         <TextView
-        android:id="@+id/subtitle"
+        android:id="@+id/exercise_subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-thin"

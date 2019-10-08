@@ -111,4 +111,8 @@
     <string name="seekBarMinText">Trifft nicht zu.</string>
     <string name="seekBarMaxText">Trifft vollkommen zu.</string>
     <string name="Feedback">Feedback</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="Text_appearance_header">Textgröße</string>
+    <string name="TextSizeSettingItem">"Textgröße "</string>
+    <string name="textSizeOne">Textgröße: Titel</string>
 </resources>

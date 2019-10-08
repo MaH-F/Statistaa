@@ -54,11 +54,30 @@
     <string name="jsonparam_exercise_id" translatable="false">id</string>
     <string name="no_user_group">Error, you are not part of a user group, please call help</string>
     <string name="jsonparam_exercise_group" translatable="false">group</string>
-    <string name="moveToBox2">Move Exercise to Box 2</string>
+    <string name="moveToBox2">Move Exercise to Box 2</string>g
     <string name="moveToBox3">Move Exercise to Box 3</string>
     <string name="Feedback">Feedback</string>
     <string name="seekBarMinText">Absolutely not.</string>
     <string name="seekBarMaxText">Absolutly yes.</string>
+    <string name="text_size_prefs" translatable="false">textSizePreferences</string>
+    <string name="exercise_subtitle_textSize" translatable="false">ExerciseSubtitleTextSize</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="Text_appearance_header">Text appearance</string>
+    <string name="sync_header" translatable="false">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="TextSizeSettingItem" >Text size</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+    <string name="textSizeOne">Title Text Size</string>
 
 
 </resources>

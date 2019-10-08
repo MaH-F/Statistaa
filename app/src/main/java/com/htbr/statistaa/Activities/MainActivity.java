@@ -58,11 +58,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         });
 
         findViewById(R.id.gotologin).setOnClickListener(this);
-
-
-
-
-
     }
 
     @Override

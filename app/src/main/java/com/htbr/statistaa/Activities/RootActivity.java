@@ -137,25 +137,6 @@ public class RootActivity extends AppCompatActivity {
 
 
 
-       // String fileContent = FileWriter.readFile(this, user.getUid() + getString(R.string.mySelectedExerciseJSON));
-        //String fileContent = FileWriter.readFile(this, "questionnaire_1");
-
-
-
-       // if (fileContent.equals("{}")){
-            //download file if exists from firebase
-
-       //     downloadSelectedExercisesJSONFile();
-        //}
-
-//            //load data up
-          //  uploadSelectedExercises(fileContent);
-        //}
-
-
-
-
-
 
     }
 
@@ -340,6 +321,9 @@ public class RootActivity extends AppCompatActivity {
             case R.id.about:
                 startActivity(new Intent(this, AboutActivity.class));
                 return true;
+
+            case R.id.settingsActivity:
+                startActivity(new Intent(this, SettingsActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }

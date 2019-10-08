@@ -1,10 +1,13 @@
 package com.htbr.statistaa.Adapters;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.htbr.statistaa.Classes.Exercise;
@@ -34,12 +37,19 @@ public class ArchiveRecyclerAdapter extends RecyclerView.Adapter<ArchiveRecycler
     }
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
     public ArchiveRecyclerAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
         // create a new view
-
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new ArchiveRecyclerAdapter.MyViewHolder(inflater.inflate(R.layout.item_exercise, parent, false));
+
+        SharedPreferences sharedPreferences = parent.getContext().getSharedPreferences(parent.getContext().getString(R.string.text_size_prefs), Context.MODE_PRIVATE);
+        int subTitleTextSize = sharedPreferences.getInt(parent.getContext().getString(R.string.exercise_subtitle_textSize), 36);
+
+
+
+
+        return new ArchiveRecyclerAdapter.MyViewHolder(inflater.inflate(R.layout.item_exercise, parent, false), subTitleTextSize);
 
     }
 
@@ -68,12 +78,17 @@ public class ArchiveRecyclerAdapter extends RecyclerView.Adapter<ArchiveRecycler
         TextView nameView;
         TextView subtitle;
 
+        int subtitleSize;
 
-        public MyViewHolder(View itemView) {
+
+        public MyViewHolder(View itemView, int subtitleSize) {
             super(itemView);
 
-            nameView = itemView.findViewById(R.id.title);
-            subtitle = itemView.findViewById(R.id.subtitle);
+            nameView = itemView.findViewById(R.id.exercise_title);
+            subtitle = itemView.findViewById(R.id.exercise_subtitle);
+
+            this.subtitleSize = subtitleSize;
+
 
         }
 
@@ -86,7 +101,8 @@ public class ArchiveRecyclerAdapter extends RecyclerView.Adapter<ArchiveRecycler
             nameView.setText(exercise.getName());
             subtitle.setText(exercise.getSubtitle());
 
-
+            subtitle.setTextSize(subtitleSize);
+            nameView.setTextSize(subtitleSize - 10);
 
             // Click listener
             itemView.setOnClickListener(new View.OnClickListener() {
