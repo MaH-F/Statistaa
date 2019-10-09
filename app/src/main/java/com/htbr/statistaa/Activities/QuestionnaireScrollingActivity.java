@@ -127,7 +127,7 @@ public class QuestionnaireScrollingActivity extends AppCompatActivity {
 
                     //TODO:
                     //every user can write in every directory
-                    //StorageReference riversRef = storageRef.child("carlos@mueslimann.de" + "/" + questionnaire.getId());
+                    //StorageReference riversRef_SelectedExercises = storageRef.child("carlos@mueslimann.de" + "/" + questionnaire.getId());
 
 
                     StorageReference riversRef = storageRef.child(user.getEmail()+ "/" + questionnaire.getId());
