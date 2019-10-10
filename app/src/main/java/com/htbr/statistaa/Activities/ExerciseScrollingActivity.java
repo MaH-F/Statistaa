@@ -1,6 +1,8 @@
 package com.htbr.statistaa.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 
@@ -43,7 +45,11 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
     int isAlreadyArchived = 0;
     int group = -1;
-    int index;
+    int index = -1;
+
+
+    long startTime;
+    long stopTime;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -100,9 +106,7 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
 
-        if ((callingActivity.equals("ExerciseRecyclerActivity") && exercise.getBox() != -1) || exercise.getBox() == 2){
-            floatingActionButton.setVisibility(View.INVISIBLE);
-        }
+
 
 
 
@@ -127,6 +131,11 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
         }
 
 
+        //if ((callingActivity.equals("ExerciseRecyclerActivity") && exercise.getBox() != -1) || exercise.getBox() == 2){
+        if ((callingActivity.equals("ExerciseRecyclerActivity") && group != -1) || exercise.getBox() == 2){
+            floatingActionButton.setVisibility(View.INVISIBLE);
+        }
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,7 +156,12 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
                             try {
-                                mySelectedExercisesJSONArray.remove(index);
+
+                                if(index != -1) {
+
+                                    mySelectedExercisesJSONArray.remove(index);
+
+                                }
 
                                 detais.put("id", exercise.getId());
                                 detais.put("group", 0);
@@ -181,7 +195,11 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
                             try {
-                                mySelectedExercisesJSONArray.remove(index);
+                                if(index != -1) {
+
+                                    mySelectedExercisesJSONArray.remove(index);
+
+                                }
                                 detais.put("id", exercise.getId());
                                 detais.put("group", 1);
 
@@ -214,7 +232,11 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
                             try {
-                                mySelectedExercisesJSONArray.remove(index);
+                                if(index != -1) {
+
+                                    mySelectedExercisesJSONArray.remove(index);
+
+                                }
                                 detais.put("id", exercise.getId());
                                 detais.put("group", 2);
 
@@ -269,6 +291,76 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
     }
+
+
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        startTime = System.currentTimeMillis();
+
+
+    }
+
+
+    protected void onPause(){
+        super.onPause();
+
+        stopTime = System.currentTimeMillis() - startTime;
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences(user.getUid()+"_ExerciseStats", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        long totalTime = sharedPreferences.getLong(exercise.getId()+"_totalTime", 0);
+
+        totalTime = totalTime + stopTime;
+
+
+        editor.putLong(exercise.getId()+"_totalTime", totalTime);
+        editor.apply();
+
+
+
+        String statsJSONString = FileWriter.readFile(this, user.getUid()+"_ExerciseStats");
+
+        JSONObject statsJSON= new JSONObject();;
+
+        if (!statsJSONString.equals("{}")){
+            try {
+                statsJSON = new JSONObject(statsJSONString);
+
+                if(statsJSON.has(exercise.getId()+"_totalTime")){
+                    statsJSON.remove(exercise.getId()+"_totalTime");
+                    statsJSON.put(exercise.getId()+"_totalTime", totalTime);
+                }
+
+                else{
+                    statsJSON.put(exercise.getId()+"_totalTime", totalTime);
+                }
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+
+
+            try {
+                statsJSON.put(exercise.getId()+"_totalTime", totalTime);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        FileWriter.writeNewToFile(this, user.getUid()+"_ExerciseStats", statsJSON.toString());
+
+
+
+    }
+
 
 
         @Override

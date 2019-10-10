@@ -13,13 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
 
-
-        android:versionCode="12"
-        android:versionName="1.12"
-        tools:ignore="GoogleAppIndexingWarning"
-        android:fullBackupContent="@xml/backup_descriptor">
-
-
+        android:versionCode="11"
+        android:versionName="1.10"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activities.TermsActivity"
+            android:label="@string/terms_activity_label">
+        </activity>
         <activity
             android:name=".Activities.SettingsActivity"
             android:label="@string/title_activity_settings"></activity>

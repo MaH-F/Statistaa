@@ -1,6 +1,5 @@
 package com.htbr.statistaa.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -45,7 +44,8 @@ public class RootActivity extends AppCompatActivity {
     FirebaseUser user;
     FirebaseStorage storage;
     StorageReference storageRef;
-    StorageReference riversRef;
+    StorageReference riversRef_SelectedExercises;
+    StorageReference riversRef_UserStats;
 
     UserHandler userHandler;
 
@@ -104,7 +104,8 @@ public class RootActivity extends AppCompatActivity {
 
         storage = FirebaseStorage.getInstance("gs://statistaafrbs.appspot.com/");
         storageRef = storage.getReference();
-        riversRef = storageRef.child(user.getEmail()+"/selectedExercises.txt");
+        riversRef_SelectedExercises = storageRef.child(user.getEmail()+"/selectedExercises.txt");
+        riversRef_UserStats = storageRef.child(user.getEmail()+"/StorageStats.txt");
 
 
         userHandler = new UserHandler(this);
@@ -126,8 +127,11 @@ public class RootActivity extends AppCompatActivity {
                  }
                  else {
                      //load data up
-                     uploadSelectedExercises(fileContent);
+                     uploadSelectedExercises(fileContent, riversRef_SelectedExercises);
                  }
+
+
+
 
             }
         });
@@ -135,7 +139,9 @@ public class RootActivity extends AppCompatActivity {
         userHandler.setUsergroup(this, user);
 
 
+        // upload USER STATS JSON
 
+        uploadSelectedExercises(FileWriter.readFile(this, user.getUid()+"_ExerciseStats"), riversRef_UserStats);
 
 
     }
@@ -146,7 +152,7 @@ public class RootActivity extends AppCompatActivity {
 
 
         final long ONE_MEGABYTE = 1024 * 1024;
-        riversRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+        riversRef_SelectedExercises.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
                 // Data for "images/island.jpg" is returns, use this as needed
@@ -177,11 +183,11 @@ public class RootActivity extends AppCompatActivity {
 
 
 
-    private void uploadSelectedExercises(String fileContent){
+    private void uploadSelectedExercises(String fileContent, StorageReference storageRef){
         //if we have no json,
 
 
-        UploadTask uploadTask = riversRef.putBytes(fileContent.getBytes());
+        UploadTask uploadTask = storageRef.putBytes(fileContent.getBytes());
 
         // Register observers to listen for when the download is done or if it fails
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -227,7 +233,7 @@ public class RootActivity extends AppCompatActivity {
                 //
                 // if file does not exists
                 if  ( FileWriter.exists(this,exerciseFileName) == 0 ){
-                    Log.d(TAG, "File " + exerciseFileName + " does not exist so try to load it form database!");
+                    Log.d(TAG, "File " + exerciseFileName + " does not exist so try to load it from database!");
 
 
                     final FirebaseFirestore db;

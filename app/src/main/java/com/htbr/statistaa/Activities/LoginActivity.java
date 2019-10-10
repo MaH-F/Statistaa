@@ -3,7 +3,9 @@ package com.htbr.statistaa.Activities;
 
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -148,10 +150,24 @@ public class LoginActivity extends BaseActivity implements
             findViewById(R.id.password).setVisibility(View.GONE);
             findViewById(R.id.login).setVisibility(View.GONE);
 
+//Show terms every login
+
+
+            startActivity(new Intent(LoginActivity.this, TermsActivity.class));
+
+/*
+            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(user.getUid()+"_terms", Context.MODE_PRIVATE);
+            boolean accepted = sharedPreferences.getBoolean("accepted", false);
+
+            if (accepted){
+                startActivity(new Intent(LoginActivity.this, RootActivity.class));
+            } else {
+                startActivity(new Intent(LoginActivity.this, TermsActivity.class));
+            }
+*/
 
 
 
-            startActivity(new Intent(LoginActivity.this, RootActivity.class));
             finish();
 
         } else {

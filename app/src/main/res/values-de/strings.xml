@@ -115,4 +115,77 @@
     <string name="Text_appearance_header">Textgröße</string>
     <string name="TextSizeSettingItem">"Textgröße "</string>
     <string name="textSizeOne">Textgröße: Titel</string>
+    <string name="terms_activity_label">Datenschutzbestimmungen</string>
+    <string name="termsHTMLS">
+        <![CDATA[
+        <h1>Datenschutz und Nutzungsbedingungen</h1>
+
+        <h2>Allgemeines</h2>
+
+        <p>Diese Applikation erhebt und verarbeitet personenbezogene Daten.</p>
+        <p>Im Rahmen der Masterarbeit, für die diese Applikation entwickelt wurde, werden weitere Daten über die Nutzer hinzugezogen, um daraus Rückschlüsse über Lernverhalten und Lernerfolg zu erforschen.</p>
+
+
+
+
+        <h2>Erhebung, Speicherung und Verarbeitung</h2>
+        <p>Indem der Nutzer den hier aufgeführten Teilnahmebedingungen zustimmt, gibter das Einverständis zur Erhebung und Verarbeitung seiner personenbezogenen Daten.</p>
+        <p>Folgende Daten werden erhoben, gespeichert und verarbeitet:
+        <ol>
+        <li>Name und E-Mailadresse des Nutzers</li>
+        <li>Geschlecht des Nutzers (optional, nur bei Angabe)</li>
+        <li>Nutzungszeiten der Applikation</li>
+        <li>Antworten der Fragebögen</li>
+        </ol>
+
+        <p>Seitens des Veranstalters der Vorlesung werden für jeden Nutzer die erreichte Punktzahl in Aufgaben der schriftlichen Prüfungen an den Entwickler der Applikation übermittelt, um einen Zusammenhang zwischen Lernverhalten mit der Applikation und Lernerfolg zu untersuchen. </p>
+        <p>Die von der Applikation erhobenen Daten werden auf dem Gerät des Nutzers gespeichert und über eine verschlüsselte Verbindung an Firebase-Storage-Server hochgeladen, auf die nur der verantwortliche Entwickler Zugriff hat. Auf dem Gerät des Nutzers sind die Daten von anderen Applikationen nicht lesbar. Es ist nicht zu empfehlen, diese Applikation auf gerooteten Geräten zu nutzen.</p>
+
+
+
+        <h2>Angaben nach Art. 13 DSGVO</h2>
+
+        <p>Die folgenden Angaben werden anhand Artikel 13 DSGVO (1) gemacht. Im Folgenden wird der Entwickler der Applikation "der Verantwortliche" genannt.</p>
+
+
+        <h3>a) Name und Kontakt des Verantwortlichen</h3>
+        <p>Matthias Hauber, thehitbear@gmail.com</p>
+
+        <h3>c) Zweck</h3>
+        <p>Die erhobenen Daten dienen der Erforschung des Lernverhaltens und des Lernerfolgs im Rahmen einer Masterarbeit. Die Daten werden nur erhoben, wenn der Nutzer explizit zugestimmt hat. </p>
+
+        <h3>d) Interesse</h3>
+        <p>Die Datenerhebung dient einem wissenschaftlichen Zweck. Es werden keine kommerziellen Absichten verfolgt.</p>
+
+        <h3>f) Weitergabe der Daten an Dritte</h3>
+        <p>Die Daten werden nicht an Dritte weitergegeben. Untersuchungsergebnisse werden ausschließlich anonymisiert veröffentlicht. Es kann kein Rückschluss auf den Nutzer gezogen werden.</p>
+
+
+        <p>Die folgenden Angaben werden anhand Artikel 13 DSGVO (2) gemacht.</p>
+
+        <h3>a) Löschung der Daten</h3>
+        <p>Die Daten werden nach der Analyse und Auswertung unverzüglich und vollständig gelöscht. Die Löschung findet spätestens am 31.08.2020 statt.</p>
+
+        <h3>b) Auskunftsrecht</h3>
+        <p>Der Nutzer hat das Recht auf Auskunft, Berichtigung oder Löschung der entsprechenen personenbezogenen Daten. Weiter hat der Nutzer das Recht auf Widerspruch der Zustimmung.</p>
+
+        <h3>c) Widerruf der Einwilligung</h3>
+        <p>Die Einwilligung kann jederzeit formlos per E-Mail widerrufen werden.</p>
+
+        <h3>d) Beschwerde</h3>
+        <p>Es besteht das Recht zur Beschwerde vor einer Aufsichtsbehörde.</p>
+
+        <h3>e) Vertragliche Verpflichtungen</h3>
+        <p>Der Nutzer kann die Applikation nur Nutzen, indem er dieser Erklärung zustimmt. Die Verweigerung oder der Widerruf der Zustimmung hat das Beenden der Applikation zur Folge.</p>
+
+
+        <p>Die folgenden Angaben werden anhand Artikel 13 DSGVO (3) gemacht.</p>
+        <p>Die erhobenen Daten werden für keinen anderen Zweck als den ursprünglich vorgegebenen genutzt.</p>
+
+
+
+        ]]>
+    </string>
+    <string name="termsCheckBoxText"> Ich habe die Datenschutzbestimmung gelesen, verstanden und bin damit einverstanden, dass meine Daten in dem hier beschriebenen Umfang erhoben, gespeichert und verarbeitet werden.</string>
+    <string name="accepted">Zugestimmt.</string>
 </resources>
