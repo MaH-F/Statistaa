@@ -58,6 +58,9 @@ public class TermsActivity extends AppCompatActivity {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(user.getUid()+"_terms", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
                 if (isChecked){
 
                     //continue
@@ -65,8 +68,6 @@ public class TermsActivity extends AppCompatActivity {
 
                     goOnButton.setVisibility(View.VISIBLE);
 
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(user.getUid()+"_terms", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
 
 
                     editor.putBoolean("accepted", true);
@@ -74,6 +75,12 @@ public class TermsActivity extends AppCompatActivity {
                 }
 
                 else {
+
+
+
+                    editor.putBoolean("accepted", false);
+                    editor.apply();
+
                     Log.e(TAG, "Not accepted.");
                     finish();
                 }

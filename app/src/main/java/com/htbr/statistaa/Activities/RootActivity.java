@@ -1,6 +1,8 @@
 package com.htbr.statistaa.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -54,8 +56,29 @@ public class RootActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
+        // check if user has accepted the Terms
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(user.getUid()+"_terms", Context.MODE_PRIVATE);
+        boolean accepted = sharedPreferences.getBoolean("accepted", false);
+
+
+        if(!accepted){
+            FirebaseAuth.getInstance().signOut();
+            if (FirebaseAuth.getInstance().getCurrentUser() == null){
+                Intent intent = new Intent(this, LoginActivity.class);
+                //this (hopefully destroys all other activities)
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                Log.e("Error","RootActivityLogoutError");
+            }
+        }
+
+
         setContentView(R.layout.activity_root);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -100,7 +123,7 @@ public class RootActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+
 
         storage = FirebaseStorage.getInstance("gs://statistaafrbs.appspot.com/");
         storageRef = storage.getReference();
