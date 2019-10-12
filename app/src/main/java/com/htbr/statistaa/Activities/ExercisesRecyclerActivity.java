@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -93,7 +92,7 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
 
 
         //get user group id
-        long group = userHandler.getUsergroup( user );
+        long group = userHandler.getUserGroup( user );
 
 
         String collection = "";

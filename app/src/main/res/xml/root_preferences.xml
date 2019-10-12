@@ -27,7 +27,7 @@
 <!--            android:inputType="number"/>-->
 
         <!-- app:defaultValue="reply"-->
-                <ListPreference
+        <ListPreference
             app:entries="@array/textSize_entries"
             app:entryValues="@array/textSize_values"
             app:key="textSizeOnePreference"
@@ -38,19 +38,30 @@
 
     </PreferenceCategory>
 
-<!--    <PreferenceCategory app:title="@string/sync_header">-->
+    <PreferenceCategory app:title="@string/user_properties">
+        <ListPreference
+            app:entries="@array/gender_entries"
+            app:entryValues="@array/gender_values"
+            app:key="GenderPreference"
+            app:title="@string/gender"
+            app:useSimpleSummaryProvider="true"
+
+            />
+
+
+
 
 <!--        <SwitchPreferenceCompat-->
-<!--            app:key="sync"-->
-<!--            app:title="@string/sync_title" />-->
+<!--            app:key="gender"-->
+<!--            app:title="@string/gender" />-->
 
 <!--        <SwitchPreferenceCompat-->
-<!--            app:dependency="sync"-->
+<!--            app:dependency="@string/gender"-->
 <!--            app:key="attachment"-->
 <!--            app:summaryOff="@string/attachment_summary_off"-->
 <!--            app:summaryOn="@string/attachment_summary_on"-->
 <!--            app:title="@string/attachment_title" />-->
 
-<!--    </PreferenceCategory>-->
+    </PreferenceCategory>
 
 </PreferenceScreen>

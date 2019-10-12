@@ -188,4 +188,7 @@
     </string>
     <string name="termsCheckBoxText"> Ich habe die Datenschutzbestimmung gelesen, verstanden und bin damit einverstanden, dass meine Daten in dem hier beschriebenen Umfang erhoben, gespeichert und verarbeitet werden.</string>
     <string name="accepted">Zugestimmt.</string>
+    <string name="goOnButton">Start</string>
+    <string name="user_properties">Nutzerangaben</string>
+    <string name="gender">Geschlecht</string>
 </resources>

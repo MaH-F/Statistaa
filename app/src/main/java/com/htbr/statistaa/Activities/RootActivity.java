@@ -48,6 +48,7 @@ public class RootActivity extends AppCompatActivity {
     StorageReference storageRef;
     StorageReference riversRef_SelectedExercises;
     StorageReference riversRef_UserStats;
+    StorageReference riverseRef_UserProps;
 
     UserHandler userHandler;
 
@@ -129,6 +130,7 @@ public class RootActivity extends AppCompatActivity {
         storageRef = storage.getReference();
         riversRef_SelectedExercises = storageRef.child(user.getEmail()+"/selectedExercises.txt");
         riversRef_UserStats = storageRef.child(user.getEmail()+"/StorageStats.txt");
+        riverseRef_UserProps = storageRef.child(user.getEmail()+"/UserProps.txt");
 
 
         userHandler = new UserHandler(this);
@@ -136,7 +138,7 @@ public class RootActivity extends AppCompatActivity {
             @Override
             public void onGotGroup() {
                 // check if stored exercise-filies exist, if not download them.
-                Log.d(TAG, "group is " + userHandler.getUsergroup(user));
+                Log.d(TAG, "group is " + userHandler.getUserGroup(user));
 
 
                 //TODO: download every time?? Maybe work with Listeners (OnDataChanged -> upload) and download every time...?
@@ -159,12 +161,15 @@ public class RootActivity extends AppCompatActivity {
             }
         });
 
-        userHandler.setUsergroup(this, user);
+        userHandler.setUserGroup(this, user);
 
 
         // upload USER STATS JSON
 
+
+
         uploadSelectedExercises(FileWriter.readFile(this, user.getUid()+"_ExerciseStats"), riversRef_UserStats);
+        uploadSelectedExercises(FileWriter.readFile(this, user.getUid()+"_UserProps"), riverseRef_UserProps);
 
 
     }
@@ -229,7 +234,7 @@ public class RootActivity extends AppCompatActivity {
 
 
     public void downloadSavedExercises(){
-        group = userHandler.getUsergroup(user);
+        group = userHandler.getUserGroup(user);
 
 
 
