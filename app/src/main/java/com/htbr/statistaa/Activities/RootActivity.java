@@ -80,6 +80,24 @@ public class RootActivity extends AppCompatActivity {
         }
 
 
+        // check if this is the first start. if yes: call Tutorial Activity
+
+
+        SharedPreferences firstStartPrefs = getApplicationContext().getSharedPreferences(user.getUid()+"_firstStart", Context.MODE_PRIVATE);
+        boolean isFirstStart = firstStartPrefs.getBoolean("isFirstStart", true);
+
+        if (isFirstStart){
+
+            SharedPreferences.Editor isFirstStartEditor = firstStartPrefs.edit();
+            isFirstStartEditor.putBoolean("isFirstStart", false);
+            isFirstStartEditor.apply();
+
+
+            startActivity(new Intent(this, TutorialActivity.class));
+        }
+
+
+
         setContentView(R.layout.activity_root);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -358,6 +376,12 @@ public class RootActivity extends AppCompatActivity {
 
             case R.id.settingsActivity:
                 startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+
+            case R.id.tutorialActivity:
+                startActivity(new Intent(this, TutorialActivity.class));
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
