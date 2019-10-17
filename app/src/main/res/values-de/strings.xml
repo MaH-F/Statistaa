@@ -129,7 +129,7 @@
 
 
         <h2>Erhebung, Speicherung und Verarbeitung</h2>
-        <p>Indem der Nutzer den hier aufgeführten Teilnahmebedingungen zustimmt, gibter das Einverständis zur Erhebung und Verarbeitung seiner personenbezogenen Daten.</p>
+        <p>Indem der Nutzer den hier aufgeführten Teilnahmebedingungen zustimmt, gibt er das Einverständis zur Erhebung und Verarbeitung seiner personenbezogenen Daten.</p>
         <p>Folgende Daten werden erhoben, gespeichert und verarbeitet:
         <ol>
         <li>Name und E-Mailadresse des Nutzers</li>
@@ -145,7 +145,7 @@
 
         <h2>Angaben nach Art. 13 DSGVO</h2>
 
-        <p>Die folgenden Angaben werden anhand Artikel 13 DSGVO (1) gemacht. Im Folgenden wird der Entwickler der Applikation "der Verantwortliche" genannt.</p>
+        <p>Die folgenden Angaben werden anhand Artikel 13 DSGVO (1) gemacht. Im Folgenden wird der Entwickler der Applikation &apos;der Verantwortliche&apos; genannt.</p>
 
 
         <h3>a) Name und Kontakt des Verantwortlichen</h3>
@@ -167,7 +167,7 @@
         <p>Die Daten werden nach der Analyse und Auswertung unverzüglich und vollständig gelöscht. Die Löschung findet spätestens am 31.08.2020 statt.</p>
 
         <h3>b) Auskunftsrecht</h3>
-        <p>Der Nutzer hat das Recht auf Auskunft, Berichtigung oder Löschung der entsprechenen personenbezogenen Daten. Weiter hat der Nutzer das Recht auf Widerspruch der Zustimmung.</p>
+        <p>Der Nutzer hat das Recht auf Auskunft, Berichtigung oder Löschung der entsprechenden personenbezogenen Daten. Weiter hat der Nutzer das Recht auf Widerspruch der Zustimmung.</p>
 
         <h3>c) Widerruf der Einwilligung</h3>
         <p>Die Einwilligung kann jederzeit formlos per E-Mail widerrufen werden.</p>
@@ -188,4 +188,18 @@
     </string>
     <string name="termsCheckBoxText"> Ich habe die Datenschutzbestimmung gelesen, verstanden und bin damit einverstanden, dass meine Daten in dem hier beschriebenen Umfang erhoben, gespeichert und verarbeitet werden.</string>
     <string name="accepted">Zugestimmt.</string>
+    <string name="goOnButton">Start</string>
+    <string name="user_properties">Nutzerangaben</string>
+    <string name="gender">Geschlecht</string>
+    <string name="SkipTutorialButtonText">Überspringen</string>
+    <string name="tutorial_learn">Hier findet sich eine Liste mit allen Lerninhalten. Diese Inhalte sind auf dem Server gespeichert. Indem ein Element (z.B. eine Übung) angeklickt wird, kann es gelesen, bearbeitet oder ins eigene Archiv heruntergeladen werden. Is eigene Archiv herunterladen bedeutet: Mit Hilfe des runden Buttons wird der Inhalt auf dem Gerät gespeichert und ist im Archiv zu finden.</string>
+    <string name="tutorial_archive">Das Archiv hat drei Boxen. Wird ein Lerninhalt offline gespeichert, so erscheint er zunächst in Box 1. Ein erneutes Klicken auf den Archiv-Button verschiebt die Aufgabe in die nächste Box. So kann ein Karteikasten-Prinzip auf die gespeicherten Inhalte angewendet werden.</string>
+    <string name="tutorial_profile">In diesem Fenster werden Informationen zum eingeloggten Nutzer angezeigt.</string>
+    <string name="finishTutorialButtonText">Fertig</string>
+    <string name="tutorial_feedback">Für Qualitätssicherung, Verbesserung und für die Untersuchungen bezüglich Lernverhalten und Lernerfolg können hier Fragebögen beantwortet werden. Mit einem Klick auf das Bearbeiten-Icon werden Regler sichtbar, mit der jede Aussage bewertet werden kann. Nach dem Beantworten aller Fragen speichert ein erneuter Klick auf den Speicher-Button die Antworten auf dem Server. Die Fragebögen können jederzeit erneut bearbeitet werden.</string>
+    <string name="tutorial_settings">Anpassung der Schriftgröße und Angabe von persönlichen Daten. </string>
+    <string name="tutorial_terms">Nach jedem erfolgreichen Login werden die Nutzungsbedingungen und Datenschutzhinweise angezeigt. </string>
+    <string name="tutorial_logout">Der aktuelle Nutzer wird ausgeloggt und es können andere Nutzer eingeloggt werden.</string>
+    <string name="tutorial_about">Weitere Informationen über die App.</string>
+
 </resources>

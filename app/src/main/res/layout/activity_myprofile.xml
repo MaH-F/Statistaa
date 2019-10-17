@@ -8,5 +8,7 @@
         android:id="@+id/userTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="user" />
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 </LinearLayout>

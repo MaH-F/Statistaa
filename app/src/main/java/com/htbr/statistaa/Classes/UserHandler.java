@@ -28,11 +28,15 @@ public class UserHandler {
         public void onGotGroup();
     }
 
+
+
+
     private GroupIDListener groupIDListener;
 
     public UserHandler(Activity activity){
         this.activity = activity;
         this.groupIDListener = null;
+
     }
 
     public void setGroupIDListener (GroupIDListener groupIDListener){
@@ -41,10 +45,7 @@ public class UserHandler {
 
 
 
-
-
-
-    public long getUsergroup(FirebaseUser firebaseUser)  {
+    public long getUserGroup(FirebaseUser firebaseUser)  {
 
 
         SharedPreferences sharedPref = activity.getSharedPreferences(activity.getString(R.string.usergroup_sp_file_key),Context.MODE_PRIVATE);
@@ -55,7 +56,7 @@ public class UserHandler {
     }
 
 
-    public void setUsergroup(Activity c, final FirebaseUser firebaseUser){
+    public void setUserGroup(Activity c, final FirebaseUser firebaseUser){
 
         final FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();

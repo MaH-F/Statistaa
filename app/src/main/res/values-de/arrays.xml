@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    <string-array name="gender_entries">
+
+    <item>Männlich</item>
+    <item>Weiblich</item>
+    <item>Divers</item>
+    <item>Keine Angabe</item>
+
+</string-array>
+
+    <string-array name="gender_values">
+
+
+        <item>Männlich</item>
+        <item>Weiblich</item>
+        <item>Divers</item>
+        <item>Keine Angabe</item>
+
+    </string-array>
+</resources>

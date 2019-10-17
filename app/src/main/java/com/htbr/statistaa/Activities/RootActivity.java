@@ -1,6 +1,8 @@
 package com.htbr.statistaa.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -46,6 +48,7 @@ public class RootActivity extends AppCompatActivity {
     StorageReference storageRef;
     StorageReference riversRef_SelectedExercises;
     StorageReference riversRef_UserStats;
+    StorageReference riverseRef_UserProps;
 
     UserHandler userHandler;
 
@@ -54,8 +57,47 @@ public class RootActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
+        // check if user has accepted the Terms
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(user.getUid()+"_terms", Context.MODE_PRIVATE);
+        boolean accepted = sharedPreferences.getBoolean("accepted", false);
+
+
+        if(!accepted){
+            FirebaseAuth.getInstance().signOut();
+            if (FirebaseAuth.getInstance().getCurrentUser() == null){
+                Intent intent = new Intent(this, LoginActivity.class);
+                //this (hopefully destroys all other activities)
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                Log.e("Error","RootActivityLogoutError");
+            }
+        }
+
+
+        // check if this is the first start. if yes: call Tutorial Activity
+
+
+        SharedPreferences firstStartPrefs = getApplicationContext().getSharedPreferences(user.getUid()+"_firstStart", Context.MODE_PRIVATE);
+        boolean isFirstStart = firstStartPrefs.getBoolean("isFirstStart", true);
+
+        if (isFirstStart){
+
+            SharedPreferences.Editor isFirstStartEditor = firstStartPrefs.edit();
+            isFirstStartEditor.putBoolean("isFirstStart", false);
+            isFirstStartEditor.apply();
+
+
+            startActivity(new Intent(this, TutorialActivity.class));
+        }
+
+
+
         setContentView(R.layout.activity_root);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -100,12 +142,13 @@ public class RootActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+
 
         storage = FirebaseStorage.getInstance("gs://statistaafrbs.appspot.com/");
         storageRef = storage.getReference();
         riversRef_SelectedExercises = storageRef.child(user.getEmail()+"/selectedExercises.txt");
         riversRef_UserStats = storageRef.child(user.getEmail()+"/StorageStats.txt");
+        riverseRef_UserProps = storageRef.child(user.getEmail()+"/UserProps.txt");
 
 
         userHandler = new UserHandler(this);
@@ -113,7 +156,7 @@ public class RootActivity extends AppCompatActivity {
             @Override
             public void onGotGroup() {
                 // check if stored exercise-filies exist, if not download them.
-                Log.d(TAG, "group is " + userHandler.getUsergroup(user));
+                Log.d(TAG, "group is " + userHandler.getUserGroup(user));
 
 
                 //TODO: download every time?? Maybe work with Listeners (OnDataChanged -> upload) and download every time...?
@@ -136,12 +179,15 @@ public class RootActivity extends AppCompatActivity {
             }
         });
 
-        userHandler.setUsergroup(this, user);
+        userHandler.setUserGroup(this, user);
 
 
         // upload USER STATS JSON
 
+
+
         uploadSelectedExercises(FileWriter.readFile(this, user.getUid()+"_ExerciseStats"), riversRef_UserStats);
+        uploadSelectedExercises(FileWriter.readFile(this, user.getUid()+"_UserProps"), riverseRef_UserProps);
 
 
     }
@@ -206,7 +252,7 @@ public class RootActivity extends AppCompatActivity {
 
 
     public void downloadSavedExercises(){
-        group = userHandler.getUsergroup(user);
+        group = userHandler.getUserGroup(user);
 
 
 
@@ -330,6 +376,12 @@ public class RootActivity extends AppCompatActivity {
 
             case R.id.settingsActivity:
                 startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+
+            case R.id.tutorialActivity:
+                startActivity(new Intent(this, TutorialActivity.class));
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

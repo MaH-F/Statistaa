@@ -90,7 +90,7 @@ public class QuestionnairesRecyclerActivity extends AppCompatActivity implements
 
 
         //get user group id
-        long group = userHandler.getUsergroup(user);;
+        long group = userHandler.getUserGroup(user);;
 
 
 

@@ -39,4 +39,27 @@
         <item>100</item>
         <item>110</item>
     </string-array>
+
+
+    <string-array name="gender_entries">
+
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+         <item>No statement</item>
+
+    </string-array>
+
+    <string-array name="gender_values">
+
+
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+        <item>No statement</item>
+
+    </string-array>
+
+
+
 </resources>

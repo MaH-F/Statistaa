@@ -65,14 +65,14 @@
 
     <!-- Preference Titles -->
     <string name="Text_appearance_header">Text appearance</string>
-    <string name="sync_header" translatable="false">Sync</string>
+    <string name="user_properties">User Properties</string>
 
     <!-- Messages Preferences -->
     <string name="TextSizeSettingItem" >Text size</string>
     <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="gender">Gender</string>
     <string name="attachment_title" translatable="false">Download incoming attachments</string>
     <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
     </string>
@@ -81,12 +81,26 @@
     <string name="terms_activity_label">Terms and Conditions</string>
     <string name="termsHTMLS">
         <![CDATA[
-        <h1>Main Title</h1>
+        <h1>Main Title, please see the german version.</h1>
         ]]>
     </string>
     <string name="termsCheckBoxText">I have read an understood the german version of the "Terms and Conditions"</string>
     <string name="accepted">Accepted.</string>
     <string name="goOnButton">Start</string>
+    <string name="user_properties_JSON" translatable="false">UserProperties.json</string>
+    <string name="genderID" translatable="false">gender</string>
+    <string name="title_activity_tutorial" translatable="false">Tutorial</string>
+    <string name="SkipTutorialButtonText">Skip Tutorial</string>
+    <string name="tutorial" translatable="false">Tutorial</string>
+    <string name="tutorial_learn">This is a complete list of the material.</string>
+    <string name="tutorial_archive">In your archive you can view your stored exercises.</string>
+    <string name="tutorial_profile">This gives an overview and you can edit personal information.</string>
+    <string name="finishTutorialButtonText">OK</string>
+    <string name="tutorial_feedback">Questions to answer for feedback</string>
+    <string name="tutorial_settings">Configure your app.</string>
+    <string name="tutorial_terms">Terms and Conditions</string>
+    <string name="tutorial_logout">Log out</string>
+    <string name="tutorial_about">Show information about the app.</string>
 
 
 </resources>
