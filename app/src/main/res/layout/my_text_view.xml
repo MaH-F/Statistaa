@@ -8,7 +8,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="@string/title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18sp" />
 
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-thin"
-        android:text="Subtitle"
+        android:text="@string/subtitle"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="30sp"

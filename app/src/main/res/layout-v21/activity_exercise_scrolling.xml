@@ -41,7 +41,7 @@
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@drawable/ic_icon_archive"
-        />
+        android:backgroundTint="@color/colorArchive"/>
 
     <include layout="@layout/content_exercise_scrolling" />
 

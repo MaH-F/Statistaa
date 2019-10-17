@@ -33,6 +33,15 @@
 
     </RelativeLayout>
 
+
+
+
+
+
+
+
+
+
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -52,21 +61,21 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp" tools:targetApi="lollipop">
+            app:cardElevation="8dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginRight="16dp"
-                android:orientation="vertical"
-                android:layout_marginEnd="16dp">
+
+
+
+            <FrameLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+
 
 
                 <ImageButton
                     android:id="@+id/learnbutton"
-                    android:layout_width="93dp"
-                    android:layout_height="95dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:background="@color/colorLearn"
                     android:contentDescription="@string/learning"
@@ -74,15 +83,24 @@
                     android:scrollbarSize="@android:dimen/dialog_min_width_major"
                     android:src="@drawable/ic_icon_learn" />
 
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:text="@string/learning"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp">
+
+                </TextView>
+
+            </FrameLayout>
 
 
-            </LinearLayout>
+
+
+
+
 
         </androidx.cardview.widget.CardView>
 
@@ -96,20 +114,20 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp" tools:targetApi="lollipop">
+            app:cardElevation="8dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginRight="16dp"
-                android:orientation="vertical"
-                android:layout_marginEnd="16dp">
+
+
+            <FrameLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+
+
 
                 <ImageButton
                     android:id="@+id/archivebutton"
-                    android:layout_width="93dp"
-                    android:layout_height="95dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:background="@color/colorArchive"
                     android:contentDescription="@string/archive"
@@ -117,15 +135,21 @@
                     android:scrollbarSize="@android:dimen/dialog_min_width_major"
                     android:src="@drawable/ic_icon_archive" />
 
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:text="@string/archive"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp">
+
+                </TextView>
+
+            </FrameLayout>
 
 
-            </LinearLayout>
+
 
         </androidx.cardview.widget.CardView>
 
@@ -139,20 +163,19 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp" tools:targetApi="lollipop">
+            app:cardElevation="8dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginRight="16dp"
-                android:orientation="vertical"
-                android:layout_marginEnd="16dp">
+
+            <FrameLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+
+
 
                 <ImageButton
                     android:id="@+id/profilebutton"
-                    android:layout_width="93dp"
-                    android:layout_height="95dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:background="@color/colorProflie"
                     android:contentDescription="@string/myprofile"
@@ -160,15 +183,18 @@
                     android:scrollbarSize="@android:dimen/dialog_min_width_major"
                     android:src="@drawable/ic_icon_profile" />
 
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:text="@string/myprofile"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp">
 
+                </TextView>
 
-            </LinearLayout>
+            </FrameLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -182,20 +208,19 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp" tools:targetApi="lollipop">
+            app:cardElevation="8dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginRight="16dp"
-                android:orientation="vertical"
-                android:layout_marginEnd="16dp">
+
+            <FrameLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+
+
 
                 <ImageButton
                     android:id="@+id/feedbackbutton"
-                    android:layout_width="93dp"
-                    android:layout_height="95dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:background="@color/colorFeedback"
                     android:contentDescription="@string/feedback"
@@ -203,15 +228,18 @@
                     android:scrollbarSize="@android:dimen/dialog_min_width_major"
                     android:src="@drawable/ic_icon_feedback" />
 
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:text="@string/feedback"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp">
 
+                </TextView>
 
-            </LinearLayout>
+            </FrameLayout>
 
         </androidx.cardview.widget.CardView>
 
