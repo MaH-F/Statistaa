@@ -100,8 +100,8 @@
     <string name="tutorial_terms">Terms and Conditions</string>
     <string name="tutorial_logout">Log out</string>
     <string name="tutorial_about">Show information about the app.</string>
-    <string name="title">Title</string>
-    <string name="subtitle">Subtitle</string>
+    <string name="title" translatable="false">Title</string>
+    <string name="subtitle" translatable="false">Subtitle</string>
 
 
 
