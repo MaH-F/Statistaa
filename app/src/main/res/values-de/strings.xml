@@ -201,5 +201,10 @@
     <string name="tutorial_terms">Nach jedem erfolgreichen Login werden die Nutzungsbedingungen und Datenschutzhinweise angezeigt. </string>
     <string name="tutorial_logout">Der aktuelle Nutzer wird ausgeloggt und es können andere Nutzer eingeloggt werden.</string>
     <string name="tutorial_about">Weitere Informationen über die App.</string>
+    <string name="solutionHint">Lösung</string>
+    <string name="solutionRight">Richtig!</string>
+    <string name="solutionFalse">Falsch.</string>
+    <string name="proof">Prüfen.</string>
+
 
 </resources>

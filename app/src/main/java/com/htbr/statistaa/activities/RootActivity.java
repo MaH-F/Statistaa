@@ -49,6 +49,7 @@ public class RootActivity extends AppCompatActivity {
     StorageReference riversRef_SelectedExercises;
     StorageReference riversRef_UserStats;
     StorageReference riverseRef_UserProps;
+    StorageReference riversRef_Solutions;
 
     UserHandler userHandler;
 
@@ -149,6 +150,7 @@ public class RootActivity extends AppCompatActivity {
         riversRef_SelectedExercises = storageRef.child(user.getEmail()+"/selectedExercises.txt");
         riversRef_UserStats = storageRef.child(user.getEmail()+"/StorageStats.txt");
         riverseRef_UserProps = storageRef.child(user.getEmail()+"/UserProps.txt");
+        riversRef_Solutions = storageRef.child(user.getEmail()+"/Solutions.json");
 
 
         userHandler = new UserHandler(this);
@@ -188,6 +190,7 @@ public class RootActivity extends AppCompatActivity {
 
         uploadSelectedExercises(FileWriter.readFile(this, user.getUid()+"_ExerciseStats"), riversRef_UserStats);
         uploadSelectedExercises(FileWriter.readFile(this, user.getUid()+"_UserProps"), riverseRef_UserProps);
+        uploadSelectedExercises(FileWriter.readFile(this, user.getUid() + getString(R.string.mySolutions)) , riversRef_Solutions);
 
 
     }

@@ -16,6 +16,9 @@ import android.util.Log;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,14 +81,6 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
 
-
-        TextView textView = findViewById(R.id.exercise_body_text);
-        textView.setText(exercise.getContent());
-
-
-        Log.d(TAG, "Exercise " + exercise.getName());
-
-
         try {
 
 
@@ -99,6 +94,61 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
             mySelectedExercisesJSONArray = new JSONArray();
 
         }
+
+
+
+        String html = "";
+
+//        TextView textView = findViewById(R.id.exercise_body_text);
+//        textView.setText(exercise.getContent());
+
+
+
+        if(exercise.getHtml() != null){
+            html = exercise.getHtml();
+
+            WebView webView = (WebView) findViewById(R.id.exercise_html);
+            webView.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
+
+        }
+
+
+        if(exercise.getSolution() != null){
+            final EditText solutionEditText = (EditText) findViewById(R.id.exercise_editText_solution);
+            solutionEditText.setVisibility(View.VISIBLE);
+
+            final Button sendSolutionButton = (Button) findViewById(R.id.exercise_sendSolutionButton);
+            sendSolutionButton.setVisibility(View.VISIBLE);
+
+            sendSolutionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+
+                   if(solutionEditText.getText().toString().equals(exercise.getSolution())){
+                       Toast.makeText(ExerciseScrollingActivity.this, getString(R.string.solutionRight), Toast.LENGTH_SHORT).show();
+
+
+                       writeToJson(1);
+
+
+                   }
+
+                   else {
+                       Toast.makeText(ExerciseScrollingActivity.this, getString(R.string.solutionFalse), Toast.LENGTH_SHORT).show();
+
+                       writeToJson(0);
+                   }
+
+                }
+            });
+        }
+
+
+        Log.d(TAG, "Exercise " + exercise.getName());
+
+
 
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab_archieveFab);
@@ -364,6 +414,139 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
     }
 
+
+
+    public void writeToJson(int inputInteger){
+
+        JSONArray solutionsArray;
+        JSONObject exJson = new JSONObject();
+        JSONObject detJson = new JSONObject();
+
+
+        int numberOfTrueSolutions;
+        int numberOfFalseSolutions;
+
+
+        try {
+
+
+            String readData = FileWriter.readFile(this, user.getUid() + getString(R.string.mySolutions));
+
+            if (readData.equals("{}")){
+                solutionsArray = new JSONArray();
+            }
+
+            else {
+
+                solutionsArray = new JSONArray(readData);
+
+            }
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+
+
+            solutionsArray = new JSONArray();
+
+        }
+
+
+
+        //read from JSON
+
+        String exerciseID = exercise.getId();
+
+        for(int i = 0; i < solutionsArray.length(); i++){
+            try {
+                exJson = (JSONObject) solutionsArray.get(i);
+
+                detJson = (JSONObject) exJson.get("exercise");
+                if(detJson.get(getString(R.string.jsonparam_exercise_id)).equals(exerciseID)){
+
+                   solutionsArray.remove(i);
+
+                    if (inputInteger == 1){
+
+                        if (detJson.has(getString(R.string.jsonparam_exercise_numberOfTrueSolutions))){
+                            numberOfTrueSolutions = (int) detJson.get(getString(R.string.jsonparam_exercise_numberOfTrueSolutions));
+
+                            detJson.remove(getString(R.string.jsonparam_exercise_numberOfTrueSolutions));
+                            detJson.put(getString(R.string.jsonparam_exercise_numberOfTrueSolutions), numberOfTrueSolutions + 1);
+
+                        }
+                        else {
+                            detJson.put(getString(R.string.jsonparam_exercise_numberOfTrueSolutions), 1);
+                        }
+
+                    }
+
+
+                    else{
+                        if (detJson.has(getString(R.string.jsonparam_exercise_numberOfFalseSolutions))){
+                            numberOfFalseSolutions = (int) detJson.get(getString(R.string.jsonparam_exercise_numberOfFalseSolutions));
+
+                            detJson.remove(getString(R.string.jsonparam_exercise_numberOfFalseSolutions));
+                            detJson.put(getString(R.string.jsonparam_exercise_numberOfFalseSolutions), numberOfFalseSolutions + 1);
+
+                        }
+                        else {
+                            detJson.put(getString(R.string.jsonparam_exercise_numberOfFalseSolutions), 1);
+                        }
+                    }
+
+                    detJson.put(getString(R.string.jsonparam_exercise_id), exerciseID);
+                    exJson.put("exercise", detJson);
+                    solutionsArray.put(exJson);
+
+
+                    FileWriter.writeNewToFile(this, user.getUid() + getString(R.string.mySolutions) ,solutionsArray.toString() );
+
+                    return;
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        // if there is no json...
+
+        try {
+
+        Log.d(TAG, "write a new json");
+
+        detJson = new JSONObject();
+        exJson = new JSONObject();
+
+        if(inputInteger == 1){
+            detJson.put(getString(R.string.jsonparam_exercise_numberOfTrueSolutions), 1);
+        }
+        else {
+            detJson.put(getString(R.string.jsonparam_exercise_numberOfFalseSolutions), 1);
+        }
+
+        detJson.put(getString(R.string.jsonparam_exercise_id), exerciseID);
+
+        exJson.put("exercise", detJson);
+        solutionsArray.put(exJson);
+
+        FileWriter.writeNewToFile(this, user.getUid() + getString(R.string.mySolutions) ,solutionsArray.toString() );
+
+        } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+
+
+
+
+
+    }
 
 
         @Override

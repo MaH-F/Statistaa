@@ -102,7 +102,12 @@
     <string name="tutorial_about">Show information about the app.</string>
     <string name="title" translatable="false">Title</string>
     <string name="subtitle" translatable="false">Subtitle</string>
-
-
+    <string name="solutionHint">Solution</string>
+    <string name="solutionRight">Right!</string>
+    <string name="solutionFalse">False.</string>
+    <string name="proof">Proof</string>
+    <string name="mySolutions" translatable="false">Solutions</string>
+    <string name="jsonparam_exercise_numberOfFalseSolutions" translatable="false">numberOfFalseSolutions</string>
+    <string name="jsonparam_exercise_numberOfTrueSolutions" translatable="false">numberOfTrueSolutions</string>
 
 </resources>

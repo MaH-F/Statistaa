@@ -14,6 +14,8 @@ public class Exercise implements Serializable {
     private String subtitle;
     private String content;
     private int number;
+    private String html;
+    private String solution;
 
     //this is only for "offline"
     private int box;
@@ -21,13 +23,14 @@ public class Exercise implements Serializable {
 
 
 
-    public Exercise(String id, String name, String subtitle, String content, int number) {
+    public Exercise(String id, String name, String subtitle, String content, int number, String html, String solution) {
         this.id = id;
         this.name = name;
         this.content = content;
         this.subtitle = subtitle;
         this.number = number;
-
+        this.html = html;
+        this.solution = solution;
 
     }
     public Exercise() {}
@@ -79,6 +82,22 @@ public class Exercise implements Serializable {
 
     public void setBox(int box) {
         this.box = box;
+    }
+
+    public String getHtml() {
+        return html;
+    }
+
+    public void setHtml(String html) {
+        this.html = html;
+    }
+
+    public String getSolution() {
+        return solution;
+    }
+
+    public void setSolution(String solution) {
+        this.solution = solution;
     }
 }
 
