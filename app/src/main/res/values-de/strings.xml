@@ -76,7 +76,7 @@
 
         "Die Anmeldedaten werden mit Google Firebase Authentication gespeichert."
         "Nutzungsdaten werden mit Google Analytics erhoben und verarbeitet."
-        "Um Fehler- und Absturzberichte zu erzeugen, nutzt die App Google Clashlytics"
+        "Um Fehler- und Absturzberichte zu erzeugen, nutzt die App Google Clashlytics."
         "Die erhobenen und gespeicherten Daten dienen keinem kommerziellen Zweck und werden an keine Dritten weitergegeben."
 
         "\n\n"
@@ -192,7 +192,7 @@
     <string name="user_properties">Nutzerangaben</string>
     <string name="gender">Geschlecht</string>
     <string name="SkipTutorialButtonText">Überspringen</string>
-    <string name="tutorial_learn">Hier findet sich eine Liste mit allen Lerninhalten. Diese Inhalte sind auf dem Server gespeichert. Indem ein Element (z.B. eine Übung) angeklickt wird, kann es gelesen, bearbeitet oder ins eigene Archiv heruntergeladen werden. Is eigene Archiv herunterladen bedeutet: Mit Hilfe des runden Buttons wird der Inhalt auf dem Gerät gespeichert und ist im Archiv zu finden.</string>
+    <string name="tutorial_learn">Hier findet sich eine Liste mit allen Lerninhalten. Diese Inhalte sind auf dem Server gespeichert. Indem ein Element (z.B. eine Übung) angeklickt wird, kann es gelesen, bearbeitet oder ins eigene Archiv heruntergeladen werden. Ins eigene Archiv herunterladen bedeutet: Mit Hilfe des runden Buttons wird der Inhalt auf dem Gerät gespeichert und ist im Archiv zu finden.</string>
     <string name="tutorial_archive">Das Archiv hat drei Boxen. Wird ein Lerninhalt offline gespeichert, so erscheint er zunächst in Box 1. Ein erneutes Klicken auf den Archiv-Button verschiebt die Aufgabe in die nächste Box. So kann ein Karteikasten-Prinzip auf die gespeicherten Inhalte angewendet werden.</string>
     <string name="tutorial_profile">In diesem Fenster werden Informationen zum eingeloggten Nutzer angezeigt.</string>
     <string name="finishTutorialButtonText">Fertig</string>
@@ -201,5 +201,11 @@
     <string name="tutorial_terms">Nach jedem erfolgreichen Login werden die Nutzungsbedingungen und Datenschutzhinweise angezeigt. </string>
     <string name="tutorial_logout">Der aktuelle Nutzer wird ausgeloggt und es können andere Nutzer eingeloggt werden.</string>
     <string name="tutorial_about">Weitere Informationen über die App.</string>
+    <string name="solutionHint">Lösung</string>
+    <string name="solutionRight">Richtig!</string>
+    <string name="solutionFalse">Falsch.</string>
+    <string name="proof">Prüfen.</string>
+    <string name="watchVdeo">Hier klicken, um das Video zu laden.</string>
+
 
 </resources>

@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:weightSum="10"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activities.RootActivity"
+    tools:context=".activities.RootActivity"
     tools:showIn="@layout/activity_root">
 
 
