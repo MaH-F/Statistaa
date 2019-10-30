@@ -187,12 +187,28 @@ public class RootActivity extends AppCompatActivity {
         // upload USER STATS JSON
 
 
+        String stats = FileWriter.readFile(this, user.getUid()+"_ExerciseStats");
+         if (!stats.equals("{}")){
+            uploadSelectedExercises(stats, riversRef_UserStats);
+        }
 
-        uploadSelectedExercises(FileWriter.readFile(this, user.getUid()+"_ExerciseStats"), riversRef_UserStats);
-        uploadSelectedExercises(FileWriter.readFile(this, user.getUid()+"_UserProps"), riverseRef_UserProps);
-        uploadSelectedExercises(FileWriter.readFile(this, user.getUid() + getString(R.string.mySolutions)) , riversRef_Solutions);
 
 
+
+
+
+        String props = FileWriter.readFile(this, user.getUid()+"_UserProps");
+        if (!props.equals("{}")) {
+            uploadSelectedExercises(props, riverseRef_UserProps);
+        }
+
+
+
+
+        String solutions = FileWriter.readFile(this, user.getUid() + getString(R.string.mySolutions));
+        if (!solutions.equals("{}")) {
+            uploadSelectedExercises(solutions, riversRef_Solutions);
+        }
     }
 
     private void downloadSelectedExercisesJSONFile() {

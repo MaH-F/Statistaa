@@ -38,7 +38,7 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:inputType="text"
-             android:visibility="gone"
+             android:visibility="invisible"
              android:hint="@string/solutionHint">
 
          </EditText>
@@ -46,10 +46,13 @@
 
         <Button
             android:id="@+id/exercise_sendSolutionButton"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="@string/proof">
+            android:background="@color/colorPrimary"
+            android:text="@string/proof"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:visibility="invisible">
 
         </Button>
 

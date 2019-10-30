@@ -146,6 +146,26 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
         }
 
 
+        if (exercise.getUrl() != null){
+
+
+
+            final Button sendSolutionButton = (Button) findViewById(R.id.exercise_sendSolutionButton);
+            sendSolutionButton.setVisibility(View.VISIBLE);
+            sendSolutionButton.setText(getString(R.string.watchVdeo));
+
+            sendSolutionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    WebView webView = (WebView) findViewById(R.id.exercise_html);
+                    webView.loadUrl(exercise.getUrl());
+                }
+            });
+
+
+        }
+
+
         Log.d(TAG, "Exercise " + exercise.getName());
 
 

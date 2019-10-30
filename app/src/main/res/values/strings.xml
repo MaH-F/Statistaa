@@ -109,5 +109,6 @@
     <string name="mySolutions" translatable="false">Solutions</string>
     <string name="jsonparam_exercise_numberOfFalseSolutions" translatable="false">numberOfFalseSolutions</string>
     <string name="jsonparam_exercise_numberOfTrueSolutions" translatable="false">numberOfTrueSolutions</string>
+    <string name="watchVdeo">Watch Video</string>
 
 </resources>

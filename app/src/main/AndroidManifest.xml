@@ -31,7 +31,8 @@
         <activity
             android:name=".activities.ExerciseScrollingActivity"
             android:label="@string/title_activity_exercise_scrolling"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about" />
