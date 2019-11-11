@@ -110,5 +110,7 @@
     <string name="jsonparam_exercise_numberOfFalseSolutions" translatable="false">numberOfFalseSolutions</string>
     <string name="jsonparam_exercise_numberOfTrueSolutions" translatable="false">numberOfTrueSolutions</string>
     <string name="watchVdeo">Watch Video</string>
+    <string name="falseCheckBox">false</string>
+    <string name="trueCheckBox">True</string>
 
 </resources>

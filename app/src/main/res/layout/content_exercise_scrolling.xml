@@ -22,12 +22,12 @@
         tools:ignore="WebViewLayout"
         android:orientation="vertical">
 
-    <WebView
-        android:id="@+id/exercise_html"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <WebView
+            android:id="@+id/exercise_html"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </WebView>
+        </WebView>
 
 
 
@@ -44,6 +44,30 @@
          </EditText>
 
 
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/exercise_True_CheckBox"
+            android:text="@string/trueCheckBox"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone"
+            android:onClick="OnCheckBoxClicked">
+
+        </CheckBox>
+
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/exercise_False_CheckBox"
+            android:text="@string/falseCheckBox"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone"
+            android:onClick="OnCheckBoxClicked">
+
+        </CheckBox>
+
+
         <Button
             android:id="@+id/exercise_sendSolutionButton"
 
@@ -57,6 +81,13 @@
         </Button>
 
 
+        <WebView
+            android:id="@+id/exercise_statement_webView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+        </WebView>
 
 
     </LinearLayout>

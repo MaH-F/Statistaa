@@ -114,17 +114,20 @@ public class RecyclerViewFragment extends Fragment implements OnExerciseSelected
                     //file exists
                     exercise = (Exercise) FileWriter.readObjectFromFile(getContext(), exerciseFileName);
 
+                    if (exercise != null) {
 
-                    switch ((int) detailsJSON.get("group")){
-                        case 0:
-                            exerciseListGroup1.add(exercise);
-                            break;
-                        case 1:
-                            exerciseListGroup2.add(exercise);
-                            break;
-                        case 2:
-                            exerciseListGroup3.add(exercise);
-                            break;
+
+                        switch ((int) detailsJSON.get("group")) {
+                            case 0:
+                                exerciseListGroup1.add(exercise);
+                                break;
+                            case 1:
+                                exerciseListGroup2.add(exercise);
+                                break;
+                            case 2:
+                                exerciseListGroup3.add(exercise);
+                                break;
+                        }
                     }
                 }
 

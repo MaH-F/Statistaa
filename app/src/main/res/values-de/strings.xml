@@ -206,6 +206,8 @@
     <string name="solutionFalse">Falsch.</string>
     <string name="proof">Prüfen.</string>
     <string name="watchVdeo">Hier klicken, um das Video zu laden.</string>
+    <string name="trueCheckBox">Wahr</string>
+    <string name="falseCheckBox">Falsch</string>
 
 
 </resources>

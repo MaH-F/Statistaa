@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -114,35 +115,70 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
         if(exercise.getSolution() != null){
-            final EditText solutionEditText = (EditText) findViewById(R.id.exercise_editText_solution);
-            solutionEditText.setVisibility(View.VISIBLE);
-
-            final Button sendSolutionButton = (Button) findViewById(R.id.exercise_sendSolutionButton);
-            sendSolutionButton.setVisibility(View.VISIBLE);
-
-            sendSolutionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
 
 
-                   if(solutionEditText.getText().toString().equals(exercise.getSolution())){
-                       Toast.makeText(ExerciseScrollingActivity.this, getString(R.string.solutionRight), Toast.LENGTH_SHORT).show();
 
 
-                       writeToJson(1);
+
+            // if exercise is a TrueFalse Exercise
+
+            if(exercise.getType() != null && exercise.getType().equals("trueOrFalse")){
+
+                CheckBox trueCheckBox = (CheckBox) findViewById(R.id.exercise_True_CheckBox);
+                CheckBox falseCheckBox = (CheckBox) findViewById(R.id.exercise_False_CheckBox);
+
+                trueCheckBox.setVisibility(View.VISIBLE);
+                falseCheckBox.setVisibility(View.VISIBLE);
 
 
-                   }
 
-                   else {
-                       Toast.makeText(ExerciseScrollingActivity.this, getString(R.string.solutionFalse), Toast.LENGTH_SHORT).show();
 
-                       writeToJson(0);
-                   }
 
-                }
-            });
+            } else {
+
+                final Button sendSolutionButton = (Button) findViewById(R.id.exercise_sendSolutionButton);
+                sendSolutionButton.setVisibility(View.VISIBLE);
+                final EditText solutionEditText = (EditText) findViewById(R.id.exercise_editText_solution);
+                solutionEditText.setVisibility(View.VISIBLE);
+
+                sendSolutionButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+
+                        if(solutionEditText.getText().toString().equals(exercise.getSolution())){
+                            writeToJson(1);
+
+                            if(exercise.getStatement() != null){
+
+                                WebView statementWebView = (WebView) findViewById(R.id.exercise_statement_webView);
+                                statementWebView.loadDataWithBaseURL(null, exercise.getStatement(), "text/html", "utf-8", null);
+
+                            }
+                            else {
+                                // exercise has no statement
+                                Toast.makeText(ExerciseScrollingActivity.this, getString(R.string.solutionRight), Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+
+                        else {
+                            Toast.makeText(ExerciseScrollingActivity.this, getString(R.string.solutionFalse), Toast.LENGTH_SHORT).show();
+
+                            writeToJson(0);
+                        }
+
+                    }
+                });
+            }
+
+
+
+
+
         }
 
 
@@ -367,7 +403,8 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
 
-    @Override
+
+        @Override
     protected void onResume(){
         super.onResume();
 
@@ -578,4 +615,66 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
             return super.onOptionsItemSelected(item);
         }
+
+    public void OnCheckBoxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+
+        WebView statementWebView = (WebView) findViewById(R.id.exercise_statement_webView);
+
+
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.exercise_True_CheckBox:
+                if (checked){
+
+                    if(exercise.getSolution().equals("ja")){
+
+                        statementWebView.loadDataWithBaseURL(null, exercise.getStatement(), "text/html", "utf-8", null);
+
+                    }
+
+                    else {
+                        statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+                    }
+
+
+                }
+
+
+
+            else{
+
+                    statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+
+
+                }
+
+                break;
+            case R.id.exercise_False_CheckBox:
+                if (checked){
+                    if(exercise.getSolution().equals("nein")){
+
+                        statementWebView.loadDataWithBaseURL(null, exercise.getStatement(), "text/html", "utf-8", null);
+
+                    }
+
+                    else {
+                        statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+                    }
+
+                }
+
+            else {
+                    statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+
+                }
+
+                break;
+
+
+        }
+
+    }
 }
