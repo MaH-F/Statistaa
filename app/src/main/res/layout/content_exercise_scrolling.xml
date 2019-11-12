@@ -39,33 +39,31 @@
              android:layout_height="wrap_content"
              android:inputType="text"
              android:visibility="invisible"
-             android:hint="@string/solutionHint">
+             android:hint="@string/solutionHint"
+             android:importantForAutofill="no">
 
          </EditText>
 
 
-        <CheckBox
+
+        <RadioGroup
+            android:id="@+id/exercise_RadioGroup"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/exercise_True_CheckBox"
-            android:text="@string/trueCheckBox"
-            android:textColor="@color/colorPrimary"
-            android:visibility="gone"
-            android:onClick="OnCheckBoxClicked">
+            android:orientation="vertical">
+            <RadioButton android:id="@+id/exercise_True_CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/trueCheckBox"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/exercise_False_CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/falseCheckBox"
+                android:onClick="onRadioButtonClicked"/>
+        </RadioGroup>
 
-        </CheckBox>
-
-
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/exercise_False_CheckBox"
-            android:text="@string/falseCheckBox"
-            android:textColor="@color/colorPrimary"
-            android:visibility="gone"
-            android:onClick="OnCheckBoxClicked">
-
-        </CheckBox>
 
 
         <Button
