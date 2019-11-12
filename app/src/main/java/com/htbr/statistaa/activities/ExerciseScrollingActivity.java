@@ -20,6 +20,8 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -125,12 +127,8 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
             if(exercise.getType() != null && exercise.getType().equals("trueOrFalse")){
 
-                CheckBox trueCheckBox = (CheckBox) findViewById(R.id.exercise_True_CheckBox);
-                CheckBox falseCheckBox = (CheckBox) findViewById(R.id.exercise_False_CheckBox);
-
-                trueCheckBox.setVisibility(View.VISIBLE);
-                falseCheckBox.setVisibility(View.VISIBLE);
-
+                RadioGroup radioGroup = (RadioGroup) findViewById(R.id.exercise_RadioGroup);
+                radioGroup.setVisibility(View.VISIBLE);
 
 
 
@@ -646,69 +644,71 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
 
-    public void OnCheckBoxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
 
 
-        WebView statementWebView = (WebView) findViewById(R.id.exercise_statement_webView);
 
+    public void onRadioButtonClicked(View view) {
+    // Is the button now checked?
+    boolean checked = ((RadioButton) view).isChecked();
 
-        // Check which checkbox was clicked
-        switch(view.getId()) {
-            case R.id.exercise_True_CheckBox:
-                if (checked){
+    WebView statementWebView = (WebView) findViewById(R.id.exercise_statement_webView);
 
-                    if(exercise.getSolution().equals("ja")){
+    // Check which radio button was clicked
+    switch(view.getId()) {
+        case R.id.exercise_True_CheckBox:
+            if (checked){
 
-                        statementWebView.loadDataWithBaseURL(null, exercise.getStatement(), "text/html", "utf-8", null);
+                if(exercise.getSolution().equals("ja")){
 
-                    }
-
-                    else {
-                        statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-                    }
-
-
+                    statementWebView.loadDataWithBaseURL(null, exercise.getStatement(), "text/html", "utf-8", null);
+                    writeToJson(1);
                 }
+
+                else {
+                    statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+                    writeToJson(0);
+                }
+
+
+            }
 
 
 
             else{
 
+                statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+
+
+            }
+
+            break;
+        case R.id.exercise_False_CheckBox:
+            if (checked){
+                if(exercise.getSolution().equals("nein")){
+
+                    statementWebView.loadDataWithBaseURL(null, exercise.getStatement(), "text/html", "utf-8", null);
+                    writeToJson(1);
+                }
+
+                else {
                     statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-
-
+                    writeToJson(0);
                 }
 
-                break;
-            case R.id.exercise_False_CheckBox:
-                if (checked){
-                    if(exercise.getSolution().equals("nein")){
-
-                        statementWebView.loadDataWithBaseURL(null, exercise.getStatement(), "text/html", "utf-8", null);
-
-                    }
-
-                    else {
-                        statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-                    }
-
-                }
+            }
 
             else {
-                    statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+                statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
 
-                }
+            }
 
-                break;
-
-
-        }
-
+            break;
     }
+}
 
 
+
+    // calculate the percentage (error)
     private boolean testSolution(String exactSolution, String givenSolution){
         try {
             Double exact = Double.valueOf(exactSolution.replace(",","."));
