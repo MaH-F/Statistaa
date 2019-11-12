@@ -111,5 +111,9 @@
     <string name="jsonparam_exercise_numberOfFalseSolutions" translatable="false">numberOfFalseSolutions</string>
     <string name="jsonparam_exercise_numberOfTrueSolutions" translatable="false">numberOfTrueSolutions</string>
     <string name="watchVdeo">Watch Video</string>
+    <string name="falseCheckBox">false</string>
+    <string name="trueCheckBox">True</string>
+    <string name="solutionFalse_SepareteWithKomma">False. Separation with comma!</string>
+    <string name="noHint">No hint available.</string>
 
 </resources>

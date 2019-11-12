@@ -41,7 +41,7 @@ public class QuestionnaireAdapter extends MyAdapter<QuestionnaireAdapter.ViewHol
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         SharedPreferences sharedPreferences = parent.getContext().getSharedPreferences(parent.getContext().getString(R.string.text_size_prefs), Context.MODE_PRIVATE);
-        int textSize = sharedPreferences.getInt(parent.getContext().getString(R.string.exercise_subtitle_textSize), 36);
+        int textSize = sharedPreferences.getInt(parent.getContext().getString(R.string.exercise_subtitle_textSize), 20);
 
         return new ViewHolder(inflater.inflate(R.layout.item_questionnaire, parent, false), textSize);
     }
