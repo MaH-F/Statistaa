@@ -192,7 +192,7 @@
     <string name="user_properties">Nutzerangaben</string>
     <string name="gender">Geschlecht</string>
     <string name="SkipTutorialButtonText">Überspringen</string>
-    <string name="tutorial_learn">Hier findet sich eine Liste mit allen Lerninhalten. Diese Inhalte sind auf dem Server gespeichert. Indem ein Element (z.B. eine Übung) angeklickt wird, kann es gelesen, bearbeitet oder ins eigene Archiv heruntergeladen werden. Ins eigene Archiv herunterladen bedeutet: Mit Hilfe des runden Buttons wird der Inhalt auf dem Gerät gespeichert und ist im Archiv zu finden.</string>
+    <string name="tutorial_learn">Hier findet sich eine Liste mit allen Lerninhalten. Diese Inhalte sind auf dem Server gespeichert. Indem ein Element (z.B. eine Übung) angeklickt wird, kann es gelesen, bearbeitet oder ins eigene Archiv heruntergeladen werden. Ins eigene Archiv herunterladen bedeutet: Mit Hilfe des runden Buttons wird der Inhalt auf dem Gerät gespeichert und ist im Archiv zu finden. Wird bei einer Aufgabe die richtige Lösung eingegeben, erscheint unter dem Prüfen-Button die Lösung. Einen Lösungshinweis erhält man, indem der Lösungs-Button lange gehalten wird.</string>
     <string name="tutorial_archive">Das Archiv hat drei Boxen. Wird ein Lerninhalt offline gespeichert, so erscheint er zunächst in Box 1. Ein erneutes Klicken auf den Archiv-Button verschiebt die Aufgabe in die nächste Box. So kann ein Karteikasten-Prinzip auf die gespeicherten Inhalte angewendet werden.</string>
     <string name="tutorial_profile">In diesem Fenster werden Informationen zum eingeloggten Nutzer angezeigt.</string>
     <string name="finishTutorialButtonText">Fertig</string>
@@ -208,6 +208,8 @@
     <string name="watchVdeo">Hier klicken, um das Video zu laden.</string>
     <string name="trueCheckBox">Wahr</string>
     <string name="falseCheckBox">Falsch</string>
+    <string name="solutionFalse_SepareteWithKomma">Falsch. Richtige Lösung bitte mit Komma getrennt angeben.</string>
+    <string name="noHint">Es gibt keinen Hinweis.</string>
 
 
 </resources>

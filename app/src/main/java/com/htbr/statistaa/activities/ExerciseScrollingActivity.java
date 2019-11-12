@@ -134,7 +134,7 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
 
-
+            // exercise is a calculation
             } else {
 
                 final Button sendSolutionButton = (Button) findViewById(R.id.exercise_sendSolutionButton);
@@ -147,8 +147,12 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
 
+                        testSolution(exercise.getSolution(), solutionEditText.getText().toString());
 
-                        if(solutionEditText.getText().toString().equals(exercise.getSolution())){
+                        //if(solutionEditText.getText().toString().equals(exercise.getSolution())){
+
+                        // See what delta is allowed...
+                        if(testSolution(exercise.getSolution(), solutionEditText.getText().toString())){
                             writeToJson(1);
 
                             if(exercise.getStatement() != null){
@@ -166,11 +170,37 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                         }
 
                         else {
-                            Toast.makeText(ExerciseScrollingActivity.this, getString(R.string.solutionFalse), Toast.LENGTH_SHORT).show();
+
+
+                            // Solutions are german with , not with .
+                            if (solutionEditText.getText().toString().contains(".")){
+                                Toast.makeText(ExerciseScrollingActivity.this, getString(R.string.solutionFalse_SepareteWithKomma), Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(ExerciseScrollingActivity.this, getString(R.string.solutionFalse), Toast.LENGTH_SHORT).show();
+                            }
 
                             writeToJson(0);
                         }
 
+                    }
+                });
+
+
+
+
+                // for hint
+                sendSolutionButton.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        if(exercise.getHint() != null){
+                            Toast.makeText(ExerciseScrollingActivity.this, exercise.getHint(), Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(ExerciseScrollingActivity.this, getString(R.string.noHint), Toast.LENGTH_SHORT).show();
+                        }
+
+                        return true;
                     }
                 });
             }
@@ -675,6 +705,37 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
         }
+
+    }
+
+
+    private boolean testSolution(String exactSolution, String givenSolution){
+        try {
+            Double exact = Double.valueOf(exactSolution.replace(",","."));
+            Double given = Double.valueOf(givenSolution.replace(",","."));
+
+
+            Double error = 100 * Math.abs(Math.abs(exact - given) / exact);
+
+            Log.d(TAG, "Error of solution " + error + "%");
+
+
+
+            if (error < 10){
+                return true;
+            }
+            else {
+                return false;
+            }
+
+        } catch (NumberFormatException e){
+            e.printStackTrace();
+            Log.d(TAG, "Solution " + givenSolution + " is not a number");
+            return  false;
+        }
+
+
+
 
     }
 }

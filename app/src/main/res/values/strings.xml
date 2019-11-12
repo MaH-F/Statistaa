@@ -112,5 +112,7 @@
     <string name="watchVdeo">Watch Video</string>
     <string name="falseCheckBox">false</string>
     <string name="trueCheckBox">True</string>
+    <string name="solutionFalse_SepareteWithKomma">False. Separation with comma!</string>
+    <string name="noHint">No hint available.</string>
 
 </resources>
