@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
 
-        android:versionCode="1"
-        android:versionName="1.17"
+        android:versionCode="18"
+        android:versionName="1.18"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activities.TermsActivity"
             android:label="@string/terms_activity_label">
