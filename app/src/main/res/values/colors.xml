@@ -10,4 +10,6 @@
     <color name="fab_edit_background">#8AAAB0BD</color>
     <color name="fab_save_background">#F44336</color>
     <color name="black_overlay">#66000000</color>
+    <color name="green_right">#2DCC03</color>
+    <color name="false_red">#E03434</color>
 </resources>

@@ -141,6 +141,7 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                 solutionEditText.setVisibility(View.VISIBLE);
 
                 sendSolutionButton.setOnClickListener(new View.OnClickListener() {
+                    @SuppressLint("ResourceAsColor")
                     @Override
                     public void onClick(View v) {
 
@@ -165,6 +166,9 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                             }
 
 
+                            sendSolutionButton.setBackgroundColor(getResources().getColor(R.color.green_right));
+
+
                         }
 
                         else {
@@ -179,6 +183,9 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                             }
 
                             writeToJson(0);
+
+
+                            sendSolutionButton.setBackgroundColor(getResources().getColor(R.color.false_red));
                         }
 
                     }
@@ -721,7 +728,7 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
 
-            if (error < 10){
+            if (error < 5){
                 return true;
             }
             else {
