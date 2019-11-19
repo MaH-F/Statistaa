@@ -150,9 +150,9 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
                         //if(solutionEditText.getText().toString().equals(exercise.getSolution())){
 
-                        // See what delta is allowed...
+                        // See what delta is allowed... if answer is correct
                         if(testSolution(exercise.getSolution(), solutionEditText.getText().toString())){
-                            writeToJson(1);
+                            writeToJson(1, calcDelta(exercise.getSolution(), solutionEditText.getText().toString()));
 
                             if(exercise.getStatement() != null){
 
@@ -182,7 +182,7 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                                 Toast.makeText(ExerciseScrollingActivity.this, getString(R.string.solutionFalse), Toast.LENGTH_SHORT).show();
                             }
 
-                            writeToJson(0);
+                            writeToJson(0, calcDelta(exercise.getSolution(), solutionEditText.getText().toString()));
 
 
                             sendSolutionButton.setBackgroundColor(getResources().getColor(R.color.false_red));
@@ -480,10 +480,24 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                     statsJSON.put(exercise.getId()+"_totalTime", totalTime);
                 }
 
+
                 else{
                     statsJSON.put(exercise.getId()+"_totalTime", totalTime);
                 }
 
+                // write/increase number of total clicks
+
+
+                if(statsJSON.has(exercise.getId()+"_totalClicks")){
+                    int totalClicks = statsJSON.getInt(exercise.getId()+"_totalClicks");
+                    statsJSON.remove(exercise.getId()+"_totalClicks");
+                    statsJSON.put(exercise.getId()+"_totalClicks", totalClicks + 1);
+                }
+
+
+                else{
+                    statsJSON.put(exercise.getId()+"_totalClicks", 1);
+                }
 
 
             } catch (JSONException e) {
@@ -495,6 +509,7 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
             try {
                 statsJSON.put(exercise.getId()+"_totalTime", totalTime);
+                statsJSON.put(exercise.getId()+"_totalClicks", 1);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -507,8 +522,8 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
     }
 
 
-
-    public void writeToJson(int inputInteger){
+    // delta is the difference between the correct and the given solution
+    public void writeToJson(int inputInteger, Double delta){
 
         JSONArray solutionsArray;
         JSONObject exJson = new JSONObject();
@@ -582,9 +597,31 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                             detJson.remove(getString(R.string.jsonparam_exercise_numberOfFalseSolutions));
                             detJson.put(getString(R.string.jsonparam_exercise_numberOfFalseSolutions), numberOfFalseSolutions + 1);
 
+
+                            //get average of false deltas
+
+                            //but only if delta is not -1 (this means that input was not in correct format)
+
+                            if(delta != -1) {
+
+
+                                if (detJson.has("everageDelta")) {
+                                    Double everageDelta = detJson.getDouble("everageDelta");
+
+                                    Double newEverageDelta = ((numberOfFalseSolutions * everageDelta) + delta) / (numberOfFalseSolutions + 1);
+                                    detJson.remove("everageDelta");
+                                    detJson.put("everageDelta", newEverageDelta);
+
+
+                                } else {
+                                    detJson.put("everageDelta", delta);
+                                }
+                            }
+
                         }
                         else {
                             detJson.put(getString(R.string.jsonparam_exercise_numberOfFalseSolutions), 1);
+
                         }
                     }
 
@@ -668,12 +705,12 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                 if(exercise.getSolution().equals("ja")){
 
                     statementWebView.loadDataWithBaseURL(null, exercise.getStatement(), "text/html", "utf-8", null);
-                    writeToJson(1);
+                    writeToJson(1, (double)-1);
                 }
 
                 else {
                     statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-                    writeToJson(0);
+                    writeToJson(0, (double)-1);
                 }
 
 
@@ -694,12 +731,12 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
                 if(exercise.getSolution().equals("nein")){
 
                     statementWebView.loadDataWithBaseURL(null, exercise.getStatement(), "text/html", "utf-8", null);
-                    writeToJson(1);
+                    writeToJson(1, (double)-1);
                 }
 
                 else {
                     statementWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-                    writeToJson(0);
+                    writeToJson(0, (double)-1);
                 }
 
             }
@@ -744,5 +781,28 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    //calculate everage Delta
+    private double calcDelta(String exactSolution, String givenSolution){
+
+                try {
+            Double exact = Double.valueOf(exactSolution.replace(",","."));
+            Double given = Double.valueOf(givenSolution.replace(",","."));
+
+
+            Double delta =  Math.abs(exact - given);
+
+            Log.d(TAG, "Error of solution " + delta + "%");
+
+
+            return delta;
+
+        } catch (NumberFormatException e){
+            e.printStackTrace();
+            Log.d(TAG, "Solution " + givenSolution + " is not a number");
+            return -1;
+        }
     }
 }

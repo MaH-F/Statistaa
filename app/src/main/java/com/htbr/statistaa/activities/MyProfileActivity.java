@@ -37,6 +37,11 @@ public class MyProfileActivity extends AppCompatActivity {
         userTextView.setText(user.getEmail());
 
     }
+
+
+
+
+
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
 
