@@ -12,9 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-
-        android:versionCode="18"
-        android:versionName="1.18"
+        android:versionCode="20"
+        android:versionName="1.20"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activities.TermsActivity"
             android:label="@string/terms_activity_label">
@@ -36,7 +35,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan"
             android:screenOrientation="landscape"/>
-            android:screenOrientation="landscape"/>
+
         <activity
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about" />

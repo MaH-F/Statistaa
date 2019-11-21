@@ -9,14 +9,8 @@ android {
         applicationId "com.htbr.statistaa"
         minSdkVersion 16
         targetSdkVersion 28
-<<<<<<< HEAD
-
-        versionCode 18
-        versionName "1.18"
-=======
-        versionCode 11
-        versionName "1.1 B"
->>>>>>> dev
+        versionCode 20
+        versionName "1.20"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
