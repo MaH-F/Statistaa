@@ -57,6 +57,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             sharedPreferences =  getActivity().getSharedPreferences(FirebaseAuth.getInstance().getCurrentUser().getUid() + getString(R.string.user_properties_JSON), Context.MODE_PRIVATE);
             String gender = sharedPreferences.getString(getString(R.string.genderID), "no");
+            String birthyear = sharedPreferences.getString(getString(R.string.birthyear), "no");
 
 
 
@@ -168,6 +169,91 @@ public class SettingsActivity extends AppCompatActivity {
                     return false;
                 }
             });
+
+
+
+
+
+
+
+
+
+            final ListPreference birthyearPreference = (ListPreference) findPreference("BirthyearPreference");
+
+
+            birthyearPreference.setValue(birthyear);
+
+            birthyearPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+                    listPreferenceGender.setValue((String) newValue);
+
+
+                    SharedPreferences sharedPreferences =  getActivity().getSharedPreferences(user.getUid() + getString(R.string.user_properties_JSON), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(getString(R.string.birthyear), newValue.toString());
+                    editor.apply();
+
+
+                    String statsJSONString = FileWriter.readFile(getContext(), user.getUid()+"_UserProps");
+
+                    JSONObject jsonObject= new JSONObject();;
+
+                    String key = "birth";
+
+                    if (!statsJSONString.equals("{}")){
+                        try {
+                            jsonObject = new JSONObject(statsJSONString);
+
+
+
+                            if(jsonObject.has(key)){
+                                jsonObject.remove(key);
+                                jsonObject.put(key, newValue.toString());
+                            }
+
+                            else{
+                                jsonObject.put(key, newValue.toString());
+                            }
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+
+
+                        try {
+                            jsonObject.put(key, newValue.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    FileWriter.writeNewToFile(getContext(), user.getUid()+"_UserProps", jsonObject.toString());
+
+
+                    return false;
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
 

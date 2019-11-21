@@ -114,5 +114,6 @@
     <string name="trueCheckBox">True</string>
     <string name="solutionFalse_SepareteWithKomma">False. Separation with comma!</string>
     <string name="noHint">No hint available.</string>
+    <string name="birthyear">Year of Bith</string>
 
 </resources>
