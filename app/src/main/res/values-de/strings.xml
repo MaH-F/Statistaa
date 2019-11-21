@@ -134,6 +134,7 @@
         <ol>
         <li>Name und E-Mailadresse des Nutzers</li>
         <li>Geschlecht des Nutzers (optional, nur bei Angabe)</li>
+        <li>Geburtsjahr des Nutzers (optional, nur bei Angabe)</li>
         <li>Nutzungszeiten der Applikation</li>
         <li>Antworten der Fragebögen</li>
         </ol>
