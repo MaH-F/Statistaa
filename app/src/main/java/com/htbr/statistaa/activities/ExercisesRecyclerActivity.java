@@ -115,7 +115,7 @@ public class ExercisesRecyclerActivity extends AppCompatActivity implements View
         // Get the 50 highest rated restaurants
         //TODO generate GroupID
         mQuery = mFirestore.collection(collection)
-                .orderBy("number", Query.Direction.DESCENDING)
+                .orderBy("number", Query.Direction.ASCENDING)
                 .limit(LIMIT);
 
 

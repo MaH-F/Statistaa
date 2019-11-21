@@ -59,8 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/learning"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:gravity="center">
 
@@ -101,8 +100,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/archive"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold">
 
         </TextView>
@@ -139,8 +137,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/myprofile"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold">
 
         </TextView>
@@ -176,8 +173,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/feedback"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold">
 
         </TextView>
@@ -220,8 +216,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/title_activity_settings"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold">
 
         </TextView>
@@ -248,8 +243,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/about"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold">
 
         </TextView>
@@ -276,8 +270,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/logout"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold">
 
         </TextView>
@@ -303,8 +296,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/terms_activity_label"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold">
 
         </TextView>
