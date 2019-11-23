@@ -115,5 +115,7 @@
     <string name="solutionFalse_SepareteWithKomma">False. Separation with comma!</string>
     <string name="noHint">No hint available.</string>
     <string name="birthyear">Year of Bith</string>
+    <string name="name_of_profile">Name of profile</string>
+    <string name="optionalIndication">Optional indications</string>
 
 </resources>
