@@ -4,11 +4,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name_of_profile"
+        android:textColor="@color/colorPrimaryDark">
+
+    </TextView>
+
     <TextView
         android:id="@+id/userTextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
+        android:layout_gravity="center_horizontal"
         android:textSize="18sp"
         android:textStyle="bold" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/optionalIndication">
+
+    </TextView>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+
+    <FrameLayout
+        android:id="@+id/settings_profile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>
+

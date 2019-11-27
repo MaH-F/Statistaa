@@ -212,6 +212,8 @@
     <string name="solutionFalse_SepareteWithKomma">Falsch. Richtige Lösung bitte mit Komma getrennt angeben.</string>
     <string name="noHint">Es gibt keinen Hinweis.</string>
     <string name="birthyear">Geburtsjahr</string>
+    <string name="name_of_profile">Name des Benutzerkontos</string>
+    <string name="optionalIndication">Diese Angaben sind freiwillig, erleichtern aber die Untersuchung und Verbesserung der Applikation.</string>
 
 
 </resources>

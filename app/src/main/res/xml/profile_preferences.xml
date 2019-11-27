@@ -1,0 +1,32 @@
+
+
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <PreferenceCategory app:title="@string/user_properties">
+        <ListPreference
+            app:entries="@array/gender_entries"
+            app:entryValues="@array/gender_values"
+            app:key="GenderPreference"
+            app:title="@string/gender"
+            app:useSimpleSummaryProvider="true"
+
+            />
+
+        <ListPreference
+            app:entries="@array/birthyear_entries"
+            app:entryValues="@array/birthyear_values"
+            app:key="BirthyearPreference"
+            app:title="@string/birthyear"
+            app:useSimpleSummaryProvider="true"
+
+            />
+
+
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

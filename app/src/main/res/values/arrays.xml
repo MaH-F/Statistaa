@@ -62,6 +62,7 @@
 
 
     <string-array name="birthyear_entries">
+        <item>No statement</item>
         <item>1960</item>
         <item>1961</item>
         <item>1962</item>
@@ -112,6 +113,7 @@
 
 
     <string-array name="birthyear_values">
+        <item>No statement</item>
         <item>1960</item>
         <item>1961</item>
         <item>1962</item>

@@ -1,18 +1,25 @@
 package com.htbr.statistaa.activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.htbr.statistaa.R;
+import com.htbr.statistaa.classes.FileWriter;
 
-
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MyProfileActivity extends AppCompatActivity {
@@ -33,13 +40,184 @@ public class MyProfileActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
 
+
+
+
         TextView userTextView = findViewById(R.id.userTextView);
         userTextView.setText(user.getEmail());
+
+
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.settings_profile, new SettingsFragment())
+                .commit();
+
 
     }
 
 
+    public static class SettingsFragment extends PreferenceFragmentCompat {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.profile_preferences, rootKey);
 
+            //final EditTextPreference textSizePreference = findPreference("textSizePreference");
+
+
+            SharedPreferences sharedPreferences;
+
+
+            sharedPreferences = getActivity().getSharedPreferences(FirebaseAuth.getInstance().getCurrentUser().getUid() + getString(R.string.user_properties_JSON), Context.MODE_PRIVATE);
+            String gender = sharedPreferences.getString(getString(R.string.genderID), "no");
+            String birthyear = sharedPreferences.getString(getString(R.string.birthyear), "no");
+
+
+
+            final ListPreference listPreferenceGender = (ListPreference) findPreference("GenderPreference");
+
+
+            listPreferenceGender.setValue(gender);
+
+            listPreferenceGender.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+                    listPreferenceGender.setValue((String) newValue);
+
+
+                    SharedPreferences sharedPreferences =  getActivity().getSharedPreferences(user.getUid() + getString(R.string.user_properties_JSON), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(getString(R.string.genderID), newValue.toString());
+                    editor.apply();
+
+
+                    String statsJSONString = FileWriter.readFile(getContext(), user.getUid()+"_UserProps");
+
+                    JSONObject jsonObject= new JSONObject();;
+
+                    String key = "gender";
+
+                    if (!statsJSONString.equals("{}")){
+                        try {
+                            jsonObject = new JSONObject(statsJSONString);
+
+
+
+                            if(jsonObject.has(key)){
+                                jsonObject.remove(key);
+                                jsonObject.put(key, newValue.toString());
+                            }
+
+                            else{
+                                jsonObject.put(key, newValue.toString());
+                            }
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+
+
+                        try {
+                            jsonObject.put(key, newValue.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    FileWriter.writeNewToFile(getContext(), user.getUid()+"_UserProps", jsonObject.toString());
+
+
+                    return false;
+                }
+            });
+
+
+
+
+
+
+
+
+
+            final ListPreference birthyearPreference = (ListPreference) findPreference("BirthyearPreference");
+
+
+            birthyearPreference.setValue(birthyear);
+
+            birthyearPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+                    birthyearPreference.setValue((String) newValue);
+
+
+                    SharedPreferences sharedPreferences =  getActivity().getSharedPreferences(user.getUid() + getString(R.string.user_properties_JSON), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(getString(R.string.birthyear), newValue.toString());
+                    editor.apply();
+
+
+                    String statsJSONString = FileWriter.readFile(getContext(), user.getUid()+"_UserProps");
+
+                    JSONObject jsonObject= new JSONObject();;
+
+                    String key = "birth";
+
+                    if (!statsJSONString.equals("{}")){
+                        try {
+                            jsonObject = new JSONObject(statsJSONString);
+
+
+
+                            if(jsonObject.has(key)){
+                                jsonObject.remove(key);
+                                jsonObject.put(key, newValue.toString());
+                            }
+
+                            else{
+                                jsonObject.put(key, newValue.toString());
+                            }
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+
+
+                        try {
+                            jsonObject.put(key, newValue.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    FileWriter.writeNewToFile(getContext(), user.getUid()+"_UserProps", jsonObject.toString());
+
+
+                    return false;
+                }
+            });
+
+
+
+
+
+        }
+    }
 
 
         @Override
