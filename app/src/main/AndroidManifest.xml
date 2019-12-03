@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme"
         android:versionCode="11"
         android:versionName="1.10"
+        android:screenOrientation="landscape"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activities.TermsActivity"
             android:label="@string/terms_activity_label">
