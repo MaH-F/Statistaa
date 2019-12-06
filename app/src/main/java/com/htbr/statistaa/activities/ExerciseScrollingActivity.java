@@ -765,7 +765,7 @@ public class ExerciseScrollingActivity extends AppCompatActivity {
 
 
 
-            if (error < 5){
+            if (error < 0.2){
                 return true;
             }
             else {

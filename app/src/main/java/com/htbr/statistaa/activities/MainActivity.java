@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -21,11 +22,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
 
-    static FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    static FirebaseUser user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //FirebaseApp.initializeApp(this);
+
+        user =  FirebaseAuth.getInstance().getCurrentUser();
+
 
         // go to RootActivity if user is registered
         if (user != null){

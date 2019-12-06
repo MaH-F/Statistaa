@@ -214,6 +214,7 @@
     <string name="birthyear">Geburtsjahr</string>
     <string name="name_of_profile">Name des Benutzerkontos</string>
     <string name="optionalIndication">Diese Angaben sind freiwillig, erleichtern aber die Untersuchung und Verbesserung der Applikation.</string>
+    <string name="change_password">Passwort ändern</string>
 
 
 </resources>

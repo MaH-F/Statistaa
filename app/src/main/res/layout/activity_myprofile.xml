@@ -23,16 +23,17 @@
         android:textStyle="bold" />
 
 
+    <Button
+        android:id="@+id/button_chpw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/change_password" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
 
-
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="60dp" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -1,9 +1,12 @@
 package com.htbr.statistaa.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -40,7 +43,14 @@ public class MyProfileActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-
+        Button changePasswordButton = (Button) findViewById(R.id.button_chpw);
+        changePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         TextView userTextView = findViewById(R.id.userTextView);
