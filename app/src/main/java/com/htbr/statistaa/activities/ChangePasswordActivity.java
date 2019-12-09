@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,8 +37,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+
         final EditText a = (EditText) findViewById(R.id.newPassword1);
         final EditText b = (EditText) findViewById(R.id.newPassword2);
+
 
 
         FirebaseUser user;
@@ -51,22 +54,50 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 String firstNewPassword = a.getText().toString();
                 String secondNewPassword = b.getText().toString();
 
-                if(firstNewPassword.equals(secondNewPassword)){
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    String newPassword = firstNewPassword;
 
-                    if (user != null){
-                        user.updatePassword(newPassword)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Log.d(TAG, "User password updated.");
+
+
+
+                if(firstNewPassword.equals(secondNewPassword)){
+
+
+
+                    //check if between 7 and 40
+
+
+                    if(6 < firstNewPassword.length() && firstNewPassword.length() < 41) {
+
+
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        String newPassword = firstNewPassword;
+
+                        if (user != null) {
+                            user.updatePassword(newPassword)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "User password updated.");
+                                                Toast.makeText(getApplicationContext(), getString(R.string.pw_updated), Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Log.d(TAG, "password could not be updated");
+                                                Toast.makeText(getApplicationContext(), getString(R.string.error_pw_not_updated), Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                    }
-                                });
+
+
+                                    });
+                        }
                     }
 
+                    else {
+                        Toast.makeText(getApplicationContext(), getString(R.string.requirement_for_valid_pw1), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+                else {
+                    Toast.makeText(getApplicationContext(), getString(R.string.different_inputs), Toast.LENGTH_SHORT).show();
                 }
             }
         });
