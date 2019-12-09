@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
 
-        android:versionCode="20"
-        android:versionName="1.20"
+        android:versionCode="22"
+        android:versionName="1.22"
         android:screenOrientation="landscape"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activities.TermsActivity"
