@@ -214,6 +214,14 @@
     <string name="birthyear">Geburtsjahr</string>
     <string name="name_of_profile">Name des Benutzerkontos</string>
     <string name="optionalIndication">Diese Angaben sind freiwillig, erleichtern aber die Untersuchung und Verbesserung der Applikation.</string>
+    <string name="change_password">Passwort ändern</string>
+    <string name="new_password">neues Passwort</string>
+    <string name="confirm_new_password">neues Passwort bestätigen</string>
+    <string name="changePasswordButton">Passwort ändern</string>
+    <string name="different_inputs">Eingaben sind nicht gleich.</string>
+    <string name="requirement_for_valid_pw1">Passwort muss zwischen 7 und 40 Zeichen enthalten.</string>
+    <string name="pw_updated">Password wurde geändert</string>
+    <string name="error_pw_not_updated">Fehler. Passwort konnte nicht geändert werden. Versuche es, dich erneut einzuloggen.</string>
 
 
 </resources>
