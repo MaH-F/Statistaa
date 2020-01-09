@@ -16,7 +16,21 @@
         android:id="@+id/settingsActivity"
         android:title="@string/title_activity_settings" />
 
+    <item
+        android:id="@+id/item_learning"
+        android:title="@string/learning" />
 
+    <item
+        android:id="@+id/item_archive"
+        android:title="@string/archive" />
+
+    <item
+        android:id="@+id/item_myprofile"
+        android:title="@string/myprofile" />
+
+    <item
+        android:id="@+id/item_feedback"
+        android:title="@string/Feedback" />
 
     <item
         android:id="@+id/logout"

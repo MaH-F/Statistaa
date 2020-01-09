@@ -397,6 +397,22 @@ public class RootActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
 
+            case R.id.item_archive:
+                startActivity(new Intent(this, ArchiveActivity.class));
+                return true;
+
+            case R.id.item_feedback:
+                startActivity(new Intent(this, QuestionnairesRecyclerActivity.class));
+                return true;
+
+            case R.id.item_learning:
+                startActivity(new Intent(this, ExercisesRecyclerActivity.class));
+                return true;
+
+            case R.id.item_myprofile:
+                startActivity(new Intent(this, MyProfileActivity.class));
+                return true;
+
             case R.id.tutorialActivity:
                 startActivity(new Intent(this, TutorialActivity.class));
                 return true;
