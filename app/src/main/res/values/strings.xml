@@ -119,7 +119,7 @@
     <string name="name_of_profile">Name of profile</string>
     <string name="optionalIndication">Optional indications</string>
     <string name="change_password">change password</string>
-    <string name="change_password_activity" translatable="false">ChangePassword</string>
+    <string name="change_password_activity">Change Password</string>
     <string name="new_password">new password</string>
     <string name="confirm_new_password">confirm new password</string>
     <string name="changePasswordButton">Change Password</string>
